@@ -1,7 +1,7 @@
 # Site settings
 title:          Ziyue(Hadley) Hou
 description:    "Minimal Jekyll theme for storytellers"
-baseurl:        "/home"
+# baseurl:        "/home"
 url:            "https://Hadleyhzy34.github.io"
 
 # Google Analytics
