@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Two Pointers | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Two Pointers" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Two Pointers Classical Problem 360 sort transformed array(Q:A) Sum Description Given a sorted array A, having N integers, find if there exists any pair of elements such that their sum is equal to target. bool isPairSum(int array[], int N, int target){ //two pointers int i=0,j=N-1; while(i&lt;j){ if(array[i]+array[j]==target){ return true; }else if(array[i]+array[j]&lt;target){ i++; }else{ j--; } } return false; }" />
+<meta property="og:description" content="Two Pointers Classical Problem 360 sort transformed array(Q:A) Sum Description Given a sorted array A, having N integers, find if there exists any pair of elements such that their sum is equal to target. bool isPairSum(int array[], int N, int target){ //two pointers int i=0,j=N-1; while(i&lt;j){ if(array[i]+array[j]==target){ return true; }else if(array[i]+array[j]&lt;target){ i++; }else{ j--; } } return false; }" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-10-19/Two-Pointers" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-10-19/Two-Pointers" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-19T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Two Pointers" />
+<script type="application/ld+json">
+{"headline":"Two Pointers","url":"https://hadleyhzy34.github.io/home/2020-10-19/Two-Pointers","datePublished":"2020-10-19T00:00:00+08:00","dateModified":"2020-10-19T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-10-19/Two-Pointers"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"Two Pointers Classical Problem 360 sort transformed array(Q:A) Sum Description Given a sorted array A, having N integers, find if there exists any pair of elements such that their sum is equal to target. bool isPairSum(int array[], int N, int target){ //two pointers int i=0,j=N-1; while(i&lt;j){ if(array[i]+array[j]==target){ return true; }else if(array[i]+array[j]&lt;target){ i++; }else{ j--; } } return false; }","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-10-19 00:00:00 +0800">October 19, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Two Pointers</h1>
+  <div class="post-line"></div>
+
+  <h2 id="two-pointers-classical-problem">Two Pointers Classical Problem</h2>
+<ul>
+  <li>360 sort transformed array(<a href="https://leetcode.com/problems/sort-transformed-array/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<h3 id="sum">Sum</h3>
+<h4 id="description">Description</h4>
+<p>Given a sorted array A, having N integers, find if there exists any pair of elements such that their sum is equal to target.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">isPairSum</span><span class="p">(</span><span class="kt">int</span> <span class="n">array</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">N</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">){</span>
+    <span class="c1">//two pointers</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="n">target</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">target</span><span class="p">){</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<!--more-->
+
+<h4 id="follow-up">Follow up</h4>
+<p>find numbers of pairs of elements such that their sum is less than target.</p>
+<ul>
+  <li>11 Container With Most Water(<a href="https://leetcode.com/problems/container-with-most-water/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">twoSum</span><span class="p">(</span><span class="kt">int</span> <span class="n">array</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">N</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">res</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">target</span><span class="p">){</span>
+            <span class="n">res</span><span class="o">+=</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="p">;</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="follow-up-1">Follow up</h4>
+<p>find numbers of three elements such that their sum is less than target.</p>
+<ul>
+  <li>259 3Sum Smaller(<a href="https://leetcode.com/problems/3sum-smaller/">Q</a>:<a href="">A</a>)</li>
+  <li>16 3Sum Closest(<a href="https://leetcode.com/problems/3sum-closest/">Q</a>:<a href="">A</a>)</li>
+  <li>18 4Sum(<a href="https://leetcode.com/problems/4sum/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">threeSumSmaller</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">)</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">n</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+
+    <span class="n">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="kt">int</span> <span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">z</span><span class="o">+</span><span class="mi">2</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">z</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">z</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">z</span><span class="p">]</span><span class="o">+</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">target</span><span class="p">){</span>
+                <span class="n">count</span><span class="o">+=</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="p">;</span>
+                <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-10-20/Linux-Command-Line-II" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-10-19/Backtracking" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

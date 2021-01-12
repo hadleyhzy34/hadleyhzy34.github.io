@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Naive Bayes Classifer | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Naive Bayes Classifer" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Definition Naive Bayes classifiers are based on naive bayes classifier algorithms. Let’s say we have m input values Assume all these input variables/features are conditionally independent given Y and equally contributed to the outcome. In reality it is not quite possible that all features are conditionally independent Simply chose the class label that is the most likely given the data, predict Y using" />
+<meta property="og:description" content="Definition Naive Bayes classifiers are based on naive bayes classifier algorithms. Let’s say we have m input values Assume all these input variables/features are conditionally independent given Y and equally contributed to the outcome. In reality it is not quite possible that all features are conditionally independent Simply chose the class label that is the most likely given the data, predict Y using" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-11-05/Naive-Bayes-Classifier" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-11-05/Naive-Bayes-Classifier" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-05T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Naive Bayes Classifer" />
+<script type="application/ld+json">
+{"headline":"Naive Bayes Classifer","url":"https://hadleyhzy34.github.io/home/2020-11-05/Naive-Bayes-Classifier","datePublished":"2020-11-05T00:00:00+08:00","dateModified":"2020-11-05T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-11-05/Naive-Bayes-Classifier"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"Definition Naive Bayes classifiers are based on naive bayes classifier algorithms. Let’s say we have m input values Assume all these input variables/features are conditionally independent given Y and equally contributed to the outcome. In reality it is not quite possible that all features are conditionally independent Simply chose the class label that is the most likely given the data, predict Y using","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-11-05 00:00:00 +0800">November 05, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Naive Bayes Classifer</h1>
+  <div class="post-line"></div>
+
+  <h2 id="definition">Definition</h2>
+
+<p>Naive Bayes classifiers are based on naive bayes classifier algorithms. Let’s say we have m input values <img src="https://latex.codecogs.com/svg.latex?  \overrightarrow{x} =&lt; x_{1},x_{2},x_{3},...,x_{m} &gt;" title="x_{ij}" /></p>
+
+<ol class="info">
+  <li>Assume all these input variables/features are conditionally independent given Y and equally contributed to the outcome.<br />
+In reality it is not quite <code class="language-plaintext highlighter-rouge">possible</code> that all features are conditionally independent</li>
+</ol>
+
+<ol>
+  <li>Simply chose the class label that is the most likely given the data, predict Y using <img src="https://latex.codecogs.com/svg.latex?   \widehat{Y} =   argmax_{y=\{0,1\}}   P( \overrightarrow{x},Y)" title="x_{ij}" /></li>
+</ol>
+
+<!--more-->
+<h2 id="bayes-theorem">Bayes’ Theorem</h2>
+<p>Bayes’ Theorem gives the probability of an event occurring given the probability of another event that has already occurred.</p>
+
+<p><img src="https://latex.codecogs.com/svg.latex? p(y| \overrightarrow{x})= \frac{p( \overrightarrow{x}|y) p(y)}{p( \overrightarrow{x} )}" title="x_{ij}" /></p>
+
+<p>where y is class variable and <img src="https://latex.codecogs.com/svg.latex?  \overrightarrow{x} " title="x_{ij}" /> is a feature vector where <img src="https://latex.codecogs.com/svg.latex?  \overrightarrow{x} =&lt; x_{1},x_{2},x_{3},...,x_{n} &gt;" title="x_{ij}" /></p>
+
+<ul>
+  <li>
+    <p>basically, we are trying to find probability of event y, given event x, event x is also termed as evidence.</p>
+  </li>
+  <li>
+    <p>p(x) is prior probability of x and p(y) is prior probability of y.</p>
+  </li>
+  <li>
+    <p><img src="https://latex.codecogs.com/svg.latex? p( \overrightarrow{x} |y)" /> is a posteriori probability of y.</p>
+  </li>
+</ul>
+
+<p>Since given assumption that all features are independent, then</p>
+
+<p><img src="https://latex.codecogs.com/svg.latex? p(y| \overrightarrow{x})= \frac{p( \overrightarrow{x}|y) p(y)}{p( \overrightarrow{x} )}" title="x_{ij}" /></p>
+
+<p>As the denomitor remains constant for a given input, we can obtain equations like follows:</p>
+
+<p><img src="https://latex.codecogs.com/svg.latex? p(y| \overrightarrow{x}) \propto  \prod_i^n   {p(  x_{i} |y) p(y)}" title="x_{ij}" /></p>
+
+<p>To maximize the probability of event y given the probability of event x is the same as to choose/calculate <code class="language-plaintext highlighter-rouge">parameter</code> y which result maximal probability using MAP:</p>
+
+<p><img src="https://latex.codecogs.com/svg.latex? \widehat{y} =   argmax_{y=\{0,1\}}   p(y) \prod_i^n p( x_{i}|y)" title="x_{ij}" /></p>
+
+<h2 id="compare-between-mle-and-map">Compare between MLE and MAP</h2>
+
+<ul>
+  <li>the key part difference is that prior distribution of unknown parameter is known or not, or is uniform or not.</li>
+</ul>
+
+<p>Details can be found here:</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation">wikipedia</a></p>
+
+<p><a href="https://web.stanford.edu/class/archive/cs/cs109/cs109.1166/ppt/22-MAP.pdf">MAP</a></p>
+
+<p><a href="https://www.probabilitycourse.com/chapter9/9_1_2_MAP_estimation.php">MAP &amp; MLE</a></p>
+
+<h2 id="example">Example</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Outlook</th>
+      <th style="text-align: center">Temperature</th>
+      <th style="text-align: right">Humidity</th>
+      <th style="text-align: right">Windy</th>
+      <th style="text-align: right">Play Golf</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Rainy</td>
+      <td style="text-align: center">Hot</td>
+      <td style="text-align: right">High</td>
+      <td style="text-align: right">False</td>
+      <td style="text-align: right">No</td>
+    </tr>
+    <tr>
+      <td>Rainy</td>
+      <td style="text-align: center">Hot</td>
+      <td style="text-align: right">High</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">No</td>
+    </tr>
+    <tr>
+      <td>Overcast</td>
+      <td style="text-align: center">Hot</td>
+      <td style="text-align: right">High</td>
+      <td style="text-align: right">False</td>
+      <td style="text-align: right">Yes</td>
+    </tr>
+    <tr>
+      <td>Sunny</td>
+      <td style="text-align: center">Mild</td>
+      <td style="text-align: right">High</td>
+      <td style="text-align: right">False</td>
+      <td style="text-align: right">Yes</td>
+    </tr>
+    <tr>
+      <td>Sunny</td>
+      <td style="text-align: center">Cool</td>
+      <td style="text-align: right">Normal</td>
+      <td style="text-align: right">False</td>
+      <td style="text-align: right">Yes</td>
+    </tr>
+    <tr>
+      <td>Sunny</td>
+      <td style="text-align: center">Cool</td>
+      <td style="text-align: right">Normal</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">No</td>
+    </tr>
+    <tr>
+      <td>Overcast</td>
+      <td style="text-align: center">Cool</td>
+      <td style="text-align: right">Normal</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">Yes</td>
+    </tr>
+    <tr>
+      <td>Rainy</td>
+      <td style="text-align: center">Mild</td>
+      <td style="text-align: right">High</td>
+      <td style="text-align: right">False</td>
+      <td style="text-align: right">No</td>
+    </tr>
+    <tr>
+      <td>Rainy</td>
+      <td style="text-align: center">Cool</td>
+      <td style="text-align: right">Normal</td>
+      <td style="text-align: right">False</td>
+      <td style="text-align: right">Yes</td>
+    </tr>
+    <tr>
+      <td>Sunny</td>
+      <td style="text-align: center">Mild</td>
+      <td style="text-align: right">Normal</td>
+      <td style="text-align: right">False</td>
+      <td style="text-align: right">Yes</td>
+    </tr>
+    <tr>
+      <td>Rainy</td>
+      <td style="text-align: center">Mild</td>
+      <td style="text-align: right">Normal</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">Yes</td>
+    </tr>
+    <tr>
+      <td>Overcast</td>
+      <td style="text-align: center">Mild</td>
+      <td style="text-align: right">High</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">Yes</td>
+    </tr>
+    <tr>
+      <td>Overcast</td>
+      <td style="text-align: center">Hot</td>
+      <td style="text-align: right">Normal</td>
+      <td style="text-align: right">False</td>
+      <td style="text-align: right">Yes</td>
+    </tr>
+    <tr>
+      <td>Sunny</td>
+      <td style="text-align: center">Mild</td>
+      <td style="text-align: right">High</td>
+      <td style="text-align: right">True</td>
+      <td style="text-align: right">No</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Task: estimate whether or not to play golf when it’s {Rainy, Hot, High, False}</p>
+
+<p>Solution:</p>
+
+<p><img src="https://latex.codecogs.com/svg.latex? p(y|outlook,temperature,humidity,windy)= \frac{p(outlook,temperature,humidity,windy|y)p(y)}{p(outlook,temperature,humidity,windy}= p(outlook,temperature,humidity,windy|y)p(y)=p(outlook|y)p(temperature|y)p(humidity|y)p(windy|y)p(y)" title="x_{ij}" /></p>
+
+<p>Given specific observations mentioned in the task:</p>
+
+<p><img src="https://latex.codecogs.com/svg.latex? p(y=yes|outlook,temperature,humidity,windy)=p(outlook=rainy|y=yes)p(temperature=Hot|y=yes)p(humidity=High|y=yes)p(windy=False|y=yes)p(y=yes)= \frac{2}{9} \frac{2}{9} \frac{6}{9} \frac{6}{9} \frac{9}{14}" title="x_{ij}" /></p>
+
+<p>Now after normalization or logarithmic calculation, we compare both probabilities for playing gold and not playing gold, and the prediction would be the one with higher probability:</p>
+
+<p><img src="https://latex.codecogs.com/svg.latex? p(yes|today)= \frac{0.0141}{0.0141+0.0068} =0.67" title="x_{ij}" /></p>
+
+<p><img src="https://latex.codecogs.com/svg.latex? p(no|today)= \frac{0.0068}{0.0141+0.0068} =0.33" title="x_{ij}" /></p>
+
+<h2 id="implementation-continuous-data-model-from-scratch">Implementation continuous data model from scratch</h2>
+
+<h3 id="import-module">Import module</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</code></pre></div></div>
+
+<h3 id="input-datasets">Input datasets</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">.</span><span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(1000, 10)
+(1000,)
+[[ 0.24063119 -0.07970884 -0.05313268  0.09263489 -0.13935777  1.20319285
+  -0.15590018 -0.09709308  0.06994683  0.11660277]
+ [ 0.75425016 -0.937854    0.21947276 -1.28066902  1.55618457 -0.65538962
+   0.77023157  0.19311463 -2.27886416  0.65102942]
+ [ 0.9584009  -1.31841143  1.15350536 -0.96816469  1.88667929  0.53473693
+   0.46015911  0.0423321   0.79249125  0.24144309]
+ [ 0.64384845  0.35082051 -0.10869679  0.71060146 -0.85406842  0.33485545
+   0.60778386  0.94834854  1.29778445  2.16583174]
+ [ 1.03268464 -1.26482413  0.18067775  0.35989813 -0.26303363 -0.33760592
+   0.52075594 -1.4403634   1.25766489  0.14630826]]
+[0 0 1 1 1 0 0 0 1 0]
+</code></pre></div></div>
+
+<h3 id="create-naive-bayes-model">create naive bayes model</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">NaiveBayes</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">_samples</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">_features</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">_classes</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">_labels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_classes</span><span class="p">)</span>
+
+        <span class="c1"># initialize mean, var, and prior for each feature
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">_mean</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">_labels</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">_features</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">_var</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="p">.</span><span class="n">_labels</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">_features</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">_priors</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_labels</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">float64</span><span class="p">)</span>
+
+        <span class="c1"># calculate mean, var and prior for each feature given y
+</span>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_classes</span><span class="p">):</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">y</span><span class="o">==</span><span class="n">label</span><span class="p">]</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">_mean</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">_var</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">.</span><span class="n">var</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">_priors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_samples</span><span class="p">)</span>
+    
+    <span class="c1"># calculate posterior for each class given observed dataset x
+</span>    <span class="k">def</span> <span class="nf">_train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">posteriors</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_classes</span><span class="p">):</span>
+            <span class="n">prior</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_priors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">posterior</span> <span class="o">=</span> <span class="n">prior</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_pdf</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">)))</span>
+            <span class="n">posteriors</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">posterior</span><span class="p">)</span>
+        
+        <span class="c1"># compare and return highest posterior probability
+</span>        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_classes</span><span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">posteriors</span><span class="p">)]</span>
+
+
+    <span class="c1"># calculate pdf for each row of observed dataset x
+</span>    <span class="k">def</span> <span class="nf">_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_mean</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_var</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">numerator</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">var</span><span class="p">))</span>
+        <span class="n">denominator</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="o">*</span><span class="n">var</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">numerator</span><span class="o">/</span><span class="n">denominator</span>  
+
+    <span class="c1"># predict test data
+</span>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">_train</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+    
+    <span class="c1"># calculate accuracy
+</span>    <span class="k">def</span> <span class="nf">accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">accuracy</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nb</span> <span class="o">=</span> <span class="n">NaiveBayes</span><span class="p">()</span>
+<span class="n">nb</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="p">.</span><span class="n">_classes</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="p">.</span><span class="n">_samples</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="p">.</span><span class="n">_features</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="p">.</span><span class="n">_labels</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="p">.</span><span class="n">_mean</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="p">.</span><span class="n">_var</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="p">.</span><span class="n">_priors</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="p">.</span><span class="n">_pdf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">nb</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nb</span><span class="p">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0 1]
+800
+10
+2
+(2, 10)
+[[0.98269025 0.95576451 0.36205835 0.44312622 1.29896635 0.86864312
+  1.03288266 0.89110435 0.33131845 0.95275246]
+ [1.03305993 0.95375061 0.48209481 0.59179712 1.7236553  0.92576642
+  0.96969459 1.10314154 0.50775021 1.14787765]]
+(2,)
+(10,)
+0.965
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nb</span> <span class="o">=</span> <span class="n">NaiveBayes</span><span class="p">()</span>
+<span class="n">nb</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">nb</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">nb</span><span class="p">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Naive Bayes classification accuracy"</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Naive Bayes classification accuracy 0.965
+</code></pre></div></div>
+
+<h2 id="implementation-using-sklearn">Implementation using sklearn</h2>
+
+<h3 id="import-modules">import modules</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+</code></pre></div></div>
+
+<h3 id="import-datasets">import datasets</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">.</span><span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="model-training">Model Training</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+
+<span class="n">nb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">nb</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GaussianNB()
+</code></pre></div></div>
+
+<h3 id="predict-the-results">Predict the results</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_pred</span> <span class="o">=</span> <span class="n">nb</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">y_pred</span><span class="p">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(200,)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'Model accuracy score: {0:0.4f}'</span><span class="p">.</span> <span class="nb">format</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Model accuracy score: 0.9650
+</code></pre></div></div>
+
+<h3 id="confusion-matrix">Confusion Matrix</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="n">confusion_matrix</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Confusion matrix</span><span class="se">\n\n</span><span class="s">'</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Confusion matrix
+
+ [[98  1]
+ [ 6 95]]
+</code></pre></div></div>
+
+<h3 id="visualize-confusion-matrix">Visualize confusion matrix</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cm_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Actual Positive:1'</span><span class="p">,</span> <span class="s">'Actual Negative:0'</span><span class="p">],</span> 
+                                 <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">'Predict Positive:1'</span><span class="p">,</span> <span class="s">'Predict Negative:0'</span><span class="p">])</span>
+
+<span class="n">sns</span><span class="p">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">'d'</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'YlGnBu'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;AxesSubplot:&gt;
+</code></pre></div></div>
+
+<p><img src="https://raw.githubusercontent.com/hadleyhzy34/machine_learning/master/naive_bayes/naive_bayes_sklearn_files/naive_bayes_sklearn_12_1.png" alt="svg" /></p>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-11-05/Numpy-Cheat-Sheet" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-11-03/Random-Forest" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

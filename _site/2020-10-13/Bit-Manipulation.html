@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Bit Manipulation | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Bit Manipulation" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Bit Arithmetic Binary Addition string addBinary(string a, string b){ int m=a.size(),n=b.size(); int i=m-1,j=n-1; string res=&quot;&quot;; int temp=0; while(i&gt;=0||j&gt;=0||temp==1){ temp+=((i&gt;=0)?a[i]-&#39;0&#39;:0); temp+=((j&gt;=0)?b[j]-&#39;0&#39;:0); res=char(temp%2+&#39;0&#39;)+res; temp/=2; i--;j--; } return res; } 67 Add Binary(Q:A) Binary, Decimal, Hexadecimal Conversion Power of Two Get the Rightmost 1-bit two’s complement: -x = ~x + 1; bool isPowerOfTwo(int n){ return (n&amp;(-n))==n; } Turn off the rightmost 1-bit bool isPowerOfTwo(int n){ return n&amp;(n-1)==0; } 231 Power of Two(Q:A)" />
+<meta property="og:description" content="Bit Arithmetic Binary Addition string addBinary(string a, string b){ int m=a.size(),n=b.size(); int i=m-1,j=n-1; string res=&quot;&quot;; int temp=0; while(i&gt;=0||j&gt;=0||temp==1){ temp+=((i&gt;=0)?a[i]-&#39;0&#39;:0); temp+=((j&gt;=0)?b[j]-&#39;0&#39;:0); res=char(temp%2+&#39;0&#39;)+res; temp/=2; i--;j--; } return res; } 67 Add Binary(Q:A) Binary, Decimal, Hexadecimal Conversion Power of Two Get the Rightmost 1-bit two’s complement: -x = ~x + 1; bool isPowerOfTwo(int n){ return (n&amp;(-n))==n; } Turn off the rightmost 1-bit bool isPowerOfTwo(int n){ return n&amp;(n-1)==0; } 231 Power of Two(Q:A)" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-10-13/Bit-Manipulation" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-10-13/Bit-Manipulation" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-13T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Bit Manipulation" />
+<script type="application/ld+json">
+{"headline":"Bit Manipulation","url":"https://hadleyhzy34.github.io/home/2020-10-13/Bit-Manipulation","datePublished":"2020-10-13T00:00:00+08:00","dateModified":"2020-10-13T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-10-13/Bit-Manipulation"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"Bit Arithmetic Binary Addition string addBinary(string a, string b){ int m=a.size(),n=b.size(); int i=m-1,j=n-1; string res=&quot;&quot;; int temp=0; while(i&gt;=0||j&gt;=0||temp==1){ temp+=((i&gt;=0)?a[i]-&#39;0&#39;:0); temp+=((j&gt;=0)?b[j]-&#39;0&#39;:0); res=char(temp%2+&#39;0&#39;)+res; temp/=2; i--;j--; } return res; } 67 Add Binary(Q:A) Binary, Decimal, Hexadecimal Conversion Power of Two Get the Rightmost 1-bit two’s complement: -x = ~x + 1; bool isPowerOfTwo(int n){ return (n&amp;(-n))==n; } Turn off the rightmost 1-bit bool isPowerOfTwo(int n){ return n&amp;(n-1)==0; } 231 Power of Two(Q:A)","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-10-13 00:00:00 +0800">October 13, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Bit Manipulation</h1>
+  <div class="post-line"></div>
+
+  <h2 id="bit-arithmetic">Bit Arithmetic</h2>
+<ul>
+  <li>Binary Addition
+    <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="nf">addBinary</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="n">b</span><span class="p">){</span>
+  <span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="n">n</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+  <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="n">string</span> <span class="n">res</span><span class="o">=</span><span class="s">""</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">temp</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">||</span><span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">||</span><span class="n">temp</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+      <span class="n">temp</span><span class="o">+=</span><span class="p">((</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'0'</span><span class="o">:</span><span class="mi">0</span><span class="p">);</span>
+      <span class="n">temp</span><span class="o">+=</span><span class="p">((</span><span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="sc">'0'</span><span class="o">:</span><span class="mi">0</span><span class="p">);</span>
+
+      <span class="n">res</span><span class="o">=</span><span class="kt">char</span><span class="p">(</span><span class="n">temp</span><span class="o">%</span><span class="mi">2</span><span class="o">+</span><span class="sc">'0'</span><span class="p">)</span><span class="o">+</span><span class="n">res</span><span class="p">;</span>
+      <span class="n">temp</span><span class="o">/=</span><span class="mi">2</span><span class="p">;</span>
+      <span class="n">i</span><span class="o">--</span><span class="p">;</span><span class="n">j</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>67 Add Binary(<a href="https://leetcode.com/problems/add-binary/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<h2 id="binary-decimal-hexadecimal-conversion">Binary, Decimal, Hexadecimal Conversion</h2>
+
+<h2 id="power-of-two">Power of Two</h2>
+<ol>
+  <li>Get the Rightmost 1-bit
+two’s complement:
+<code class="language-plaintext highlighter-rouge">-x = ~x + 1;</code></li>
+</ol>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">isPowerOfTwo</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+	<span class="k">return</span> <span class="p">(</span><span class="n">n</span><span class="o">&amp;</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">))</span><span class="o">==</span><span class="n">n</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Turn off the rightmost 1-bit
+    <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">isPowerOfTwo</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+ <span class="k">return</span> <span class="n">n</span><span class="o">&amp;</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<ul class="info">
+  <li>231 Power of Two(<a href="https://leetcode.com/problems/power-of-two/">Q</a>:<a href="">A</a>)
+<!--more--></li>
+  <li>338 Counting Bits(<a href="https://leetcode.com/problems/counting-bits/">Q</a>:<a href="">A</a>)
+(Turnoff rightmost bits)
+How to understand using n&amp;(n-1) to turn off rightmost bits?
+there must be only one bit that turns from 0 to 1 when adding one to any numbers, all the rest of bits that are right side of this bit will become zero, thus n&amp;(n-1) will set all these right side of bits to be zero include this rightmost 1 bit since this rightmost bit in (n-1) must be zero.</li>
+</ul>
+
+<h2 id="sum-using-bitwise-operation">Sum using bitwise operation</h2>
+<ul>
+  <li>371 Sum of two integers(<a href="https://leetcode.com/problems/sum-of-two-integers/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<h2 id="xor-operator">XOR Operator</h2>
+<p>Imagine, you have a problem to indentify an array element (or elements), which appears exactly given number of times. Probably, the key is to build first an array bitmask using XOR operator. Examples: In-Place Swap, Single Number, Single Number II.</p>
+
+<ul>
+  <li>136 Single Number(<a href="https://leetcode.com/problems/single-number/">Q</a>:<a href="">A</a>)</li>
+  <li>137 Single Number II(<a href="https://leetcode.com/problems/single-number-ii/">Q</a>:<a href="">A</a>)</li>
+  <li>260 Single Number III(<a href="https://leetcode.com/problems/single-number-iii/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<h2 id="count-set-bits">Count set bits</h2>
+
+<h2 id="bitwise-operation">Bitwise Operation</h2>
+<ul class="info">
+  <li>Bitwise And of Numbers Range(<a href="https://leetcode.com/problems/bitwise-and-of-numbers-range/">Q</a>:<a href="">A</a>)
+1.brute force 2.bit shift operation 3.Brian Kernighan’s Algorithm</li>
+</ul>
+
+<h2 id="compare-strings">Compare Strings</h2>
+<ul>
+  <li>318 Maximum Product of Word Lengths(<a href="https://leetcode.com/problems/maximum-product-of-word-lengths/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-10-13/Heap" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-10-13/Array" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

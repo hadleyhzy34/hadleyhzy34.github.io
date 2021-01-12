@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>OOP Comparison between C++ and Python | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="OOP Comparison between C++ and Python" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Inheritance Polymorphism Encapsulation Abstraction class definition C++ //class class Points { public: //constructor Points(int x, int y){ this-&gt;_x = x; this-&gt;_y = y; } //print function void print() const{ std::cout&lt;&lt;this-&gt;_x&lt;&lt;&quot; &quot;&lt;&lt;this-&gt;_y&lt;&lt;std::endl; } //public data members string alias = &quot;position of point&quot;; private: //private data members int _x; int _y; };" />
+<meta property="og:description" content="Inheritance Polymorphism Encapsulation Abstraction class definition C++ //class class Points { public: //constructor Points(int x, int y){ this-&gt;_x = x; this-&gt;_y = y; } //print function void print() const{ std::cout&lt;&lt;this-&gt;_x&lt;&lt;&quot; &quot;&lt;&lt;this-&gt;_y&lt;&lt;std::endl; } //public data members string alias = &quot;position of point&quot;; private: //private data members int _x; int _y; };" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-11-15/OOP-Comparison-between-C++-and-Python" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-11-15/OOP-Comparison-between-C++-and-Python" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="OOP Comparison between C++ and Python" />
+<script type="application/ld+json">
+{"headline":"OOP Comparison between C++ and Python","url":"https://hadleyhzy34.github.io/home/2020-11-15/OOP-Comparison-between-C++-and-Python","datePublished":"2020-11-15T00:00:00+08:00","dateModified":"2020-11-15T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-11-15/OOP-Comparison-between-C++-and-Python"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"Inheritance Polymorphism Encapsulation Abstraction class definition C++ //class class Points { public: //constructor Points(int x, int y){ this-&gt;_x = x; this-&gt;_y = y; } //print function void print() const{ std::cout&lt;&lt;this-&gt;_x&lt;&lt;&quot; &quot;&lt;&lt;this-&gt;_y&lt;&lt;std::endl; } //public data members string alias = &quot;position of point&quot;; private: //private data members int _x; int _y; };","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-11-15 00:00:00 +0800">November 15, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">OOP Comparison between C++ and Python</h1>
+  <div class="post-line"></div>
+
+  <ol>
+  <li>Inheritance</li>
+  <li>Polymorphism</li>
+  <li>Encapsulation</li>
+  <li>Abstraction</li>
+</ol>
+
+<h2 id="class-definition">class definition</h2>
+
+<h3 id="c">C++</h3>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//class</span>
+<span class="k">class</span> <span class="nc">Points</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+	<span class="c1">//constructor</span>
+	<span class="n">Points</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
+		<span class="k">this</span><span class="o">-&gt;</span><span class="n">_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+		<span class="k">this</span><span class="o">-&gt;</span><span class="n">_y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="c1">//print function</span>
+	<span class="kt">void</span> <span class="n">print</span><span class="p">()</span> <span class="k">const</span><span class="p">{</span>
+		<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_x</span><span class="o">&lt;&lt;</span><span class="s">" "</span><span class="o">&lt;&lt;</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_y</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="c1">//public data members</span>
+	<span class="n">string</span> <span class="n">alias</span> <span class="o">=</span> <span class="s">"position of point"</span><span class="p">;</span>
+<span class="nl">private:</span>
+	<span class="c1">//private data members</span>
+	<span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">_y</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<!--more-->
+
+<ul>
+  <li>create instances:
+```c++
+//create temporary Points using constructor, implicitly call the copy
+//constructor of Points to copy from that temporary into point1
+Points point1 = Points(1,1,1);</li>
+</ul>
+
+<p>//explicit constructor
+Points point2(2,2,2);</p>
+
+<p>//invoke default constructor, implicitly calling default constructor
+Points point_default;</p>
+
+<p>std::cout«“default constructor”«endl;</p>
+
+<p>point_default.print();</p>
+
+<p>//accessing private data member
+std::cout«point1.getX()«” “«point1.getY()«std::endl;</p>
+
+<p>//print function
+point1.print();</p>
+
+<p>//accessing public data member
+std::cout«point1.alias«std::endl;</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+<p>default constructor
+0 0
+1 1
+1 1
+position of point</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+1. `;` after class `{}`
+2. `this` is pointer, not reference, accessing current object data member needs to use this form: `this-&gt;data_member`
+3. declare an instance must predeclare it's class type, for instance, `SoftwareEngineer student1 = SoftwareEngineer()` is correct, while `student1 = SoftwareEngineer()` can only be used in Python.
+4. private class members are accessible by the member functions of this class only while public members are accessible everywhere.
+
+
+### Python
+
+```python
+# class
+class SoftwareEngineer:
+    # class attribute
+    alias = 'SE'
+
+    def __init__(self,name,age,level,salary):
+        #instance attribute
+        self.name = name
+        self.age = age
+        self.level = level
+        self.salary = salary
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#create instance
+</span><span class="n">student1</span> <span class="o">=</span> <span class="n">SoftwareEngineer</span><span class="p">(</span><span class="s">'Max'</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="s">'Junior'</span><span class="p">,</span><span class="mi">5000</span><span class="p">)</span>
+<span class="c1">#access instance attribute
+</span><span class="k">print</span><span class="p">(</span><span class="n">student1</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">student1</span><span class="p">.</span><span class="n">alias</span><span class="p">,</span><span class="n">student1</span><span class="p">.</span><span class="n">salary</span><span class="p">)</span>
+<span class="c1">#access class attribute
+</span><span class="k">print</span><span class="p">(</span><span class="n">SoftwareEngineer</span><span class="p">.</span><span class="n">alias</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Max SE 5000
+SE
+</code></pre></div></div>
+
+<ol>
+  <li>create class</li>
+  <li>class attribute</li>
+  <li>instance attribute</li>
+  <li>create instance</li>
+  <li>instance vs class</li>
+</ol>
+
+<h2 id="method-and-functions">method and functions</h2>
+
+<h3 id="python">Python</h3>
+
+<h4 id="instance-method-with-input-argument-and-return-type">instance method with input argument and return type</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SoftwareEngineer</span><span class="p">:</span>
+	<span class="p">...</span>
+	<span class="c1"># instance method
+</span>    <span class="k">def</span> <span class="nf">code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> is writing code..."</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">code_in_language</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">language</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> is writing code in </span><span class="si">{</span><span class="n">language</span><span class="si">}</span><span class="s">..."</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">information</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">information</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"name = </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">, age = </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">age</span><span class="si">}</span><span class="s">, level = </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">level</span><span class="si">}</span><span class="s">"</span>
+        <span class="k">return</span> <span class="n">information</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">student1</span><span class="p">.</span><span class="n">code</span><span class="p">()</span>
+<span class="n">student1</span><span class="p">.</span><span class="n">code_in_language</span><span class="p">(</span><span class="s">'pyhton'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">student1</span><span class="p">.</span><span class="n">information</span><span class="p">())</span>
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Max is writing code...
+Max is writing code in pyhton...
+name = Max, age = 20, level = Junior
+</code></pre></div></div>
+
+<h4 id="python-special-method">python special method</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">__eq__</code></li>
+</ul>
+
+<p>Comparison two instances without defining <code class="language-plaintext highlighter-rouge">__eq__</code> would result in false since two instances memory locations are not the same:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">student2</span> <span class="o">=</span> <span class="n">SoftwareEngineer</span><span class="p">(</span><span class="s">'Max'</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="s">'Junior'</span><span class="p">,</span><span class="mi">5000</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">student1</span> <span class="o">==</span> <span class="n">student2</span><span class="p">)</span> <span class="c1">#comparing memory
+</span></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">__str__</code></li>
+</ul>
+
+<p>this method is called whenever object is converted to string</p>
+
+<p>for instance:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">student2</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">__main__</span><span class="p">.</span><span class="n">SoftwareEngineer</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x106996070</span><span class="o">&gt;</span>
+</code></pre></div></div>
+<p>now adding <code class="language-plaintext highlighter-rouge">__str__</code> method to <code class="language-plaintext highlighter-rouge">SoftwareEngineer</code> class:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">information</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"name = </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">, age = </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">age</span><span class="si">}</span><span class="s">, level = </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">level</span><span class="si">}</span><span class="s">"</span>
+        <span class="k">return</span> <span class="n">information</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">student2</span><span class="p">)</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">Max</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">level</span> <span class="o">=</span> <span class="n">Junior</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SoftwareEngineer</span><span class="p">:</span>
+	    <span class="c1"># python default method
+</span>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">information</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"name = </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">, age = </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">age</span><span class="si">}</span><span class="s">, level = </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">level</span><span class="si">}</span><span class="s">"</span>
+        <span class="k">return</span> <span class="n">information</span>
+    
+    <span class="c1">#python equal method
+</span>    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">name</span> <span class="ow">and</span> <span class="bp">self</span><span class="p">.</span><span class="n">age</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">age</span>
+</code></pre></div></div>
+
+<h4 id="class-method">class method</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SoftwareEngineer</span><span class="p">:</span>
+	<span class="p">...</span>
+    <span class="c1">#class method
+</span>    <span class="k">def</span> <span class="nf">entry_salary2</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">"without object &lt;10"</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">"without object &gt;=10"</span>
+
+	    <span class="c1">#instance method
+</span>    <span class="k">def</span> <span class="nf">entry_salary1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">age</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">25</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">5000</span>
+        <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span><span class="mi">30</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">7000</span>
+        <span class="k">return</span> <span class="mi">9000</span>
+    
+    <span class="c1">#cannot access self attribute, decorator
+</span>    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">entry_salary</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">25</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">5000</span>
+        <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">7000</span>
+        <span class="k">return</span> <span class="mi">9000</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">entry_salary</span><span class="p">(</span><span class="mi">30</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">SoftwareEngineer</span><span class="p">.</span><span class="n">entry_salary</span><span class="p">(</span><span class="mi">27</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">SoftwareEngineer</span><span class="p">.</span><span class="n">entry_salary2</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>9000
+7000
+without object &gt;=10
+</code></pre></div></div>
+
+<p class="warning">Note that using both decorator and class method, accessing self attribute is not allowed since it is not tied to specific instance.</p>
+
+<p>How ever calling <code class="language-plaintext highlighter-rouge">entry_salary2</code> from instance is not allowed since it didn’t pass object as input:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">entry_salary2</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-79-76716bf772b6&gt; in &lt;module&gt;
+----&gt; 1 print(student2.entry_salary2(11))
+
+TypeError: entry_salary2() takes 1 positional argument but 2 were given
+</code></pre></div></div>
+
+<h3 id="c-1">C++</h3>
+
+<h4 id="default-constructor">Default constructor</h4>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Points</span><span class="p">{</span>
+<span class="nl">public:</span>
+	<span class="n">Points</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">){</span>
+		<span class="k">this</span><span class="o">-&gt;</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">;</span>
+		<span class="k">this</span><span class="o">-&gt;</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="p">...</span>
+<span class="nl">private:</span>
+	<span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//defaut constructor</span>
+<span class="n">Points</span> <span class="n">point3</span> <span class="o">=</span> <span class="n">Points</span><span class="p">();</span>
+<span class="n">point3</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 0
+</code></pre></div></div>
+
+<h4 id="constructor-initializer-list">constructor initializer list</h4>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Points</span><span class="p">{</span>
+<span class="nl">public:</span>
+	<span class="n">Points</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">:</span><span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">y</span><span class="p">){}</span>
+	<span class="p">...</span>
+<span class="nl">private:</span>
+	<span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>When do we use initializer list</li>
+</ul>
+
+<ol>
+  <li>for initialization of non-static const data members</li>
+</ol>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Points</span><span class="p">{</span>
+<span class="nl">public:</span>
+	<span class="n">Points</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">:</span><span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">y</span><span class="p">){};</span>
+<span class="nl">private:</span>
+	<span class="k">const</span> <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+	<span class="k">const</span> <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>initializer list is a copy constructor, we don’t need and cannot all the assignment operator which means we are avoiding one extra operation.</li>
+  <li>initializer list initializes objects first, even if you do not explicitly initialise them there, the compiler will do for it. const object can only initialised, cannot be assigned</li>
+</ul>
+
+<ol>
+  <li>for initialization of reference members</li>
+  <li>for initialization of member objects which do not have default constructor</li>
+  <li>for initialization of base class members</li>
+  <li>when constructor’s parameter name is same as data member</li>
+</ol>
+
+<p>Reference:</p>
+<ol>
+  <li>https://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/</li>
+  <li>https://stackoverflow.com/questions/355258/why-must-const-members-be-initialized-in-the-constructor-initializer-rather-than</li>
+</ol>
+
+<h4 id="get-and-set">get and set</h4>
+
+<p>Public getters and setters for private variables: Member variables are suually declared private to prevent direct access. Instea, public getter and setter are defined to retrieve and modify the private member variable.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Points</span><span class="p">{</span>
+    <span class="p">...</span>
+<span class="c1">//set function</span>
+    <span class="kt">void</span> <span class="n">setX</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//get function</span>
+    <span class="kt">int</span> <span class="n">getX</span><span class="p">()</span> <span class="k">const</span><span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_x</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//set function</span>
+    <span class="kt">void</span> <span class="n">setY</span><span class="p">(</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">_y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//get function</span>
+    <span class="kt">int</span> <span class="n">getY</span><span class="p">()</span> <span class="k">const</span><span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">_y</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//set function</span>
+    <span class="kt">void</span> <span class="n">setXY</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">_y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="object-initialization-with-dynamicstatic-memory">object initialization with dynamic/static memory</h4>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//object pointer</span>
+    <span class="n">Points</span> <span class="o">*</span><span class="n">point3</span><span class="p">;</span>
+    <span class="n">point3</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Points</span><span class="p">();</span> 
+    <span class="n">point3</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">();</span>
+
+    <span class="n">Points</span> <span class="o">*</span><span class="n">point4</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Points</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+    <span class="n">point4</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">();</span>
+
+    <span class="c1">//segmentation fault 11 since object pointer will not implicitly call default constructor</span>
+    <span class="c1">// Points *ptr_point;</span>
+    <span class="c1">// std::cout&lt;&lt;"default pointer of object"&lt;&lt;std::endl;</span>
+    <span class="c1">// ptr_point-&gt;print();</span>
+    <span class="c1">// std::cout&lt;&lt;"default pointer of object"&lt;&lt;std::endl;</span>
+
+
+    <span class="c1">//remove storage via delete</span>
+    <span class="k">delete</span> <span class="n">point3</span><span class="p">;</span>
+    <span class="k">delete</span> <span class="n">point4</span><span class="p">;</span>
+
+    <span class="c1">//object reference</span>
+    <span class="n">Points</span> <span class="o">&amp;</span><span class="n">point5</span> <span class="o">=</span> <span class="n">point2</span><span class="p">;</span>
+    <span class="n">point5</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+
+    <span class="c1">//object pointer points to already existed object</span>
+    <span class="n">Points</span> <span class="o">*</span><span class="n">point6</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">point1</span><span class="p">;</span>
+    <span class="n">point6</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">();</span>
+
+    <span class="c1">//array of objects with static memory and default constructor</span>
+    <span class="n">Points</span> <span class="n">ptsArray</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="c1">//below is not working since above is already use default constructor for all elements</span>
+    <span class="c1">// ptsArray[0] Points();</span>
+    <span class="n">ptsArray</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">ptsArray</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">print</span><span class="p">();</span>
+    <span class="p">(</span><span class="n">ptsArray</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">();</span>
+
+
+    <span class="c1">//array of objects with static memory and customized constructor</span>
+    <span class="n">Points</span> <span class="n">pts_array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">Points</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">11</span><span class="p">),</span><span class="n">Points</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="mi">21</span><span class="p">),</span><span class="n">Points</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span><span class="mi">31</span><span class="p">)};</span>
+
+    <span class="n">pts_array</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">pts_array</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">pts_array</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">print</span><span class="p">();</span>
+
+    <span class="c1">//array of object pointers with dynamical memory</span>
+    <span class="n">Points</span> <span class="o">*</span><span class="n">pts_arrays</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Points</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="n">pts_arrays</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">pts_arrays</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Points</span><span class="p">(</span><span class="mi">41</span><span class="p">,</span><span class="mi">41</span><span class="p">);</span>
+    <span class="p">(</span><span class="n">pts_arrays</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">();</span>
+
+    <span class="c1">//array of object pointers with dynamical memory using malloc, implicitly calling constructor</span>
+    <span class="n">Points</span> <span class="o">*</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="n">Points</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Points</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">);</span>
+    <span class="c1">//cannot calling constructor if object data members have const</span>
+    <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">Points</span><span class="p">();</span>
+    <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Points</span><span class="p">(</span><span class="mi">51</span><span class="p">,</span><span class="mi">51</span><span class="p">);</span>
+    <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">print</span><span class="p">();</span>
+
+    <span class="c1">//array of object pointers with dynamical memory, this will defautly call constructor</span>
+    <span class="n">Points</span> <span class="o">*</span><span class="n">ptr_points</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Points</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+    <span class="n">ptr_points</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">ptr_points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">Points</span><span class="p">(</span><span class="mi">51</span><span class="p">,</span><span class="mi">51</span><span class="p">);</span>
+    <span class="n">ptr_points</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">print</span><span class="p">();</span>
+
+
+</code></pre></div></div>
+
+<h3 id="inheritance">Inheritance</h3>
+
+<h4 id="inheritance-in-python">Inheritance in Python</h4>
+
+<ul>
+  <li>Base class</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>  <span class="c1">#inherits,extend,override
+</span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">salary</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">salary</span> <span class="o">=</span> <span class="n">salary</span>
+    
+    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> is working..."</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>child class</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SoftwareEngineer</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
+    <span class="c1">#extend
+</span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">salary</span><span class="p">,</span><span class="n">level</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">salary</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
+    <span class="c1">#overide
+</span>    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> is coding..."</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> is debugging..."</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">se</span> <span class="o">=</span> <span class="n">SoftwareEngineer</span><span class="p">(</span><span class="s">'Max'</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">5000</span><span class="p">,</span><span class="s">'Junior'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">se</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">se</span><span class="p">.</span><span class="n">age</span><span class="p">)</span>
+<span class="n">se</span><span class="p">.</span><span class="n">work</span><span class="p">()</span>
+<span class="n">se</span><span class="p">.</span><span class="n">debug</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Max 25
+Max is coding...
+Max is debugging...
+</code></pre></div></div>
+
+<ul>
+  <li>child class</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Designer</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">drawing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> is drawing..."</span><span class="p">)</span>
+    <span class="c1">#override
+</span>    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> is designing..."</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span> <span class="o">=</span> <span class="n">Designer</span><span class="p">(</span><span class="s">'Philipp'</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span><span class="mi">7000</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">d</span><span class="p">.</span><span class="n">age</span><span class="p">)</span>
+<span class="n">d</span><span class="p">.</span><span class="n">work</span><span class="p">()</span>
+<span class="n">d</span><span class="p">.</span><span class="n">drawing</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Philipp 27
+Philipp is designing...
+Philipp is drawing...
+</code></pre></div></div>
+
+<h4 id="inheritance-in-python-1">Inheritance in Python</h4>
+
+<ul>
+  <li>Example</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/hadleyhzy34/OOP-Comparison-between-C-and-Python/main/source/c%2B%2B_inheritance.png" alt="img" /></p>
+
+<h5 id="subclass-header">Subclass header</h5>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Header for Moving 3D Points with int coords (MovablePoint.h) */</span>
+<span class="cp">#ifndef MOVING_POINT_H
+#define MOVING_POINT_H
+</span> 
+<span class="cp">#include "Points.h"   // Include header of the base class
+</span> 
+<span class="k">class</span> <span class="nc">MovablePoint</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Points</span> <span class="p">{</span> <span class="c1">// MovablePoint is a subclass of Point</span>
+<span class="nl">private:</span>
+   <span class="kt">int</span> <span class="n">xSpeed</span><span class="p">,</span> <span class="n">ySpeed</span><span class="p">;</span>
+ 
+<span class="nl">public:</span>
+   <span class="n">MovablePoint</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">xSpeed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ySpeed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+   <span class="kt">int</span> <span class="n">getXSpeed</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+   <span class="kt">int</span> <span class="n">getYSpeed</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+   <span class="kt">void</span> <span class="n">setXSpeed</span><span class="p">(</span><span class="kt">int</span> <span class="n">xSpeed</span><span class="p">);</span>
+   <span class="kt">void</span> <span class="n">setYSpeed</span><span class="p">(</span><span class="kt">int</span> <span class="n">ySpeed</span><span class="p">);</span>
+   <span class="kt">void</span> <span class="n">move</span><span class="p">();</span>
+   <span class="kt">void</span> <span class="n">print</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+ 
+<span class="cp">#endif
+</span></code></pre></div></div>
+<h5 id="subclassderived-class-implementation">Subclass/derived class implementation</h5>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "MovablePoints.h"   // Include header of the base class
+</span>
+<span class="c1">//note that do not set default argument here, otherwise it could cause redefinition issue</span>
+<span class="n">MovablePoint</span><span class="o">::</span><span class="n">MovablePoint</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">xSpeed</span><span class="p">,</span><span class="kt">int</span> <span class="n">ySpeed</span><span class="p">)</span>
+    <span class="o">:</span><span class="n">Points</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">xSpeed</span><span class="p">(</span><span class="n">xSpeed</span><span class="p">),</span><span class="n">ySpeed</span><span class="p">(</span><span class="n">ySpeed</span><span class="p">){}</span>
+
+<span class="kt">int</span> <span class="n">MovablePoint</span><span class="o">::</span><span class="n">getXSpeed</span><span class="p">()</span> <span class="k">const</span><span class="p">{</span>
+    <span class="k">return</span> <span class="n">xSpeed</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">MovablePoint</span><span class="o">::</span><span class="n">getYSpeed</span><span class="p">()</span> <span class="k">const</span><span class="p">{</span>
+    <span class="k">return</span> <span class="n">ySpeed</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MovablePoint</span><span class="o">::</span><span class="n">setXSpeed</span><span class="p">(</span><span class="kt">int</span> <span class="n">xSpeed</span><span class="p">){</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">xSpeed</span> <span class="o">=</span> <span class="n">xSpeed</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MovablePoint</span><span class="o">::</span><span class="n">setYSpeed</span><span class="p">(</span><span class="kt">int</span> <span class="n">ySpeed</span><span class="p">){</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">ySpeed</span> <span class="o">=</span> <span class="n">ySpeed</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MovablePoint</span><span class="o">::</span><span class="n">print</span><span class="p">()</span> <span class="k">const</span><span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"Movable"</span><span class="p">;</span>
+    <span class="n">Points</span><span class="o">::</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">" Speed="</span><span class="o">&lt;&lt;</span><span class="n">xSpeed</span><span class="o">&lt;&lt;</span><span class="s">" "</span><span class="o">&lt;&lt;</span><span class="n">ySpeed</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MovablePoint</span><span class="o">::</span><span class="n">move</span><span class="p">(){</span>
+    <span class="n">Points</span><span class="o">::</span><span class="n">setX</span><span class="p">(</span><span class="n">Points</span><span class="o">::</span><span class="n">getX</span><span class="p">()</span><span class="o">+</span><span class="n">xSpeed</span><span class="p">);</span>
+    <span class="n">Points</span><span class="o">::</span><span class="n">setY</span><span class="p">(</span><span class="n">Points</span><span class="o">::</span><span class="n">getY</span><span class="p">()</span><span class="o">+</span><span class="n">ySpeed</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul class="warning">
+  <li>When the subclass construct its instance, it must construct a superclass object, which it inherited.</li>
+  <li>The subclass does not have direct access to superclass’ private members x and y. To initialize these inherited members, the subclass constructors invokes the superclass constructor which is <code class="language-plaintext highlighter-rouge">public</code>, in the member initializer list.</li>
+  <li>You need to use the member initializer list to invoke the superclass Point’s constructor to initialize the superclass, before initializing the subclass. Object data member can only initialized via member initializer list.</li>
+  <li>If you did not explicitly invoke the superclass’ constructor, the compiler implicitly invoke the superclass’ default constructor to construct a superclass object.</li>
+  <li>To use the superclass members, use scope resolution operator in the form of <code class="language-plaintext highlighter-rouge">SuperclassName::memberName</code>. For example, Point::print(), Point::getX().</li>
+</ul>
+
+<h5 id="test-driver">Test driver</h5>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Test Driver Program for MovablePoint (TestMovablePoint.cpp) */</span>
+<span class="cp">#include &lt;iostream&gt;
+#include "Points.h"
+#include "MovablePoints.h"  // included "Point.h"
+</span> 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+   <span class="n">Points</span> <span class="n">p1</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>  <span class="c1">// superclass</span>
+   <span class="n">p1</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>      <span class="c1">// Point @ (4,5)</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+ 
+   <span class="n">MovablePoint</span> <span class="n">mp1</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">);</span> <span class="c1">// subclass, default speed</span>
+   <span class="n">mp1</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>       <span class="c1">// MovablePoint @ (11,22) Speed=(0,0)</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+   <span class="n">mp1</span><span class="p">.</span><span class="n">setXSpeed</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+   <span class="n">mp1</span><span class="p">.</span><span class="n">move</span><span class="p">();</span>
+   <span class="n">mp1</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>       <span class="c1">// MovablePoint @ (19,22) Speed=(8,0)</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+ 
+   <span class="n">MovablePoint</span> <span class="n">mp2</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">44</span><span class="p">);</span>
+   <span class="n">mp2</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>  <span class="c1">// MovablePoint @ (11,22) Speed=(33,44)</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+   <span class="n">mp2</span><span class="p">.</span><span class="n">move</span><span class="p">();</span>
+   <span class="n">mp2</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>  <span class="c1">// MovablePoint @ (44,66) Speed=(33,44)</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that private data member in the superclass is not accessible in the subclass. For example, in the function <code class="language-plaintext highlighter-rouge">move()</code> of MovablePoint, you cannot reference <code class="language-plaintext highlighter-rouge">_x</code> of superclass <code class="language-plaintext highlighter-rouge">Points</code> directly.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">MovablePoint</span><span class="o">::</span><span class="n">move</span><span class="p">()</span> <span class="p">{</span>
+   <span class="n">x</span> <span class="o">+=</span> <span class="n">xSpeed</span><span class="p">;</span>     <span class="c1">// error: 'int Point::x' is private</span>
+<span class="c1">//   Point::setX(Point::getX() + xSpeed);</span>
+   <span class="n">Point</span><span class="o">::</span><span class="n">setY</span><span class="p">(</span><span class="n">Point</span><span class="o">::</span><span class="n">getY</span><span class="p">()</span> <span class="o">+</span> <span class="n">ySpeed</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>However, if we make <code class="language-plaintext highlighter-rouge">_x</code> protected instead of private, the subclass can access <code class="language-plaintext highlighter-rouge">_x</code> directly.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Superclass Point</span>
+<span class="k">class</span> <span class="nc">Point</span> <span class="p">{</span>
+<span class="nl">protected:</span>
+   <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">......</span>
+<span class="p">};</span>   
+
+<span class="c1">// Subclass MovablePoint</span>
+<span class="k">class</span> <span class="nc">MovablePoint</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Point</span> <span class="p">{</span>
+   <span class="p">......</span>
+<span class="p">}</span>
+ 
+<span class="kt">void</span> <span class="n">MovablePoint</span><span class="o">::</span><span class="n">move</span><span class="p">()</span> <span class="p">{</span>
+   <span class="n">x</span> <span class="o">+=</span> <span class="n">xSpeed</span><span class="p">;</span>
+   <span class="n">y</span> <span class="o">+=</span> <span class="n">ySpeed</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="polymorphism">Polymorphism</h3>
+
+<h4 id="polymorphism-in-python">Polymorphism in Python</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">employees</span> <span class="o">=</span> <span class="p">[</span><span class="n">SoftwareEngineer</span><span class="p">(</span><span class="s">"Max"</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">6000</span><span class="p">,</span> <span class="s">"Junior"</span><span class="p">),</span>
+             <span class="n">SoftwareEngineer</span><span class="p">(</span><span class="s">"George"</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">6000</span><span class="p">,</span> <span class="s">"Junior"</span><span class="p">),</span>
+             <span class="n">Designer</span><span class="p">(</span><span class="s">"Lisa"</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">6000</span><span class="p">),</span>
+            <span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">motivate_employees</span><span class="p">(</span><span class="n">employees</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">employee</span> <span class="ow">in</span> <span class="n">employees</span><span class="p">:</span>
+        <span class="n">employee</span><span class="p">.</span><span class="n">work</span><span class="p">()</span>
+
+<span class="n">motivate_employees</span><span class="p">(</span><span class="n">employees</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Max is coding...
+George is coding...
+Lisa is designing...
+</code></pre></div></div>
+
+<h4 id="polymorphism-in-c">Polymorphism in C++</h4>
+
+<h5 id="driver-program">driver program</h5>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//object pointer</span>
+    <span class="n">Points</span> <span class="o">*</span><span class="n">ptr1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MovablePoint</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">);</span>
+    <span class="n">ptr1</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">();</span> <span class="c1">//run baseClass version-&gt;(virtual)-&gt;run subclass version</span>
+    <span class="k">delete</span> <span class="n">ptr1</span><span class="p">;</span>
+
+    <span class="c1">//using object reference</span>
+    <span class="n">MovablePoint</span> <span class="n">mp</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">24</span><span class="p">);</span>
+    <span class="n">Points</span> <span class="o">*</span><span class="n">ptr2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">mp</span><span class="p">;</span>
+    <span class="n">ptr2</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">();</span> <span class="c1">//run baseclass version-&gt;(virtual)-&gt;run subclass</span>
+
+    <span class="c1">//using object with explicit constructor</span>
+    <span class="n">Points</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">MovablePoint</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">34</span><span class="p">);</span> <span class="c1">//upcast, create baseclass object using subclass constructor</span>
+    <span class="n">p3</span><span class="p">.</span><span class="n">print</span><span class="p">();</span> <span class="c1">//run baseClass version-&gt;virtual-&gt;run subclass</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that a subclass instance(mp) can be substituted for a superclass reference. Once substituted, only the superclass functions can be called, not the subclass’ one.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Point.h</span>
+<span class="k">class</span> <span class="nc">Points</span> <span class="p">{</span>
+   <span class="p">......</span>
+   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">print</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>They keyword <code class="language-plaintext highlighter-rouge">virtual</code> determines which method is used if the method is invoked by a pointer. Without <code class="language-plaintext highlighter-rouge">virtual</code>, the program chooses the method based on the pointer type. With <code class="language-plaintext highlighter-rouge">virtual</code>, the program chooses the method based on the type of the object pointed to.</p>
+
+<p class="warning">Take note that virtual functions work on object pointers/references, but not on regular objects.</p>
+
+<ul>
+  <li>Using keyword virtual on a superclass function makes the function virtual for the superclass, as well as ALL its subclasses.</li>
+  <li>If a virtual function is invoked using a pointer (or reference), the program uses the method defined for the object type instead of the pointer type. This is called <code class="language-plaintext highlighter-rouge">dynamic binding</code> or late binding, contrast to static binding during the compile time.</li>
+  <li>It is recommended that functions to be overridden in the subclass be declared virtual in the superclass.</li>
+  <li>Constructor can’t be virtual, because it is not inherited. Subclass defines its own constructor, which invokes the superclass constructor to initialize the inherited data members.</li>
+  <li>Destructor should be declared virtual, if a class is to to be used as a superclass, so that the appropriate object destructor is invoked to free the dynamically allocated memory in the subclass, if any.</li>
+  <li>Friends can’t be virtual, as friends are not class member and are not inherited.</li>
+  <li>If you override function in the subclass, the overridden function shall have the same parameter list as the superclass’ version.</li>
+</ul>
+
+<h4 id="upcasting-vs-downcasting">Upcasting VS Downcasting</h4>
+
+<p>Normally C++ does not allow you to assign an address of one type to pointer or reference of another type. For example:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">8</span><span class="p">;</span>
+<span class="kt">double</span> <span class="o">*</span><span class="n">ptr1</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">//error</span>
+<span class="kt">double</span> <span class="o">&amp;</span><span class="n">ref</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>    <span class="c1">//error</span>
+</code></pre></div></div>
+
+<p>However, a pointer or reference of superclass can hold a subclass object without explicit type cast:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//using object reference</span>
+<span class="n">MovablePoint</span> <span class="nf">mp</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">24</span><span class="p">);</span>
+<span class="n">Points</span> <span class="o">*</span><span class="n">ptr2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">mp</span><span class="p">;</span>
+<span class="n">Points</span> <span class="o">&amp;</span><span class="n">ptr2</span> <span class="o">=</span> <span class="n">mp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The reverse option, converting a superclass reference or pointer to subclass, is called downcasting. Downcasting requires explicit type cast.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//downcast</span>
+<span class="n">Points</span> <span class="nf">p4</span><span class="p">();</span>
+<span class="n">MovablePoint</span> <span class="o">*</span><span class="n">ptr3</span> <span class="o">=</span> <span class="n">ptr1</span><span class="p">;</span>
+<span class="n">MovablePoint</span> <span class="o">*</span><span class="n">ptr4</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">p4</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">main1</span><span class="p">.</span><span class="n">cpp</span><span class="o">:</span><span class="mi">23</span><span class="o">:</span><span class="mi">19</span><span class="o">:</span> <span class="n">error</span><span class="o">:</span> <span class="n">cannot</span> <span class="n">initialize</span> <span class="n">a</span> <span class="n">variable</span> <span class="n">of</span> <span class="n">type</span> <span class="err">'</span><span class="n">MovablePoint</span> <span class="o">*</span><span class="err">'</span> <span class="n">with</span> <span class="n">an</span> <span class="n">lvalue</span> <span class="n">of</span>
+      <span class="n">type</span> <span class="err">'</span><span class="n">Points</span> <span class="o">*</span><span class="err">'</span>
+    <span class="n">MovablePoint</span> <span class="o">*</span><span class="n">ptr3</span> <span class="o">=</span> <span class="n">ptr1</span><span class="p">;</span>
+                  <span class="o">^</span>      <span class="o">~~~~</span>
+<span class="n">main1</span><span class="p">.</span><span class="n">cpp</span><span class="o">:</span><span class="mi">24</span><span class="o">:</span><span class="mi">19</span><span class="o">:</span> <span class="n">error</span><span class="o">:</span> <span class="n">cannot</span> <span class="n">initialize</span> <span class="n">a</span> <span class="n">variable</span> <span class="n">of</span> <span class="n">type</span> <span class="err">'</span><span class="n">MovablePoint</span> <span class="o">*</span><span class="err">'</span> <span class="n">with</span> <span class="n">an</span> <span class="n">rvalue</span> <span class="n">of</span>
+      <span class="n">type</span> <span class="err">'</span><span class="n">Points</span> <span class="p">(</span><span class="o">*</span><span class="p">)()</span><span class="err">'</span>
+    <span class="n">MovablePoint</span> <span class="o">*</span><span class="n">ptr4</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">p4</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Explicit downcast and <code class="language-plaintext highlighter-rouge">dynamic_cast</code></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1">//downcast implicitly and explicitly</span>
+    <span class="n">Points</span> <span class="nf">p4</span><span class="p">();</span>
+    <span class="c1">// MovablePoint *ptr3 = ptr1;</span>
+    <span class="c1">// MovablePoint *ptr4 = &amp;p4;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"test5: "</span><span class="p">;</span>
+    <span class="n">MovablePoint</span> <span class="o">*</span><span class="n">ptr5</span> <span class="o">=</span> <span class="p">(</span><span class="n">MovablePoint</span><span class="o">*</span><span class="p">)</span><span class="n">ptr1</span><span class="p">;</span>
+    <span class="n">ptr5</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">//downcast using dynamic cast</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"test6"</span><span class="p">;</span>
+    <span class="n">MovablePoint</span> <span class="o">*</span><span class="n">ptr6</span> <span class="o">=</span> <span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">MovablePoint</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ptr1</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"test6:"</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">ptr6</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"test6"</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="typeid">typeid</h4>
+
+<p>The operator typeid returns a reference to an object of class <code class="language-plaintext highlighter-rouge">type_info</code>. You can use <code class="language-plaintext highlighter-rouge">type_info</code> member function <code class="language-plaintext highlighter-rouge">name()</code> to get the type name. For example:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Test Driver Program for MovablePoint (TestMovablePoint.cpp) */</span>
+<span class="cp">#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+#include "Points.h"
+#include "MovablePoints.h"  // included "Point.h"
+</span> 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//object pointer</span>
+    <span class="n">Points</span> <span class="o">*</span><span class="n">ptr1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MovablePoint</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="k">typeid</span><span class="p">(</span><span class="o">*</span><span class="n">ptr1</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="n">MovablePoint</span> <span class="o">*</span><span class="n">ptr2</span> <span class="o">=</span> <span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">MovablePoint</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ptr1</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="k">typeid</span><span class="p">(</span><span class="o">*</span><span class="n">ptr2</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">delete</span> <span class="n">ptr1</span><span class="p">;</span>
+
+    <span class="n">Points</span> <span class="n">p2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="k">typeid</span><span class="p">(</span><span class="n">p2</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="n">MovablePoint</span> <span class="n">mp2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="k">typeid</span><span class="p">(</span><span class="n">mp2</span><span class="p">).</span><span class="n">name</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p class="warning">Note that the number in front of the name gives the length of the string.</p>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-11-15/OpenCV-cheat-sheet" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-11-15/Machine-Learning-Optimizer" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

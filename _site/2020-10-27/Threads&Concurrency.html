@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Threas&amp;Concurrency | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Threas&amp;Concurrency" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Definition Instance of a program An instance of a program is a copy of an executable version of the program that has been written to the computer’s memory. Process When we run a program, those instructions are copied into memory and space is allocated for variables and other stuff required to manage its execution. This running instance of a program is called a process and it’s processes which we manage. Top" />
+<meta property="og:description" content="Definition Instance of a program An instance of a program is a copy of an executable version of the program that has been written to the computer’s memory. Process When we run a program, those instructions are copied into memory and space is allocated for variables and other stuff required to manage its execution. This running instance of a program is called a process and it’s processes which we manage. Top" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-10-27/Threads&Concurrency" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-10-27/Threads&Concurrency" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-27T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Threas&amp;Concurrency" />
+<script type="application/ld+json">
+{"headline":"Threas&amp;Concurrency","url":"https://hadleyhzy34.github.io/home/2020-10-27/Threads&Concurrency","datePublished":"2020-10-27T00:00:00+08:00","dateModified":"2020-10-27T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-10-27/Threads&Concurrency"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"Definition Instance of a program An instance of a program is a copy of an executable version of the program that has been written to the computer’s memory. Process When we run a program, those instructions are copied into memory and space is allocated for variables and other stuff required to manage its execution. This running instance of a program is called a process and it’s processes which we manage. Top","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-10-27 00:00:00 +0800">October 27, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Threas&Concurrency</h1>
+  <div class="post-line"></div>
+
+  <h2 id="definition">Definition</h2>
+
+<ul>
+  <li>
+    <p>Instance of a program
+An instance of a program is a copy of an executable version of the program that has been written to the computer’s memory.</p>
+  </li>
+  <li>
+    <p>Process
+When we run a program, those instructions are copied into memory and space is allocated for variables and other stuff required to manage its execution. This running instance of a program is called a process and it’s processes which we manage.</p>
+  </li>
+</ul>
+
+<h3 id="top">Top</h3>
+
+<!--more-->
+
+<h2 id="what-do-we-need-to-support-threads">What do we need to support threads?</h2>
+
+<p>thread data structure</p>
+
+<p>mechanisms to create and manage threads</p>
+
+<p>mechanisms to fasely coordinate among threads</p>
+
+<p>concurrent inconsistency issue-&gt;synchronization mechanisms</p>
+
+<p>mutual exclusion
+exclusive access to only one thread at a time</p>
+
+<p>mutex</p>
+
+<p>waiting on other threads
+-specific condition before proceeding
+-condition variable</p>
+
+<p>waking up other threads from wait state</p>
+
+<h2 id="creation">creation</h2>
+
+<h3 id="thread-type">thread type:</h3>
+<p>thread ID, pc, sp, registers, stack, attributes</p>
+
+<h3 id="thread-creation">thread creation:</h3>
+<p>fork(proc,args)
+create a thread
+not unix fork which is to create a new process</p>
+
+<p>new thread created, new thread data will be initialized</p>
+
+<p>notify parent-&gt;general: thread is done, return results, status of computation -&gt; application: parent thread -&gt; join</p>
+<h3 id="jointhread">join(thread)</h3>
+<p>join+id child thread
+it will be blocked until child thread completed, join will return to the parent the result of the child’s computation. thread data will be freed, terminated.</p>
+
+<h2 id="thread-creation-example">thread creation example</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Thread thread1;
+shared_list list;
+thread1=fork(safe_insert,4);
+safe_insert(6);
+join(thread1);
+</code></pre></div></div>
+
+<h2 id="mutexes">mutexes</h2>
+<p>override shared list</p>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-10-27/Tree-Advanced-Topics" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-10-27/Pthreads" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

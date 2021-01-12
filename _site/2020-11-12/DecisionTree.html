@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Decision Tree | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Decision Tree" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="example Color Diameter Label Green 3 Apple Yellow 3 Apple Red 1 Grape Red 1 Grape Yellow 3 Lemon Difficulties: No visual way to seperate features since sample 2 and sample 5 share the same features while having different labels Family of Decision Tree Learning Algorithms: ID3 C4.5 C5.0 CART" />
+<meta property="og:description" content="example Color Diameter Label Green 3 Apple Yellow 3 Apple Red 1 Grape Red 1 Grape Yellow 3 Lemon Difficulties: No visual way to seperate features since sample 2 and sample 5 share the same features while having different labels Family of Decision Tree Learning Algorithms: ID3 C4.5 C5.0 CART" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-11-12/DecisionTree" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-11-12/DecisionTree" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-12T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Decision Tree" />
+<script type="application/ld+json">
+{"headline":"Decision Tree","url":"https://hadleyhzy34.github.io/home/2020-11-12/DecisionTree","datePublished":"2020-11-12T00:00:00+08:00","dateModified":"2020-11-12T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-11-12/DecisionTree"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"example Color Diameter Label Green 3 Apple Yellow 3 Apple Red 1 Grape Red 1 Grape Yellow 3 Lemon Difficulties: No visual way to seperate features since sample 2 and sample 5 share the same features while having different labels Family of Decision Tree Learning Algorithms: ID3 C4.5 C5.0 CART","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-11-12 00:00:00 +0800">November 12, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Decision Tree</h1>
+  <div class="post-line"></div>
+
+  <h2 id="example">example</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Color</th>
+      <th style="text-align: center">Diameter</th>
+      <th style="text-align: right">Label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Green</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: right">Apple</td>
+    </tr>
+    <tr>
+      <td>Yellow</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: right">Apple</td>
+    </tr>
+    <tr>
+      <td>Red</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: right">Grape</td>
+    </tr>
+    <tr>
+      <td>Red</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: right">Grape</td>
+    </tr>
+    <tr>
+      <td>Yellow</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: right">Lemon</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Difficulties:
+No visual way to seperate features since sample 2 and sample 5 share the same features while having different labels</p>
+
+<p>Family of Decision Tree Learning Algorithms:</p>
+<ul>
+  <li>ID3</li>
+  <li>C4.5</li>
+  <li>C5.0</li>
+  <li>CART</li>
+</ul>
+
+<!--more-->
+<h3 id="cart">CART</h3>
+<p><code class="language-plaintext highlighter-rouge">CART</code> stands for classification and regression trees</p>
+
+<p><code class="language-plaintext highlighter-rouge">CART</code> overview:</p>
+
+<p><img src="https://raw.githubusercontent.com/hadleyhzy34/machine_learning/master/decision_tree/source/overview_cart.png" alt="cart_overview" /></p>
+
+<p>The trick to build an effective tree is to understand which questions to ask and when. And to do that, we need to quantify how much a question helps to unmix the labels. And we can quantify the amount of uncertainty at a single node using a metrix called <code class="language-plaintext highlighter-rouge">Gini impurity</code>. And we can quantify how much a question reduces that uncertainty using a concept called <code class="language-plaintext highlighter-rouge">information gain</code>.</p>
+
+<h2 id="import-modules">import modules</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+</code></pre></div></div>
+
+<h2 id="training-data-in-our-test-example">training data in our test example</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">training_data</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">[</span><span class="s">'Green'</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="s">'Apple'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Yellow'</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="s">'Apple'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Red'</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s">'Grape'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Red'</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s">'Grape'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Yellow'</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="s">'Lemon'</span><span class="p">],</span>
+<span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[['Green', 3, 'Apple'], ['Yellow', 3, 'Apple'], ['Red', 1, 'Grape'], ['Red', 1, 'Grape'], ['Yellow', 3, 'Lemon']]
+</code></pre></div></div>
+
+<h3 id="transform-categorical-data-into-integers">transform categorical data into integers:</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">encode_data</span><span class="p">(</span><span class="n">training_data</span><span class="p">):</span>
+    <span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">training_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">data_set</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_features</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[</span> <span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">training_data</span> <span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">training_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">col</span><span class="p">],</span><span class="nb">int</span><span class="p">):</span>
+            <span class="n">data_set</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">data_set</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">T</span>
+    <span class="n">data_set</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data_set</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_set</span> <span class="o">=</span> <span class="n">encode_data</span><span class="p">(</span><span class="n">training_data</span><span class="p">)</span>
+<span class="n">data_set</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[0, 3, 0], [2, 3, 0], [1, 1, 1], [1, 1, 1], [2, 3, 2]]
+</code></pre></div></div>
+
+<h2 id="question-class">question class</h2>
+
+<p><img src="https://raw.githubusercontent.com/hadleyhzy34/machine_learning/master/decision_tree/source/possible_questions.png" alt="questions" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Question</span><span class="p">:</span>
+    <span class="c1"># a question is used to partition a dataset
+</span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">column</span> <span class="o">=</span> <span class="n">column</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+    
+    <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
+        <span class="c1"># compare the feature value in an example to the feature
+</span>        <span class="c1"># value in this quesiton
+</span>        <span class="n">val</span> <span class="o">=</span> <span class="n">example</span><span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">column</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">val</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="p">.</span><span class="n">value</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## demo
+# let's write a question for a numeric question
+</span><span class="n">q</span><span class="o">=</span><span class="n">Question</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">example</span> <span class="o">=</span> <span class="n">data_set</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">q</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="n">example</span><span class="p">)</span>  <span class="c1">#this will be false since forth example diameter is less than 3
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+<h2 id="partition-function">partition function</h2>
+
+<p><img src="https://raw.githubusercontent.com/hadleyhzy34/machine_learning/master/decision_tree/source/partition.png" alt="partition" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+    <span class="c1">#partitions dataset, rows: dataset question is used to seperate dataset into two different list
+</span>    <span class="n">true_rows</span><span class="p">,</span><span class="n">false_rows</span><span class="o">=</span><span class="p">[],[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">question</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+            <span class="n">true_rows</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">false_rows</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">true_rows</span><span class="p">,</span> <span class="n">false_rows</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#demonstrate training data whether first categorical value is &gt;=1
+</span><span class="n">true_rows</span><span class="p">,</span> <span class="n">false_rows</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">Question</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">true_rows</span><span class="p">,</span> <span class="n">false_rows</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>([[0, 3, 0], [2, 3, 0], [1, 1, 1], [1, 1, 1], [2, 3, 2]], [])
+</code></pre></div></div>
+
+<h2 id="gini-impurity">Gini Impurity</h2>
+
+<p>Chance of being incorrect if you randomly assign a label to an example in the same set. It is a measurement of the likelihood of an incorrect classification of a new instance of a random variable. Gini Impurity means all data contains only one class.</p>
+
+<p>How to calculate gini impurity:</p>
+
+<p><img src="https://latex.codecogs.com/svg.latex?  G(K) = 1-  \sum_i^m  p\_instance(i)  p(i)   = 1- \sum_i^m  \frac{1}{m} p(i)   = 1- \sum_i^n  \frac{k}{m} p(i) " title="x_{ij}" /></p>
+
+<p>where p_instance(i) is the probablity to randomly select an instance, m is number of example/instances, n is number of class/labels, k is frequency of current instance, p(i) is the probability of an item with label i being chosen, which is also the fraction of items labeled with class i in the set.</p>
+
+<p>reference regarding to <code class="language-plaintext highlighter-rouge">Gini Impurity</code>:</p>
+<ol>
+  <li>https://victorzhou.com/blog/gini-impurity/</li>
+  <li>https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">gini</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+<span class="c1"># """ calculate the gini impurity for a list of rows"""
+</span>    <span class="n">datasets</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+    <span class="n">impurity</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">datasets</span><span class="p">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="c1">#number of labels
+</span>    <span class="n">unique</span><span class="p">,</span><span class="n">counts</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">datasets</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">return_counts</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">label</span><span class="p">,</span><span class="n">count</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span><span class="n">counts</span><span class="p">):</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">count</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">impurity</span> <span class="o">-=</span> <span class="n">prob</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">impurity</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gini</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.6399999999999999
+</code></pre></div></div>
+
+<p>demo, a dataset with no mixing</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">no_mixing</span> <span class="o">=</span> <span class="p">[[</span><span class="s">'Apple'</span><span class="p">],</span>
+              <span class="p">[</span><span class="s">'Apple'</span><span class="p">]]</span>
+<span class="c1"># this will return 0
+</span><span class="n">gini</span><span class="p">(</span><span class="n">no_mixing</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.0
+</code></pre></div></div>
+
+<p>demo, a dataset with many different labels</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lots_of_mixing</span> <span class="o">=</span> <span class="p">[[</span><span class="s">'Apple'</span><span class="p">],</span>
+                  <span class="p">[</span><span class="s">'Orange'</span><span class="p">],</span>
+                  <span class="p">[</span><span class="s">'Grape'</span><span class="p">],</span>
+                  <span class="p">[</span><span class="s">'Grapefruit'</span><span class="p">],</span>
+                  <span class="p">[</span><span class="s">'Blueberry'</span><span class="p">]]</span>
+<span class="n">gini</span><span class="p">(</span><span class="n">lots_of_mixing</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.7999999999999998
+</code></pre></div></div>
+
+<h2 id="information-gains">Information Gains</h2>
+
+<p><img src="https://raw.githubusercontent.com/hadleyhzy34/machine_learning/master/decision_tree/source/info_gain.png" alt="info_gain" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">info_gain</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">current_gini_impurity</span><span class="p">):</span>
+    <span class="c1">#the uncertainty of the starting node, minus the weighted impurity of two child nodes
+</span>    <span class="n">p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">left</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">current_gini_impurity</span> <span class="o">-</span> <span class="n">p</span> <span class="o">*</span> <span class="n">gini</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">gini</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>calculate the uncertainty of training data</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">current_impurity</span> <span class="o">=</span> <span class="n">gini</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
+<span class="n">current_impurity</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.6399999999999999
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">datasets</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
+<span class="c1"># true_rows,false_rows = partition(data_set, Question(0,0))
+# info_gain(true_rows,false_rows,current_impurity)
+# datasets[0,1]
+</span><span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="c1"># print(data)
+</span>    <span class="n">true_rows</span><span class="p">,</span><span class="n">false_rows</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">data_set</span><span class="p">,</span> <span class="n">Question</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">data</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">info_gain</span><span class="p">(</span><span class="n">true_rows</span><span class="p">,</span><span class="n">false_rows</span><span class="p">,</span><span class="n">current_impurity</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.37333333333333324
+0.37333333333333324
+0.0
+0.0
+0.37333333333333324
+</code></pre></div></div>
+
+<h2 id="build-the-tree-using-recursion">build the tree using recursion</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_best_split</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+    <span class="c1">#find the best question to ask by iterating over every feature/value and calculating the information gain
+</span>    <span class="n">current_impurity</span>  <span class="o">=</span> <span class="n">gini</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+    <span class="n">best_gain</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">best_question</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">datasets</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_features</span><span class="p">):</span>
+        <span class="n">unique</span><span class="p">,</span><span class="n">counts</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">datasets</span><span class="p">[:,</span><span class="n">col</span><span class="p">],</span><span class="n">return_counts</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">val</span><span class="p">,</span><span class="n">count</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span><span class="n">counts</span><span class="p">):</span>
+            <span class="n">question</span> <span class="o">=</span> <span class="n">Question</span><span class="p">(</span><span class="n">col</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">true_rows</span><span class="p">,</span><span class="n">false_rows</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="n">question</span><span class="p">)</span>
+            <span class="n">gain</span> <span class="o">=</span> <span class="n">info_gain</span><span class="p">(</span><span class="n">true_rows</span><span class="p">,</span> <span class="n">false_rows</span><span class="p">,</span> <span class="n">current_impurity</span><span class="p">)</span>
+            <span class="c1"># print(col, val, gain)
+</span>            <span class="k">if</span> <span class="n">gain</span> <span class="o">&gt;=</span> <span class="n">best_gain</span><span class="p">:</span>
+                <span class="n">best_gain</span><span class="p">,</span> <span class="n">best_question</span> <span class="o">=</span> <span class="n">gain</span><span class="p">,</span> <span class="n">question</span>
+    <span class="k">return</span> <span class="n">best_gain</span><span class="p">,</span> <span class="n">best_question</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">best_gain</span><span class="p">,</span> <span class="n">best_question</span> <span class="o">=</span> <span class="n">find_best_split</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
+<span class="n">best_gain</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.37333333333333324
+</code></pre></div></div>
+
+<h2 id="build-tree">build tree</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Leaf</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rows</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">datasets</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">unique</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">datasets</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">return_counts</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Decision_Node</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">question</span><span class="p">,</span><span class="n">true_branch</span><span class="p">,</span><span class="n">false_branch</span><span class="p">):</span>  
+        <span class="bp">self</span><span class="p">.</span><span class="n">question</span> <span class="o">=</span> <span class="n">question</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">true_branch</span> <span class="o">=</span> <span class="n">true_branch</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">false_branch</span> <span class="o">=</span> <span class="n">false_branch</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">build_tree</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+    <span class="n">gain</span><span class="p">,</span> <span class="n">question</span> <span class="o">=</span> <span class="n">find_best_split</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">gain</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Leaf</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+
+    <span class="n">true_rows</span><span class="p">,</span> <span class="n">false_rows</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">question</span><span class="p">)</span>
+
+    <span class="n">true_branch</span> <span class="o">=</span> <span class="n">build_tree</span><span class="p">(</span><span class="n">true_rows</span><span class="p">)</span>
+    <span class="n">false_branch</span> <span class="o">=</span> <span class="n">build_tree</span><span class="p">(</span><span class="n">false_rows</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Decision_Node</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">true_branch</span><span class="p">,</span> <span class="n">false_branch</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">print_tree</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Leaf</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"leaf"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">((</span><span class="n">node</span><span class="p">.</span><span class="n">unique</span><span class="p">,</span><span class="n">node</span><span class="p">.</span><span class="n">counts</span><span class="p">))</span>
+        <span class="k">return</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="s">"question is: "</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">question</span><span class="p">.</span><span class="n">column</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">question</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">print</span> <span class="p">(</span><span class="s">'--&gt; True:'</span><span class="p">)</span>
+    <span class="n">print_tree</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">true_branch</span><span class="p">)</span>
+
+    <span class="k">print</span> <span class="p">(</span><span class="s">'--&gt; false:'</span><span class="p">)</span>
+    <span class="n">print_tree</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">false_branch</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test</span> <span class="o">=</span> <span class="n">build_tree</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
+<span class="n">print_tree</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>question is: 
+1 3
+--&gt; True:
+question is: 
+0 2
+--&gt; True:
+leaf
+(array([0, 2]), array([1, 1]))
+--&gt; false:
+leaf
+(array([0]), array([1]))
+--&gt; false:
+leaf
+(array([1]), array([2]))
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Leaf</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">node</span><span class="p">.</span><span class="n">unique</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">counts</span>
+
+    <span class="k">if</span> <span class="n">node</span><span class="p">.</span><span class="n">question</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">classify</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">true_branch</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">classify</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">false_branch</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">classify</span><span class="p">(</span><span class="n">data_set</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(array([0]), array([1]))
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">testing_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s">'Green'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'Apple'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Yellow'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">'Apple'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Red'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'Grape'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Red'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'Grape'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Yellow'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'Lemon'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Red'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'Apple'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Yellow'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">'Apple'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Green'</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s">'Grape'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Yellow'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'Grape'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s">'Green'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'Lemon'</span><span class="p">],</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">encode_data</span><span class="p">(</span><span class="n">training_data</span><span class="p">):</span>
+    <span class="n">label_encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+    <span class="n">x_color</span><span class="o">=</span> <span class="p">[</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">training_data</span><span class="p">]</span>
+    <span class="n">x_label</span><span class="o">=</span> <span class="p">[</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">training_data</span><span class="p">]</span>
+    <span class="n">y_color</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_color</span><span class="p">)</span>
+    <span class="n">y_label</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_label</span><span class="p">)</span>
+    <span class="n">data_set</span><span class="o">=</span><span class="p">[</span> <span class="p">[</span><span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">col3</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">,</span><span class="n">col3</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y_color</span><span class="p">,</span><span class="n">training_data</span><span class="p">,</span><span class="n">y_label</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">data_set</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_data</span> <span class="o">=</span> <span class="n">encode_data</span><span class="p">(</span><span class="n">testing_data</span><span class="p">)</span>
+<span class="n">test_data</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[0, 3, 0],
+ [2, 4, 0],
+ [1, 2, 1],
+ [1, 1, 1],
+ [2, 3, 2],
+ [1, 2, 0],
+ [2, 4, 0],
+ [0, 5, 1],
+ [2, 1, 1],
+ [0, 3, 2]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">test_data</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">classify</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 (array([0]), array([1]))
+0 (array([0, 2]), array([1, 1]))
+1 (array([1]), array([2]))
+1 (array([1]), array([2]))
+2 (array([0, 2]), array([1, 1]))
+0 (array([1]), array([2]))
+0 (array([0, 2]), array([1, 1]))
+1 (array([0]), array([1]))
+1 (array([1]), array([2]))
+2 (array([0]), array([1]))
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'train.csv'</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'test.csv'</span><span class="p">)</span>
+
+<span class="c1"># train.head()
+</span><span class="n">train_data</span> <span class="o">=</span> <span class="n">train</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># train_data[0][0]
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1,
+ 0,
+ 3,
+ 'Braund, Mr. Owen Harris',
+ 'male',
+ 22.0,
+ 1,
+ 0,
+ 'A/5 21171',
+ 7.25,
+ nan,
+ 'S']
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-11-13/Python-File-System-Module" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-11-06/ssh-keys" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

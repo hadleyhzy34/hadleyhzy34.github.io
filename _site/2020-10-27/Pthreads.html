@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Pthreads | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Pthreads" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Compiling Pthreads #include &lt;pthread.h&gt; gcc -o main main.c -lpthread gcc -o main main.c -pthread cc -o thread -pthread thread_creation.c -o outfile" />
+<meta property="og:description" content="Compiling Pthreads #include &lt;pthread.h&gt; gcc -o main main.c -lpthread gcc -o main main.c -pthread cc -o thread -pthread thread_creation.c -o outfile" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-10-27/Pthreads" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-10-27/Pthreads" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-27T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pthreads" />
+<script type="application/ld+json">
+{"headline":"Pthreads","url":"https://hadleyhzy34.github.io/home/2020-10-27/Pthreads","datePublished":"2020-10-27T00:00:00+08:00","dateModified":"2020-10-27T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-10-27/Pthreads"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"Compiling Pthreads #include &lt;pthread.h&gt; gcc -o main main.c -lpthread gcc -o main main.c -pthread cc -o thread -pthread thread_creation.c -o outfile","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-10-27 00:00:00 +0800">October 27, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Pthreads</h1>
+  <div class="post-line"></div>
+
+  <h2 id="compiling-pthreads">Compiling Pthreads</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">#include &lt;pthread.h&gt;</code></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcc <span class="nt">-o</span> main main.c <span class="nt">-lpthread</span>
+gcc <span class="nt">-o</span> main main.c <span class="nt">-pthread</span>
+
+cc <span class="nt">-o</span> thread <span class="nt">-pthread</span> thread_creation.c
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">-o</code> outfile</p>
+
+<!--more-->
+<h2 id="pthread-creation">pthread creation</h2>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">pthread_create</span><span class="p">(</span><span class="n">pthread_t</span> <span class="o">*</span> <span class="kr">thread</span><span class="p">,</span>
+					<span class="k">const</span> <span class="n">pthread_attr_t</span> <span class="o">*</span> <span class="n">attr</span><span class="p">,</span>
+					<span class="kt">void</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">start_routine</span><span class="p">)(</span><span class="kt">void</span> <span class="o">*</span><span class="p">),</span>
+					<span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>thread - returns the thread id</li>
+  <li>attr - Set to NULL if default thread attributes are used.</li>
+  <li>void * (*start_routine) - pointer to the functions to be threaded</li>
+  <li>arg - pointer to argument of function. To pass multiple arguments, send a pointer to a structure.</li>
+</ul>
+
+<p class="warning">It’s worth being noted that pthread_create function starts creating a new thread which runs function of start_routine, this instruction is not finished when function returns, it is finished when the thread is created and function starts running.</p>
+
+<p>Data race or race condition:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pthread_t</span> <span class="n">threads</span><span class="p">[</span><span class="n">NUM_THREADS</span><span class="p">];</span>
+	
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_THREADS</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">threads</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="nb">NULL</span><span class="p">,</span><span class="n">threadFunc</span><span class="p">,</span><span class="o">&amp;</span><span class="n">i</span><span class="p">);</span>
+
+	<span class="p">}</span>
+</code></pre></div></div>
+
+<p>since <code class="language-plaintext highlighter-rouge">i</code> is defined in main-&gt;it’s globally visible variable. When it changes in one thread, all other threads see new value! This situation is called a data race or a race condition, it occurs when one thread tries to read a value where the other thread tries to modify it.</p>
+
+<p>Solution to this problem:
+create local storage variables that are not shared among other threads.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">lNum</span><span class="p">[</span><span class="n">NUM_THREADS</span><span class="p">];</span>
+<span class="n">pthread_t</span> <span class="n">threads</span><span class="p">[</span><span class="n">NUM_THREADS</span><span class="p">];</span>
+	
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">NUM_THREADS</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">lNum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+		<span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">threads</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="nb">NULL</span><span class="p">,</span><span class="n">threadFunc</span><span class="p">,</span><span class="o">&amp;</span><span class="n">lNum</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+	<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="pthread-mutexes">Pthread Mutexes</h2>
+<p>Mutexes are used to prevent data inconsistencies due to race conditions as we discussed above. A race condition often occurs when two or more threads need to perform operations on the same memory area, but the results of computations depends on the order in which these operations are performed. Mutexes are used for serializing shared resources. Anytime a global resource is accessed by more than one thread the resource should have a Mutex associated with it. Once can apply a mutex to protect a segment of memory(“critical region”) from toher threads. Mutexes can be applied only to threads in a single process and do not work between processes as do semaphores.</p>
+
+<h3 id="expresssions">Expresssions</h3>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//without mutex</span>
+<span class="kt">int</span> <span class="n">counter</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">//function c</span>
+<span class="kt">void</span> <span class="nf">functionC</span><span class="p">(){</span>
+	<span class="n">counter</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//with mutex</span>
+<span class="n">pthread_mutex_t</span> <span class="n">mutex1</span> <span class="o">=</span> <span class="n">PTHREAD_MUTEX_INITIALIZER</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">counter</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">functionC</span><span class="p">(){</span>
+	<span class="n">pthread_mutex_lock</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">mutex1</span> <span class="p">);</span>
+	<span class="n">counter</span><span class="o">++</span><span class="p">;</span>
+	<span class="n">pthread_mutext_unlock</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">mutex1</span> <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Output difference:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/pthreads/pthread_mutex<span class="nv">$ </span>./mutex
+counter valus is: 1
+counter valus is: 2
+counter valus is: 5
+counter valus is: 4
+counter valus is: 3
+counter valus is: 6
+counter valus is: 7
+counter valus is: 8
+counter valus is: 9
+counter valus is: 10
+hadley@hadley-MacBookPro:~/Developments/pthreads/pthread_mutex<span class="nv">$ </span>cc <span class="nt">-o</span> mutex <span class="nt">-pthread</span> mutex.c 
+hadley@hadley-MacBookPro:~/Developments/pthreads/pthread_mutex<span class="nv">$ </span>./mutex
+counter valus is: 1
+counter valus is: 2
+counter valus is: 3
+counter valus is: 4
+counter valus is: 5
+counter valus is: 6
+counter valus is: 7
+counter valus is: 8
+counter valus is: 9
+counter valus is: 10
+</code></pre></div></div>
+
+<p>When a mutex lock is attempted against a mutex which is held by another thread, the thread is blocked until the mutex is unlocked. When a thread terminates, the mutex does not unless explicitly unlocked. Nothing happens by default.</p>
+
+<h3 id="mechanisms">Mechanisms:</h3>
+<ul>
+  <li>
+    <p>Pthread mutex type:
+<code class="language-plaintext highlighter-rouge">pthread_mutex_t aMutex;</code></p>
+  </li>
+  <li>
+    <p>Lock(mutex)
+Lock(mutext){}-&gt;:
+```c
+//explicit lock
+int pthread_mutext_lock(pthread_mutex_t *mutext);</p>
+  </li>
+</ul>
+
+<p>//explicit unlock
+int pthread_mutext_unlock(pthread_mutext_t *mutext);</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+### Other operations
+* initialize mutex
+
+
+* trylock, destroy
+
+1. shared data should always be accessed through a single mutex 
+2. mutex scope must be visible to all, global variable  
+3. for all threads, lock mutexes in order
+4. always unlock a mutex
+
+
+## Joins
+A join is performed when one wants to wait for a thread to finish. Instructions that should be executed after join statement could be excuted only after thread with join statement finished, including main exit. A thread calling routine may launch multiple threads then wait for them to finish to get the results. One wait for the completion of the threads with a join.
+
+check how c programming implement pthread join statement: [link]();
+
+Output difference without joins and with joins:
+```bash
+hadley@hadley-MacBookPro:~/Developments/pthreads/pthread_join$ ./pthread_join 
+counter valus is: 1
+counter valus is: 2
+counter valus is: 3
+counter valus is: 4
+counter valus is: 5
+counter valus is: 6
+counter valus is: 7
+counter valus is: 8
+counter valus is: 9
+final counter value: 9
+counter valus is: counter valus is: 10
+hadley@hadley-MacBookPro:~/Developments/pthreads/pthread_join$ cc -o pthread_join -pthread pthread_join.c 
+hadley@hadley-MacBookPro:~/Developments/pthreads/pthread_join$ ./pthread_join 
+counter valus is: 1
+counter valus is: 2
+counter valus is: 3
+counter valus is: 4
+counter valus is: 5
+counter valus is: 6
+counter valus is: 7
+counter valus is: 8
+counter valus is: 9
+counter valus is: 10
+final counter value: 10
+</code></pre></div></div>
+
+<h2 id="pthread-condition-variables">Pthread Condition Variables</h2>
+<h3 id="mechnisms">Mechnisms:</h3>
+<ul>
+  <li>
+    <p>Condition</p>
+  </li>
+  <li>
+    <p>Wait</p>
+  </li>
+  <li>
+    <p>Signal</p>
+  </li>
+  <li>
+    <p>Broadcast</p>
+  </li>
+</ul>
+
+<h3 id="other-condition-variable-operations">Other Condition variable operations</h3>
+<p>int pthread_cond_init(pthread_cond_t * cond,
+					const pthread_condattr)</p>
+
+<ol>
+  <li>do not forget to notify waiting threads</li>
+  <li>whe</li>
+</ol>
+
+<h2 id="reference">Reference</h2>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-10-27/Threads&Concurrency" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-10-26/Linked-List" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

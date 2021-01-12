@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Page 7 of 11 for Home | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Home" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Minimal Jekyll theme for storytellers" />
+<meta property="og:description" content="Minimal Jekyll theme for storytellers" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/page7/" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/page7/" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<link rel="prev" href="https://hadleyhzy34.github.io/home/page6" />
+<link rel="next" href="https://hadleyhzy34.github.io/home/page8" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Home" />
+<script type="application/ld+json">
+{"headline":"Home","url":"https://hadleyhzy34.github.io/home/page7/","author":{"@type":"Person","name":"Ziyue Hou"},"description":"Minimal Jekyll theme for storytellers","@type":"WebPage","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="catalogue">
+  
+    <a href="/home/2020-10-19/Two-Pointers" class="catalogue-item">
+      <div>
+        <time datetime="2020-10-19 00:00:00 +0800" class="catalogue-time">October 19, 2020</time>
+        <h1 class="catalogue-title">Two Pointers</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+          <!-- Two Pointers Classical Problem 360 sort transformed array(Q:A) Sum Description Given a sorted array A, having N integers, find if there exists any pair of elements such that their sum... -->
+          <h2 id="two-pointers-classical-problem">Two Pointers Classical Problem</h2>
+<ul>
+  <li>360 sort transformed array(<a href="https://leetcode.com/problems/sort-transformed-array/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<h3 id="sum">Sum</h3>
+<h4 id="description">Description</h4>
+<p>Given a sorted array A, having N integers, find if there exists any pair of elements such that their sum is equal to target.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">isPairSum</span><span class="p">(</span><span class="kt">int</span> <span class="n">array</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">N</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">){</span>
+    <span class="c1">//two pointers</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="n">target</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">target</span><span class="p">){</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+
+        </p>
+      
+      </div>
+    </a>
+  
+    <a href="/home/2020-10-19/Backtracking" class="catalogue-item">
+      <div>
+        <time datetime="2020-10-19 00:00:00 +0800" class="catalogue-time">October 19, 2020</time>
+        <h1 class="catalogue-title">Backtracking and DFS</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+          <!-- String Definition Standard Backtracking 294 Flip Game II(Q:A) 320 Generalized Abbreviation(Q:A) Permutations Permutations for dictinct data variables void permutation(vector&lt;int&gt; &amp;num, int l, vector&lt;vector&lt;int&gt; &gt; &amp;res) { if (l == num.size()-1)... -->
+          <h2 id="string-definition">String Definition</h2>
+
+<h3 id="standard-backtracking">Standard Backtracking</h3>
+<ul>
+  <li>294 Flip Game II(<a href="https://leetcode.com/problems/flip-game-ii/">Q</a>:<a href="">A</a>)</li>
+  <li>320 Generalized Abbreviation(<a href="https://leetcode.com/problems/generalized-abbreviation/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<h2 id="permutations">Permutations</h2>
+<h3 id="permutations-for-dictinct-data-variables">Permutations for dictinct data variables</h3>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">permutation</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="n">num</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+        
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">num</span><span class="p">[</span><span class="n">l</span><span class="p">]);</span>
+        <span class="n">permutation</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">num</span><span class="p">[</span><span class="n">l</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+        </p>
+      
+      </div>
+    </a>
+  
+    <a href="/home/2020-10-18/Math" class="catalogue-item">
+      <div>
+        <time datetime="2020-10-18 00:00:00 +0800" class="catalogue-time">October 18, 2020</time>
+        <h1 class="catalogue-title">Math</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+          <!-- Topic Factor 254 Factor Combinations(Q:A)(backtracking using res,subset) Think about using multplication or division in case integer overflow. 368 Largest Divisible Subset(Q:A)(DP) Pow 50 Pow(Q;A) Ugly Number 263 Ugly Number(Q:A) 264... -->
+          <h2 id="topic">Topic</h2>
+
+<h3 id="factor">Factor</h3>
+<ul>
+  <li>254 Factor Combinations(<a href="https://leetcode.com/problems/factor-combinations/">Q</a>:<a href="">A</a>)(backtracking using res,subset)</li>
+</ul>
+
+<p class="warning">Think about using multplication or division in case integer overflow.</p>
+
+<ul>
+  <li>368 Largest Divisible Subset(<a href="https://leetcode.com/problems/largest-divisible-subset/">Q</a>:<a href="">A</a>)(DP)</li>
+</ul>
+
+<h3 id="pow">Pow</h3>
+<ul>
+  <li>50 Pow(<a href="https://leetcode.com/problems/powx-n/">Q</a>;<a href="">A</a>)</li>
+</ul>
+
+<p><img src="https://latex.codecogs.com/svg.latex? x^{n}= x^{2 n_{1}+b }=( x^{2} ) ^{ n_{1} }  x^{b} = ( x^{2} ) ^{ n_{1} }  x^{ n % 2 }=(( x^{2} ) ^{2} )^{ n_{2} }  ( x^{2} ) ^{ n_{1} % 2} x^{ n % 2 }" title="x_{ij}" /></p>
+
+<h3 id="ugly-number">Ugly Number</h3>
+<ul>
+  <li>263 Ugly Number(<a href="https://leetcode.com/problems/ugly-number/">Q</a>:<a href="https://github.com/hadleyhzy34/data_structure_and_algorithm/blob/master/math/leetcode_math/263_ugly_number.cpp">A</a>)</li>
+  <li>264 Ugly Number II(<a href="https://leetcode.com/problems/ugly-number-ii/">Q</a>:<a href="https://leetcode.com/problems/ugly-number-ii/solution/">A</a>)</li>
+</ul>
+
+
+        </p>
+      
+      </div>
+    </a>
+  
+    <a href="/home/2020-10-18/Linux-Command-Line" class="catalogue-item">
+      <div>
+        <time datetime="2020-10-18 00:00:00 +0800" class="catalogue-time">October 18, 2020</time>
+        <h1 class="catalogue-title">Linux Command Line</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+          <!-- Basic Command Line The Shell, Bash Shell is a program that takes commands from the keyboard and gives them to the operating system to perform. If you would like to... -->
+          <h2 id="basic-command-line">Basic Command Line</h2>
+
+<h3 id="the-shell-bash">The Shell, Bash</h3>
+<p>Shell is a program that takes commands from the keyboard and gives them to the operating system to perform.
+If you would like to know which shell you are using you may use a command called <code class="language-plaintext highlighter-rouge">echo</code> to display a system variable stating your current shell.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$SHELL</span>
+/bin/bash
+</code></pre></div></div>
+
+<h3 id="pwd">pwd</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~<span class="nv">$ </span><span class="nb">pwd</span>
+/home/hadley
+</code></pre></div></div>
+
+        </p>
+      
+      </div>
+    </a>
+  
+    <a href="/home/2020-10-16/Dynamic-Programming" class="catalogue-item">
+      <div>
+        <time datetime="2020-10-16 00:00:00 +0800" class="catalogue-time">October 16, 2020</time>
+        <h1 class="catalogue-title">Dynamic Programming</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+          <!-- Topic DFS/Backtracking Intuitive approach to dynamic programming 322 Coin Change(Q:A) 518 Coin Change 2(Q:A) 343 Integer Break(Q:A) Intuitive approach using backtracking: // index, current index of coins vector, amount: remaining... -->
+          <h2 id="topic">Topic</h2>
+<h3 id="dfsbacktracking-intuitive-approach-to-dynamic-programming">DFS/Backtracking Intuitive approach to dynamic programming</h3>
+<ul>
+  <li>322 Coin Change(<a href="https://leetcode.com/problems/coin-change/">Q</a>:<a href="">A</a>)</li>
+  <li>518 Coin Change 2(<a href="https://leetcode.com/problems/coin-change-2/">Q</a>:<a href="">A</a>)</li>
+  <li>343 Integer Break(<a href="https://leetcode.com/problems/integer-break/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+
+        </p>
+      
+      </div>
+    </a>
+  
+</div>
+
+<div class="pagination">
+  
+    <a href="/home/page6" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/page8" class="right arrow">&#8594;</a>
+  
+
+  <span>7</span>
+</div>
+
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

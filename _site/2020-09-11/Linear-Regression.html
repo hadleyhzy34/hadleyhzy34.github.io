@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Linear Regression | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Linear Regression" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Linear Regression Linear Regression Workflow Diagram and Math &lt;img src=”https://raw.githubusercontent.com/hadleyhzy34/pytorch/master/resources/linear.png” alt=”drawing” width=85% height=85%/&gt; Linear Regression Implementation from Scratch import modules" />
+<meta property="og:description" content="Linear Regression Linear Regression Workflow Diagram and Math &lt;img src=”https://raw.githubusercontent.com/hadleyhzy34/pytorch/master/resources/linear.png” alt=”drawing” width=85% height=85%/&gt; Linear Regression Implementation from Scratch import modules" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-09-11/Linear-Regression" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-09-11/Linear-Regression" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-11T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Linear Regression" />
+<script type="application/ld+json">
+{"headline":"Linear Regression","url":"https://hadleyhzy34.github.io/home/2020-09-11/Linear-Regression","datePublished":"2020-09-11T00:00:00+08:00","dateModified":"2020-09-11T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-09-11/Linear-Regression"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"Linear Regression Linear Regression Workflow Diagram and Math &lt;img src=”https://raw.githubusercontent.com/hadleyhzy34/pytorch/master/resources/linear.png” alt=”drawing” width=85% height=85%/&gt; Linear Regression Implementation from Scratch import modules","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-09-11 00:00:00 +0800">September 11, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Linear Regression</h1>
+  <div class="post-line"></div>
+
+  <h2 id="linear-regression">Linear Regression</h2>
+<hr />
+<h2 id="linear-regression-workflow-diagram-and-math">Linear Regression Workflow Diagram and Math</h2>
+<p>&lt;img src=”https://raw.githubusercontent.com/hadleyhzy34/pytorch/master/resources/linear.png” alt=”drawing” width=85% height=85%/&gt;</p>
+
+<h2 id="linear-regression-implementation-from-scratch">Linear Regression Implementation from Scratch</h2>
+<hr />
+<h3 id="import-modules">import modules</h3>
+
+<!--more-->
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</code></pre></div></div>
+
+<h3 id="prepare-data">Prepare data</h3>
+<p>dataset obtained from kaggle: <a href="https://www.kaggle.com/quantbruce/real-estate-price-prediction">here</a></p>
+
+<p>Read csv file by using panda module</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">real_estate</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'/Users/hadley/Documents/pytorch/resources/real_estate.csv'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>drop dataset first column since it only containes index number of each rows</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">real_estate</span> <span class="o">=</span> <span class="n">real_estate</span><span class="p">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'No'</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">real_estate</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">real_estate</span><span class="p">.</span><span class="n">info</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(414, 7)
+&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 414 entries, 0 to 413
+Data columns (total 7 columns):
+ #   Column                                  Non-Null Count  Dtype  
+---  ------                                  --------------  -----  
+ 0   X1 transaction date                     414 non-null    float64
+ 1   X2 house age                            414 non-null    float64
+ 2   X3 distance to the nearest MRT station  414 non-null    float64
+ 3   X4 number of convenience stores         414 non-null    int64  
+ 4   X5 latitude                             414 non-null    float64
+ 5   X6 longitude                            414 non-null    float64
+ 6   Y house price of unit area              414 non-null    float64
+dtypes: float64(6), int64(1)
+memory usage: 22.8 KB
+None
+</code></pre></div></div>
+
+<p>Data splitting to training and testing model</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">real_estate</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.70</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.30</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data_train</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">data_test</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(289, 7) (125, 7)
+</code></pre></div></div>
+
+<p>Split data for input, output and standardize input data</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_train</span> <span class="o">=</span> <span class="n">data_train</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="s">'Y house price of unit area'</span><span class="p">)</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">data_train</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_train</span> <span class="o">-</span> <span class="n">x_train</span><span class="p">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="p">(</span><span class="n">x_train</span><span class="p">.</span><span class="nb">max</span><span class="p">()</span><span class="o">-</span><span class="n">x_train</span><span class="p">.</span><span class="nb">min</span><span class="p">())</span>
+
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">data_test</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="s">'Y house price of unit area'</span><span class="p">)</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">data_test</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_test</span> <span class="o">-</span> <span class="n">x_test</span><span class="p">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="p">(</span><span class="n">x_test</span><span class="p">.</span><span class="nb">max</span><span class="p">()</span><span class="o">-</span><span class="n">x_test</span><span class="p">.</span><span class="nb">min</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Initialize weights and bias</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">input_size</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">input_size</span><span class="p">,))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<h3 id="model-prediction-forward-pass">Model prediction: forward pass</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre></div></div>
+
+<h3 id="loss-function">Loss function</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_predicted</span><span class="p">):</span>
+    <span class="n">square</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_predicted</span><span class="p">.</span><span class="n">T</span><span class="o">-</span><span class="n">y</span><span class="p">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">square</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="gradient-calculation">Gradient Calculation</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">gradient_weight</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">y_predicted</span><span class="p">):</span>
+    <span class="n">dw</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">input_size</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y_predicted</span><span class="o">-</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dw</span>
+
+<span class="k">def</span> <span class="nf">gradient_bias</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">y_predicted</span><span class="p">):</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">input_size</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">y_predicted</span><span class="o">-</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">db</span>
+</code></pre></div></div>
+
+<h3 id="training-model">Training Model</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">n_iters</span> <span class="o">=</span> <span class="mi">100</span>
+</code></pre></div></div>
+
+<p>prepare list for future plot</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt_x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">plt_y1</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">plt_y2</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iters</span><span class="p">):</span>
+    <span class="c1">#prediction = forward pass
+</span>    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+    <span class="c1">#loss
+</span>    <span class="n">l</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="c1"># print(l)
+</span>    <span class="c1"># print(l.dtype)
+</span>
+    <span class="c1">#gradients
+</span>    <span class="n">dw</span> <span class="o">=</span> <span class="n">gradient_weight</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">gradient_bias</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+    <span class="c1">#update wrights
+</span>    <span class="n">w</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dw</span>
+    <span class="n">b</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">db</span>
+
+    <span class="c1"># if epoch % 1 ==0:
+</span>    <span class="c1">#     print(f'epoch {epoch+1}: w={w}, loss = {l:.4f}')
+</span>    
+    <span class="c1">##prepare plot data
+</span>    <span class="n">plt_x</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
+    <span class="n">plt_y1</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="n">y_test_p</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+    <span class="n">l_p</span> <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_p</span><span class="p">)</span>
+    <span class="n">plt_y2</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">l_p</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### Result and plot analysis
+</span></code></pre></div></div>
+
+<h4 id="loss-curve-learning-and-prediction-result-with-respect-on-epochs">Loss curve, learning and prediction result with respect on epochs</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plt_x</span><span class="p">,</span> <span class="n">plt_y1</span><span class="p">,</span> <span class="s">'b'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plt_x</span><span class="p">,</span> <span class="n">plt_y2</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"number of epochs"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"mean square error"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>&lt;img src=”https://raw.githubusercontent.com/hadleyhzy34/pytorch/master/resources/loss_curve.png” alt=”drawing” width=50% height=50%/&gt;</p>
+
+<p>Final result and evaluation by using r2 score
+r2 = 1-(np.sum((y_predicted-y)<strong>2)/np.sum((y-y.mean())</strong>2))</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_test_pred</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.6750734862366894
+</code></pre></div></div>
+
+<p>Final plot to check distance between predicted value and observation with repect to each feature</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Transaction Date'</span><span class="p">,</span><span class="s">'House Age'</span><span class="p">,</span><span class="s">'Distance to the nearest MRT Station'</span><span class="p">,</span><span class="s">'Number of convenience Stores'</span><span class="p">,</span><span class="s">'latitude'</span><span class="p">,</span><span class="s">'longtitude'</span><span class="p">]</span>
+<span class="n">y_label</span> <span class="o">=</span> <span class="s">'House Price'</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_test</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">y_test</span><span class="p">,</span> <span class="s">'ro'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_test</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="s">'bo'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">((</span><span class="n">data_test</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span><span class="n">data_test</span><span class="p">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">i</span><span class="p">]),</span> <span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_test_pred</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s">'grey'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">"figure.figsize"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>&lt;img src=”https://raw.githubusercontent.com/hadleyhzy34/pytorch/master/resources/linear_distance.png” alt=”drawing” width=100% height=100%/&gt;</p>
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-09-13/Logistic-Regression" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-09-05/support-vector-machine" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

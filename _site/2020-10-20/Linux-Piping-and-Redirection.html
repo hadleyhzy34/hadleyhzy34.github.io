@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Linux Command Line - Piping and Redirection | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Linux Command Line - Piping and Redirection" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Redirecting to a file save current command output to a file instead of printed to the screen. hadley@hadley-MacBookPro:~/Developments/parentDirectory$ ls -l &gt; list hadley@hadley-MacBookPro:~/Developments/parentDirectory$ cat list total 16 -rw-rw-r-- 1 hadley hadley 230 Okt 21 22:08 data_test.txt -rw-rw-r-- 1 hadley hadley 230 Okt 21 21:01 data.txt -rwxrwxrwx 1 hadley hadley 92 Okt 20 21:28 file.txt -rw-rw-r-- 1 hadley hadley 0 Okt 21 22:08 list drwxrwxr-x 2 hadley hadley 4096 Okt 21 21:09 test1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 test.cpp -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:01 ttt -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 x -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:43 x1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 y" />
+<meta property="og:description" content="Redirecting to a file save current command output to a file instead of printed to the screen. hadley@hadley-MacBookPro:~/Developments/parentDirectory$ ls -l &gt; list hadley@hadley-MacBookPro:~/Developments/parentDirectory$ cat list total 16 -rw-rw-r-- 1 hadley hadley 230 Okt 21 22:08 data_test.txt -rw-rw-r-- 1 hadley hadley 230 Okt 21 21:01 data.txt -rwxrwxrwx 1 hadley hadley 92 Okt 20 21:28 file.txt -rw-rw-r-- 1 hadley hadley 0 Okt 21 22:08 list drwxrwxr-x 2 hadley hadley 4096 Okt 21 21:09 test1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 test.cpp -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:01 ttt -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 x -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:43 x1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 y" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-10-20/Linux-Piping-and-Redirection" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-10-20/Linux-Piping-and-Redirection" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-20T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Linux Command Line - Piping and Redirection" />
+<script type="application/ld+json">
+{"headline":"Linux Command Line - Piping and Redirection","url":"https://hadleyhzy34.github.io/home/2020-10-20/Linux-Piping-and-Redirection","datePublished":"2020-10-20T00:00:00+08:00","dateModified":"2020-10-20T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-10-20/Linux-Piping-and-Redirection"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"Redirecting to a file save current command output to a file instead of printed to the screen. hadley@hadley-MacBookPro:~/Developments/parentDirectory$ ls -l &gt; list hadley@hadley-MacBookPro:~/Developments/parentDirectory$ cat list total 16 -rw-rw-r-- 1 hadley hadley 230 Okt 21 22:08 data_test.txt -rw-rw-r-- 1 hadley hadley 230 Okt 21 21:01 data.txt -rwxrwxrwx 1 hadley hadley 92 Okt 20 21:28 file.txt -rw-rw-r-- 1 hadley hadley 0 Okt 21 22:08 list drwxrwxr-x 2 hadley hadley 4096 Okt 21 21:09 test1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 test.cpp -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:01 ttt -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 x -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:43 x1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 y","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-10-20 00:00:00 +0800">October 20, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Linux Command Line - Piping and Redirection</h1>
+  <div class="post-line"></div>
+
+  <h2 id="redirecting-to-a-file">Redirecting to a file</h2>
+
+<p>save current command output to a file instead of printed to the screen.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> <span class="o">&gt;</span> list
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">cat </span>list
+total 16
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley  230 Okt 21 22:08 data_test.txt
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley  230 Okt 21 21:01 data.txt
+<span class="nt">-rwxrwxrwx</span> 1 hadley hadley   92 Okt 20 21:28 file.txt
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 21 22:08 list
+drwxrwxr-x 2 hadley hadley 4096 Okt 21 21:09 test1
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:42 test.cpp
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:01 ttt
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:42 x
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:43 x1
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:42 y
+</code></pre></div></div>
+<!--more-->
+<p class="info">If we redirect to a file which does not exist, it will be created automatically for us. If we save into a file which already exists, however, then it’s contents will be cleared, then the new output saved to it.</p>
+
+<ul>
+  <li>append new data to the end of current file</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> <span class="o">&gt;&gt;</span> parentDirectory/data_test.txt 
+hadley@hadley-MacBookPro:~/Developments<span class="nv">$ </span><span class="nb">cat </span>parentDirectory/data_test.txt 
+Fred apples 20
+Susy oranges 5
+Mark watermellons 12
+Robert pears 4
+Terry oranges 9
+Lisa peaches 7
+Susy oranges 12
+Mark grapes 39
+Anne mangoes 7
+Greg pineapples 3
+Oliver rockmellons 2
+Betty limes 14
+test.<span class="se">\t</span>est[ss]
+aaabbbbccdddddeee
+total 220
+drwxrwxr-x 20 hadley hadley   4096 Okt 18 12:48 data_structure_and_algorithm
+drwxrwxr-x 17 hadley hadley   4096 Okt 18 11:15 Hadleyhzy.github.io
+drwxr--r--  3 hadley hadley   4096 Okt 21 22:08 parentDirectory
+<span class="nt">-rwxrwxr-x</span>  1 hadley hadley 207288 Okt 21 09:23 <span class="nb">test</span>
+<span class="nt">-rw-rw-r--</span>  1 hadley hadley    289 Okt 21 09:23 test.cpp
+</code></pre></div></div>
+
+<ul>
+  <li>send data the other way</li>
+</ul>
+
+<p class="info">A lot of programs (as we’ve seen in previous sections) allow us to supply a file as a command line argument and it will read and process the contents of that file. Given this, you may be asking why we would need to use this operator. The above example illustrates a subtle but useful difference. You’ll notice that when we ran wc supplying the file to process as a command line argument, the output from the program included the name of the file that was processed. When we ran it redirecting the contents of the file into wc the file name was not printed. This is because whenever we use redirection or piping, the data is sent anonymously. So in the above example, wc recieved some content to process, but it has no knowledge of where it came from so it may not print this information. As a result, this mechanism is often used in order to get ancillary data (which may not be required) to not be printed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">wc</span> <span class="nt">-l</span> &lt;data.txt 
+14
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">wc</span> <span class="nt">-l</span> &lt; data.txt <span class="o">&gt;</span>ttest
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">cat </span>ttest 
+14
+</code></pre></div></div>
+<h2 id="redirecting-stderr">Redirecting STDERR</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> test.h
+<span class="nb">ls</span>: cannot access <span class="s1">'test.h'</span>: No such file or directory
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> test.h&gt;errors.txt
+<span class="nb">ls</span>: cannot access <span class="s1">'test.h'</span>: No such file or directory
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">cat </span>errors.txt 
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> test.h 2&gt;errors.txt
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">cat </span>errors.txt 
+<span class="nb">ls</span>: cannot access <span class="s1">'test.h'</span>: No such file or directory
+</code></pre></div></div>
+
+<p class="info">Now let’s look at the third stream which is Standard Error or STDERR. The three streams actually have numbers associated with them (in brackets in the list at the top of the page). STDERR is stream number 2 and we may use these numbers to identify the streams. If we place a number before the &gt; operator then it will redirect that stream (if we don’t use a number, like we have been doing so far, then it defaults to stream 1).</p>
+
+<p class="info">Maybe we wish to save both normal output and error messages into a single file. This can be done by redirecting the STDERR stream to the STDOUT stream and redirecting STDOUT to a file. We redirect to a file first then redirect the error stream. We identify the redirection to a stream by placing an &amp; in front of the stream number (otherwise it would redirect to a file called 1).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> test.cpp test.h <span class="o">&gt;</span>myoutput 2&gt;&amp;1
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">cat </span>myoutput 
+<span class="nb">ls</span>: cannot access <span class="s1">'test.h'</span>: No such file or directory
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley 0 Okt 20 21:42 test.cpp
+</code></pre></div></div>
+
+<h2 id="piping">Piping</h2>
+
+<table class="info">
+  <tbody>
+    <tr>
+      <td>Now we’ll take a look at a mechanism for sending data from one program to another. It’s called piping and the operator we use is (</td>
+      <td>) (found above the backslash ( \ ) key on most keyboards). What this operator does is feed the output from the program on the left as input to the program on the right. In the example below we will list only the first 3 files in the directory.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> | <span class="nb">head</span> <span class="nt">-3</span>
+data.txt
+errors.txt
+file.txt
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> | <span class="nb">head</span> <span class="nt">-3</span> | <span class="nb">tail</span> <span class="nt">-1</span>
+file.txt
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-10-21/Linux-Command-Line-Regular-Expression" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-10-20/Linux-Command-Line-II" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

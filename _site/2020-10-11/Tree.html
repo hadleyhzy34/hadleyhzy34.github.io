@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Tree | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Tree" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1.Tree Definition //Tree Declaration struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode():val(0),left(nullptr),right(nullptr){}; TreeNode(int x):val(x),left(nullptr),right(nullptr){}; TreeNode(int x, TreeNode* l,TreeNode* r):val(x),left(l),right(r){}; }; //Tree Initializaiton with default value zero TreeNode *root = new TreeNode(0, nullptr, nullptr);" />
+<meta property="og:description" content="1.Tree Definition //Tree Declaration struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode():val(0),left(nullptr),right(nullptr){}; TreeNode(int x):val(x),left(nullptr),right(nullptr){}; TreeNode(int x, TreeNode* l,TreeNode* r):val(x),left(l),right(r){}; }; //Tree Initializaiton with default value zero TreeNode *root = new TreeNode(0, nullptr, nullptr);" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-10-11/Tree" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-10-11/Tree" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-11T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Tree" />
+<script type="application/ld+json">
+{"headline":"Tree","url":"https://hadleyhzy34.github.io/home/2020-10-11/Tree","datePublished":"2020-10-11T00:00:00+08:00","dateModified":"2020-10-11T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-10-11/Tree"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"1.Tree Definition //Tree Declaration struct TreeNode { int val; TreeNode* left; TreeNode* right; TreeNode():val(0),left(nullptr),right(nullptr){}; TreeNode(int x):val(x),left(nullptr),right(nullptr){}; TreeNode(int x, TreeNode* l,TreeNode* r):val(x),left(l),right(r){}; }; //Tree Initializaiton with default value zero TreeNode *root = new TreeNode(0, nullptr, nullptr);","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-10-11 00:00:00 +0800">October 11, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Tree</h1>
+  <div class="post-line"></div>
+
+  <h2 id="1tree-definition">1.Tree Definition</h2>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//Tree Declaration</span>
+<span class="k">struct</span> <span class="nc">TreeNode</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">left</span><span class="p">;</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">right</span><span class="p">;</span>
+    <span class="n">TreeNode</span><span class="p">()</span><span class="o">:</span><span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">left</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">),</span><span class="n">right</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">){};</span>
+    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span><span class="o">:</span><span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">left</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">),</span><span class="n">right</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">){};</span>
+    <span class="n">TreeNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">l</span><span class="p">,</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">r</span><span class="p">)</span><span class="o">:</span><span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">left</span><span class="p">(</span><span class="n">l</span><span class="p">),</span><span class="n">right</span><span class="p">(</span><span class="n">r</span><span class="p">){};</span>
+<span class="p">};</span>
+<span class="c1">//Tree Initializaiton with default value zero</span>
+<span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">TreeNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">nullptr</span><span class="p">,</span> <span class="nb">nullptr</span><span class="p">);</span>
+</code></pre></div></div>
+<!--more-->
+<h2 id="2binary-search-tree">2.Binary Search Tree</h2>
+<h3 id="21-binary-search-tree-definition">2.1 Binary Search Tree Definition</h3>
+<p>Binary Search Tree is a node-based binary tree data structure which has following structures:</p>
+<ul>
+  <li>The left subtree of a node contains only nodes with keys less than the node’s key.</li>
+  <li>The right subtree of a node contains only nodes with keys larger than the node’s key.</li>
+  <li>The left and right subtree each must also be a binary search tree.</li>
+</ul>
+
+<h3 id="bst-traversal">BST Traversal</h3>
+<h4 id="inorder-traversal">Inorder Traversal</h4>
+<p>BFS Solution:</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">BSTIterator</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//create queue to store all node value in inorder sequence</span>
+        <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+
+        <span class="n">TreeNode</span> <span class="o">*</span><span class="n">node</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">||</span><span class="n">node</span><span class="p">){</span>
+
+            <span class="k">while</span><span class="p">(</span><span class="n">node</span><span class="p">){</span>
+                <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+                <span class="n">node</span><span class="o">=</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">){</span>
+                <span class="n">node</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>173 binary search tree iterator(BFS)(stack/queue)</li>
+  <li>230 Kth Smallest Element in a BST(BFS/DFS)(<a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/solution/">Q</a>:<a href="">A</a>)</li>
+  <li>98 Validate Binary Search Tree(<a href="https://leetcode.com/problems/validate-binary-search-tree/solution/">Q</a>:<a href="">A</a>)(BFS inorder traversal, DFS by setting lower and upper limit)</li>
+  <li>333 Largest BST Subtree(<a href="https://leetcode.com/problems/largest-bst-subtree/">Q</a>:<a href="">A</a>)(DFS by setting lower and upper limit)</li>
+</ul>
+
+<p class="warning">Try to understand the difference how to set lower/upper limit between issue 98 and issue 333</p>
+
+<ul>
+  <li>285 Inorder Successor in BST(<a href="https://leetcode.com/problems/inorder-successor-in-bst/">Q</a>:<a href="">A</a>)(BFS,stack)</li>
+</ul>
+
+<p class="info">Note that when comparing integer type value with long type value, an object of type <code class="language-plaintext highlighter-rouge">int</code>  is always converted to the type long because type long has higher rank than type <code class="language-plaintext highlighter-rouge">int</code>.</p>
+
+<ul class="info">
+  <li>337 House Robber III(<a href="https://leetcode.com/problems/house-robber-iii/">Q</a>:<a href="">A</a>)
+Note that intuitive approach would be to use boolean variable to check if current node is robbed or not, but it will create redundant calculations, improvement would be to return robbed value and not robbed value at the same time.</li>
+</ul>
+
+<ul>
+  <li>298 Binary Tree Longest Consecutive Sequence(<a href="https://leetcode.com/problems/binary-tree-longest-consecutive-sequence/">Q</a>:<a href="">A</a>)(DFS Traversal)</li>
+</ul>
+
+<p class="info">Note that if dfs traversal needs to compare output of everynodes while everynodes need to traverse to get its output value, then set output value of every tree node as return value, temporarily compared result as input and pass by reference.</p>
+
+<h4 id="preorder-traversalroot-left-right">Preorder Traversal(root-&gt;left-&gt;right)</h4>
+<ul class="info">
+  <li>
+    <p>199 Binary Tree Right Side View(<a href="https://leetcode.com/problems/binary-tree-right-side-view/">Q</a>:<a href="">A</a>)(BFS)(DFS-&gt;preorder traversal)</p>
+  </li>
+  <li>
+    <p>255 Verify Preorder Sequence in Binary Search Tree(<a href="https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/">Q</a>:<a href="">A</a>)</p>
+  </li>
+  <li>
+    <p>314 Binary Tree Vertical Order Traversal(<a href="https://leetcode.com/problems/binary-tree-vertical-order-traversal/">Q</a>:<a href="">A</a>)<br />
+Think about data structure to store nodes value.</p>
+  </li>
+</ul>
+
+<ul>
+  <li>331 Verify Preorder Serialization of a Binary Tree(<a href="https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<h4 id="postorder-traversalleft-right-root">Postorder Traversal(left-&gt;right-&gt;root)</h4>
+
+<h4 id="validate-bst">Validate BST</h4>
+<ul>
+  <li>
+    <p>98 Validate Binary Search Tree(<a href="https://leetcode.com/problems/validate-binary-search-tree/solution/">Q</a>:<a href="">A</a>)(BFS inorder traversal, DFS by setting lower and upper limit)</p>
+  </li>
+  <li>
+    <p>255 Verify Preorder Sequence in Binary Search Tree(<a href="https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/">Q</a>:<a href="">A</a>)</p>
+  </li>
+</ul>
+
+<h4 id="non-bst-traversal">Non-BST Traversal</h4>
+<ul>
+  <li>364 Nested List Weight Sum II(<a href="https://leetcode.com/problems/nested-list-weight-sum-ii/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<p class="info">Note that when reversely assigning or returning depth of nested list, using hash table as global variable to store value then loop through.</p>
+
+<h3 id="binary-tree-basic-operation">Binary Tree Basic Operation</h3>
+<h4 id="leaves">Leaves</h4>
+<ul>
+  <li>366 Find Leaves of Binary Tree(<a href="https://leetcode.com/problems/find-leaves-of-binary-tree/">Q</a>:<a href="">A</a>)(returning height to return leaves)</li>
+</ul>
+
+<h4 id="sum">Sum</h4>
+
+<h4 id="height">Height</h4>
+
+<h4 id="nodes">Nodes</h4>
+<ul>
+  <li>Count Complete Tree Nodes(<a href="https://leetcode.com/problems/count-complete-tree-nodes/">Q</a>:<a href="">A</a>)(DFS, Binary Search)</li>
+</ul>
+
+<h4 id="bst-ancestor">BST Ancestor</h4>
+<ul>
+  <li>236 Lowest Common Ancestor of a Binary Tree(<a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/">Q</a>:<a href="">A</a>)</li>
+  <li>235 Lowest Common Ancestor of a Binary Search Tree(<a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<p class="warning">Note that if task is to need to traverse all nodes of binary tree meanwhile see if any nodes could fulfill requirements of tasks, then adding a new private result value and return state of every nodes during DFS.</p>
+
+<h3 id="23-binary-search-tree-construction">2.3 Binary Search Tree Construction:</h3>
+<ul>
+  <li>
+    <p>96 Unique Binary Search Trees (<a href="https://leetcode.com/problems/unique-binary-search-trees/">Q</a>:<a href="https://github.com/Hadleyhzy/data_structure_and_algorithm/blob/master/tree/leetcode_tree/96_unique_binary_search_tree.cpp">A</a>)(DFS)</p>
+  </li>
+  <li>
+    <p>95 Unique Binary Search Tree_II (<a href="https://leetcode.com/problems/unique-binary-search-trees-ii/">Q</a>:<a href="https://github.com/Hadleyhzy/data_structure_and_algorithm/blob/master/tree/leetcode_tree/95_unique_binary_search_tree_2.cpp">A</a>)(DP)</p>
+  </li>
+  <li>
+    <p>106 Construct Binary Tree from Inorder and PostOrder Traversal(<a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">Q</a>:<a href="">A</a>)</p>
+  </li>
+</ul>
+
+<p class="warning">Ust two pointers to track range of inorder of current node, one or two pointer/index to track root of postorder of current node, note that traverse post order from right to left.</p>
+
+<h4 id="construct-list-to-bst">Construct List to BST</h4>
+
+<ul>
+  <li>109 Convert Sorted List to Binary Search Tree(<a href="https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<p class="info">List-&gt;Array-&gt;DFS using boundary-&gt;Tree</p>
+
+<h3 id="24-path">2.4 Path</h3>
+<ul>
+  <li>113 Path Sum II(<a href="https://leetcode.com/problems/path-sum-ii/">Q</a>:<a href="https://github.com/Hadleyhzy/data_structure_and_algorithm/blob/master/tree/leetcode_tree/113_path_sum_3.cpp">A</a>)(DFS)</li>
+</ul>
+
+<h3 id="25-modify-tree-data-structure">2.5 Modify Tree Data Structure</h3>
+<h4 id="251-flatten-binary-treedfs">2.5.1 Flatten Binary Tree(DFS):</h4>
+<ul>
+  <li>114 Flatten Binary Tree to Linked List(<a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/">Q</a>:<a href="https://github.com/Hadleyhzy/data_structure_and_algorithm/blob/master/tree/leetcode_tree/114_flatten_bianry_tree_to_linked_list.cpp">A</a>)</li>
+</ul>
+
+<p class="info">Since every depth search we need tail of left subtree to be connected to top of right subtree, return tail of every flatten root is necessary.</p>
+
+<p class="warning">Don’t forget to set root left tree to be nullptr.</p>
+
+<h4 id="252-next-pointer">2.5.2 Next Pointer</h4>
+<ul>
+  <li>116 Populating Next Right Pointers in Each Node(<a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node/">Q</a>:<a href="https://github.com/Hadleyhzy/data_structure_and_algorithm/blob/master/tree/leetcode_tree/116_populating_next_right_pointers_in_each_node.cpp">A</a>)</li>
+</ul>
+
+<p class="info">We need to build ‘next’ connection between four tree nodes from their two root tree nodes.</p>
+
+<p>Given dicussion above, dfs function would be like:</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">left</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">right</span><span class="p">){}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>117 Populating Next Right Pointers in Each Node II(<a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/">Q</a>:<a href="https://github.com/Hadleyhzy/data_structure_and_algorithm/blob/master/tree/leetcode_tree/117_populating_next_right_pointers_in_each_node_2.cpp">A</a>)</li>
+</ul>
+
+<p class="warning">Note that better solution would be breadth first search since it’s not perfect binary tree.</p>
+
+<ul>
+  <li>199 Binary Tree Right Side View(<a href="https://leetcode.com/problems/binary-tree-right-side-view/">Q</a>:<a href="">A</a>)(BFS)(DFS-&gt;preorder traversal)</li>
+</ul>
+
+<h2 id="advanced-topics">Advanced Topics</h2>
+<h3 id="array-and-binary-search-tree">Array and Binary Search Tree</h3>
+
+<h3 id="binary-search-and-bst">Binary Search and BST</h3>
+<ul>
+  <li>Count Complete Tree Nodes(<a href="https://leetcode.com/problems/count-complete-tree-nodes/">Q</a>:<a href="">A</a>)(Binary Search, two times)</li>
+</ul>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-10-13/Array" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-09-21/cluster-k-means" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

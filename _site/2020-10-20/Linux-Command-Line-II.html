@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Linux Command Line II | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Linux Command Line II" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Permissions view permissions hadley@hadley-MacBookPro:~/Developments/parentDirectory$ ls -l total 8 -rw-rw-r-- 1 hadley hadley 92 Okt 20 21:28 file.txt drwxrwxr-x 2 hadley hadley 4096 Okt 20 21:33 test1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 test.cpp -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:01 ttt -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 x -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:43 x1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 y The first character identifies the file type. If it is a dash ( - ) then it is a normal file. If it is a d then it is a directory. The following 3 characters represent the permissions for the owner. A letter represents the presence of a permission and a dash ( - ) represents the absence of a permission. In this example the owner has all permissions (read, write and execute). The following 3 characters represent the permissions for the group. In this example the group has the ability to read but not write or execute. Note that the order of permissions is always read, then write then execute. Finally the last 3 characters represent the permissions for others (or everyone else). In this example they have the execute permission and nothing else." />
+<meta property="og:description" content="Permissions view permissions hadley@hadley-MacBookPro:~/Developments/parentDirectory$ ls -l total 8 -rw-rw-r-- 1 hadley hadley 92 Okt 20 21:28 file.txt drwxrwxr-x 2 hadley hadley 4096 Okt 20 21:33 test1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 test.cpp -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:01 ttt -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 x -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:43 x1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 y The first character identifies the file type. If it is a dash ( - ) then it is a normal file. If it is a d then it is a directory. The following 3 characters represent the permissions for the owner. A letter represents the presence of a permission and a dash ( - ) represents the absence of a permission. In this example the owner has all permissions (read, write and execute). The following 3 characters represent the permissions for the group. In this example the group has the ability to read but not write or execute. Note that the order of permissions is always read, then write then execute. Finally the last 3 characters represent the permissions for others (or everyone else). In this example they have the execute permission and nothing else." />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-10-20/Linux-Command-Line-II" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-10-20/Linux-Command-Line-II" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-20T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Linux Command Line II" />
+<script type="application/ld+json">
+{"headline":"Linux Command Line II","url":"https://hadleyhzy34.github.io/home/2020-10-20/Linux-Command-Line-II","datePublished":"2020-10-20T00:00:00+08:00","dateModified":"2020-10-20T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-10-20/Linux-Command-Line-II"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"Permissions view permissions hadley@hadley-MacBookPro:~/Developments/parentDirectory$ ls -l total 8 -rw-rw-r-- 1 hadley hadley 92 Okt 20 21:28 file.txt drwxrwxr-x 2 hadley hadley 4096 Okt 20 21:33 test1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 test.cpp -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:01 ttt -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 x -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:43 x1 -rw-rw-r-- 1 hadley hadley 0 Okt 20 21:42 y The first character identifies the file type. If it is a dash ( - ) then it is a normal file. If it is a d then it is a directory. The following 3 characters represent the permissions for the owner. A letter represents the presence of a permission and a dash ( - ) represents the absence of a permission. In this example the owner has all permissions (read, write and execute). The following 3 characters represent the permissions for the group. In this example the group has the ability to read but not write or execute. Note that the order of permissions is always read, then write then execute. Finally the last 3 characters represent the permissions for others (or everyone else). In this example they have the execute permission and nothing else.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-10-20 00:00:00 +0800">October 20, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Linux Command Line II</h1>
+  <div class="post-line"></div>
+
+  <h2 id="permissions">Permissions</h2>
+
+<h3 id="view-permissions">view permissions</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>
+total 8
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley   92 Okt 20 21:28 file.txt
+drwxrwxr-x 2 hadley hadley 4096 Okt 20 21:33 test1
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:42 test.cpp
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:01 ttt
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:42 x
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:43 x1
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:42 y
+</code></pre></div></div>
+<ul>
+  <li>The first character identifies the file type. If it is a dash ( - ) then it is a normal file. If it is a d then it is a directory.</li>
+  <li>The following 3 characters represent the permissions for the owner. A letter represents the presence of a permission and a dash ( - ) represents the absence of a permission. In this example the owner has all permissions (read, write and execute).</li>
+  <li>The following 3 characters represent the permissions for the group. In this example the group has the ability to read but not write or execute. Note that the order of permissions is always read, then write then execute.</li>
+  <li>Finally the last 3 characters represent the permissions for others (or everyone else). In this example they have the execute permission and nothing else.
+<!--more-->
+    <h3 id="change-permissions">change permissions</h3>
+  </li>
+</ul>
+
+<p>Grant execute permission to the user:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">chmod </span>u+x file.txt 
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>
+total 8
+<span class="nt">-rwxrw-r--</span> 1 hadley hadley   92 Okt 20 21:28 file.txt
+</code></pre></div></div>
+
+<p>Remove write permission to the group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">chmod </span>g-w file.txt 
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>
+total 8
+<span class="nt">-rwxr--r--</span> 1 hadley hadley   92 Okt 20 21:28 file.txt
+</code></pre></div></div>
+
+<p>Setting permissions shorthand:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Octal</th>
+      <th style="text-align: center">Binary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td style="text-align: center">000</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td style="text-align: center">001</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align: center">010</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="text-align: center">011</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td style="text-align: center">100</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td style="text-align: center">101</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td style="text-align: center">110</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td style="text-align: center">111</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">chmod </span>777 file.txt 
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>
+total 8
+<span class="nt">-rwxrwxrwx</span> 1 hadley hadley   92 Okt 20 21:28 file.txt
+</code></pre></div></div>
+
+<p>Permissions for directories</p>
+<ul>
+  <li>r - you have the ability to read the contents of the directory (ie do an ls)</li>
+  <li>w - you have the ability to write into the directory (ie create files and directories)</li>
+  <li>x - you have the ability to enter that directory (ie cd)</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments<span class="nv">$ </span><span class="nb">ls </span>parentDirectory
+file.txt  test1  test.cpp  ttt  x  x1  y
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments<span class="nv">$ </span><span class="nb">chmod </span>400 parentDirectory
+hadley@hadley-MacBookPro:~/Developments<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-ld</span> parentDirectory
+dr-------- 3 hadley hadley 4096 Okt 20 21:43 parentDirectory
+hadley@hadley-MacBookPro:~/Developments<span class="nv">$ </span><span class="nb">cd </span>parentDirectory
+bash: <span class="nb">cd</span>: parentDirectory: Permission denied
+hadley@hadley-MacBookPro:~/Developments<span class="nv">$ </span><span class="nb">ls </span>parentDirectory
+file.txt  test1  test.cpp  ttt  x  x1  y
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments<span class="nv">$ </span><span class="nb">chmod </span>100 parentDirectory
+hadley@hadley-MacBookPro:~/Developments<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-ld</span> parentDirectory
+d--x------ 3 hadley hadley 4096 Okt 20 21:43 parentDirectory
+hadley@hadley-MacBookPro:~/Developments<span class="nv">$ </span><span class="nb">ls </span>parentDirectory
+<span class="nb">ls</span>: cannot open directory <span class="s1">'parentDirectory'</span>: Permission denied
+hadley@hadley-MacBookPro:~/Developments<span class="nv">$ </span><span class="nb">cd </span>parentDirectory
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">pwd</span>
+/home/hadley/Developments/parentDirectory
+</code></pre></div></div>
+
+<p>You may have a directory which you don’t have the read permission for. It may have files within it which you do have the read permission for. As long as you know the file exists and it’s name you can still read the file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">cat </span>file.txt
+asfsaf
+asfasfd
+:x
+sfsafaf
+</code></pre></div></div>
+
+<h2 id="filters">Filters</h2>
+
+<h3 id="head">Head</h3>
+<p>Head is a program that prints the first so many lines of it’s input. By default it will print the first 10 lines but we may modify this with a command line argument.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">head </span>data.txt 
+Fred apples 20
+Susy oranges 5
+Mark watermellons 12
+Robert pears 4
+Terry oranges 9
+Lisa peaches 7
+Susy oranges 12
+Mark grapes 39
+Anne mangoes 7
+Greg pineapples 3
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">head</span> <span class="nt">-3</span> data.txt 
+Fred apples 20
+Susy oranges 5
+Mark watermellons 12
+</code></pre></div></div>
+
+<h3 id="tail">Tail</h3>
+<p>Tail is the opposite of head. Tail is a program that prints the last so many lines of it’s input. By default it will print the last 10 lines but we may modify this with a command line argument.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">tail </span>data.txt 
+Mark watermellons 12
+Robert pears 4
+Terry oranges 9
+Lisa peaches 7
+Susy oranges 12
+Mark grapes 39
+Anne mangoes 7
+Greg pineapples 3
+Oliver rockmellons 2
+Betty limes 14
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">tail</span> <span class="nt">-3</span> data.txt 
+Greg pineapples 3
+Oliver rockmellons 2
+Betty limes 14
+</code></pre></div></div>
+
+<p>-n, –lines=[+]NUM
+              output the last NUM lines, instead of the last 10; or use -n +NUM to  output  starting  with
+              line NUM</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">cat</span> <span class="nt">-n</span> data.txt 
+     1  Fred apples 20
+     2  Susy oranges 5
+     3  Mark watermellons 12
+     4  Robert pears 4
+     5  Terry oranges 9
+     6  Lisa peaches 7
+     7  Susy oranges 12
+     8  Mark grapes 39
+     9  Anne mangoes 7
+    10  Greg pineapples 3
+    11  Oliver rockmellons 2
+    12  Betty limes 14
+    13  test.<span class="se">\t</span>est[ss]
+    14  aaabbbbccdddddeee
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">tail</span> <span class="nt">-n</span> +10 data.txt 
+Greg pineapples 3
+Oliver rockmellons 2
+Betty limes 14
+test.<span class="se">\t</span>est[ss]
+aaabbbbccdddddeee
+</code></pre></div></div>
+
+<h3 id="sort">Sort</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">sort </span>data.txt 
+Anne mangoes 7
+Betty limes 14
+Fred apples 20
+Greg pineapples 3
+Lisa peaches 7
+Mark grapes 39
+Mark watermellons 12
+Oliver rockmellons 2
+Robert pears 4
+Susy oranges 12
+Susy oranges 5
+Terry oranges 9
+</code></pre></div></div>
+
+<h3 id="nl">nl</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">nl</span> <span class="nt">-s</span> <span class="s1">'.*'</span> <span class="nt">-w</span> 3 data.txt
+  1.<span class="k">*</span>Fred apples 20
+  2.<span class="k">*</span>Susy oranges 5
+  3.<span class="k">*</span>Mark watermellons 12
+  4.<span class="k">*</span>Robert pears 4
+  5.<span class="k">*</span>Terry oranges 9
+  6.<span class="k">*</span>Lisa peaches 7
+  7.<span class="k">*</span>Susy oranges 12
+  8.<span class="k">*</span>Mark grapes 39
+  9.<span class="k">*</span>Anne mangoes 7
+ 10.<span class="k">*</span>Greg pineapples 3
+ 11.<span class="k">*</span>Oliver rockmellons 2
+ 12.<span class="k">*</span>Betty limes 14
+</code></pre></div></div>
+
+<h3 id="wc">wc</h3>
+
+<p>-l give number of lines, -w give number of words</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">wc</span> <span class="nt">-l</span> data.txt 
+12 data.txt
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">wc</span> <span class="nt">-lw</span> data.txt 
+ 12  36 data.txt
+
+</code></pre></div></div>
+
+<p>show number of files in current directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+9
+</code></pre></div></div>
+
+<h3 id="cut">cut</h3>
+
+<p>cut defaults to using the TAB character as a separator to identify fields. In our file we have used a single space instead so we need to tell cut to use that instead. The separator character may be anything you like, for instance in a CSV file the separator is typically a comma ( , ). This is what the -d option does (we include the space within single quotes so it knows this is part of the argument). The -f option allows us to specify which field or fields we would like. If we wanted 2 or more fields then we separate them with a comma as below.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">cut</span> <span class="nt">-f</span> 1,2 <span class="nt">-d</span> <span class="s1">' '</span> data.txt 
+Fred apples
+Susy oranges
+Mark watermellons
+Robert pears
+Terry oranges
+Lisa peaches
+Susy oranges
+Mark grapes
+Anne mangoes
+Greg pineapples
+Oliver rockmellons
+Betty limes
+</code></pre></div></div>
+
+<h3 id="sed">sed</h3>
+<p>The initial s stands for substitute and specifies the action to perform (there are others but for now we’ll keep it simple). Then between the first and second slashes ( / ) we place what it is we are searching for. Then between the second and third slashes, what it is we wish to replace it with. The g at the end stands for global and is optional. If we omit it then it will only replace the first instance of search on each line. With the g option we will replace every instance of search that is on each line. Let’s see an example. Say we ran out of oranges and wanted to instead give those people bananas.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'s/watermellons/test/g'</span> data.txt 
+Fred apples 20
+Susy oranges 5
+Mark <span class="nb">test </span>12
+Robert pears 4
+Terry oranges 9
+Lisa peaches 7
+Susy oranges 12
+Mark grapes 39
+Anne mangoes 7
+Greg pineapples 3
+Oliver rockmellons 2
+Betty limes 14
+</code></pre></div></div>
+
+<h3 id="uniq">uniq</h3>
+
+<p>uniq stands for unique and it’s job is to remove duplicate lines from the data. One limitation however is that those lines must be adjacent (ie, one after the other).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">cat </span>data.txt 
+Fred apples 20
+Susy oranges 5
+Mark watermellons 12
+Robert pears 4
+Terry oranges 9
+Lisa peaches 7
+Susy oranges 12
+Mark grapes 39
+Anne mangoes 7
+Greg pineapples 3
+Oliver rockmellons 2
+Betty limes 14
+Betty limes 14
+Betty limes 14
+Betty limes 14
+Betty limes 14
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">uniq </span>data.txt 
+Fred apples 20
+Susy oranges 5
+Mark watermellons 12
+Robert pears 4
+Terry oranges 9
+Lisa peaches 7
+Susy oranges 12
+Mark grapes 39
+Anne mangoes 7
+Greg pineapples 3
+Oliver rockmellons 2
+Betty limes 14
+</code></pre></div></div>
+
+<h3 id="tac">tac</h3>
+<p>Linux guys are known for having a funny sense of humor. The program tac is actually cat in reverse. It was named this as it does the opposite of cat. Given data it will print the last line first, through to the first line.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">tac </span>data.txt 
+Betty limes 14
+Oliver rockmellons 2
+Greg pineapples 3
+Anne mangoes 7
+Mark grapes 39
+Susy oranges 12
+Lisa peaches 7
+Terry oranges 9
+Robert pears 4
+Mark watermellons 12
+Susy oranges 5
+Fred apples 20
+</code></pre></div></div>
+
+<h3 id="diff">diff</h3>
+<p>https://www.geeksforgeeks.org/diff-command-linux-examples/</p>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-10-20/Linux-Piping-and-Redirection" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-10-19/Two-Pointers" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

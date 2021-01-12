@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Dynamic Programming | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Dynamic Programming" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Topic DFS/Backtracking Intuitive approach to dynamic programming 322 Coin Change(Q:A) 518 Coin Change 2(Q:A) 343 Integer Break(Q:A)" />
+<meta property="og:description" content="Topic DFS/Backtracking Intuitive approach to dynamic programming 322 Coin Change(Q:A) 518 Coin Change 2(Q:A) 343 Integer Break(Q:A)" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-10-16/Dynamic-Programming" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-10-16/Dynamic-Programming" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-16T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Dynamic Programming" />
+<script type="application/ld+json">
+{"headline":"Dynamic Programming","url":"https://hadleyhzy34.github.io/home/2020-10-16/Dynamic-Programming","datePublished":"2020-10-16T00:00:00+08:00","dateModified":"2020-10-16T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-10-16/Dynamic-Programming"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"Topic DFS/Backtracking Intuitive approach to dynamic programming 322 Coin Change(Q:A) 518 Coin Change 2(Q:A) 343 Integer Break(Q:A)","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-10-16 00:00:00 +0800">October 16, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Dynamic Programming</h1>
+  <div class="post-line"></div>
+
+  <h2 id="topic">Topic</h2>
+<h3 id="dfsbacktracking-intuitive-approach-to-dynamic-programming">DFS/Backtracking Intuitive approach to dynamic programming</h3>
+<ul>
+  <li>322 Coin Change(<a href="https://leetcode.com/problems/coin-change/">Q</a>:<a href="">A</a>)</li>
+  <li>518 Coin Change 2(<a href="https://leetcode.com/problems/coin-change-2/">Q</a>:<a href="">A</a>)</li>
+  <li>343 Integer Break(<a href="https://leetcode.com/problems/integer-break/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<!--more-->
+<p>Intuitive approach using backtracking:</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index, current index of coins vector, amount: remaining sum value, subset: current combination candidate, res: final combinations</span>
+	<span class="kt">void</span> <span class="nf">backtracking</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">coins</span><span class="p">,</span> <span class="kt">int</span> <span class="n">amount</span><span class="p">,</span> <span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="n">subset</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="n">res</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">amount</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+			<span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">subset</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">index</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">coins</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">amount</span><span class="o">-</span><span class="n">coins</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+			<span class="n">subset</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">coins</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+			<span class="n">backtracking</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span><span class="n">amount</span><span class="o">-</span><span class="n">coins</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">i</span><span class="p">,</span><span class="n">subset</span><span class="p">,</span><span class="n">res</span><span class="p">);</span>
+			<span class="n">subset</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+</code></pre></div></div>
+
+<p>What’s wrong with for statements like below:</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">amount</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">coins</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+        		<span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">coins</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+        			<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">coins</span><span class="p">[</span><span class="n">j</span><span class="p">]];</span>
+        		<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">coins</span><span class="p">[</span><span class="n">j</span><span class="p">]){</span>
+        			<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+        		<span class="p">}</span>
+        	<span class="p">}</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="s">" "</span><span class="o">&lt;&lt;</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+</code></pre></div></div>
+
+<p>test case like below:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: amount = 5, coins = [1, 2, 5]
+Output: 4
+Explanation: there are four ways to make up the amount:
+5=5
+5=2+2+1
+5=2+1+1+1
+5=1+1+1+1+1
+</code></pre></div></div>
+
+<p>When amount == 5, dp[5]=dp[4]+dp[3]+…
+since dp[4]=dp[3]+…
+there’s overlapped number of ways of combinations to make up amount 3 and 4.</p>
+
+<p>Going back to first backtracking code, imaging coins array all elements are sorted, and we combine different value of coins in order, then if coin[j] is the last coin to make up amount i, then all other coins that makes up amount i will be smaller than coin[j]. Then we can loop through coins first from smaller to bigger one, dp[i]=dp[i-coin[j]] means that given current amount i, there are dp[i-coin[j]] ways that can make up amount i when last coin is coin[j].</p>
+
+<p>For instance, 
+coins: 1,2,5
+//coin 1 as last coin to make up 5
+5=1+1+1+1+1;
+//coin 2 as last coin to make up 5
+5=1+2+2;
+5=1+1+1+2;
+//coin 5 as last coin to make up 5
+//5=5</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">change</span><span class="p">(</span><span class="kt">int</span> <span class="n">amount</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">coins</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dp</span><span class="p">));</span>
+        <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+        
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">coin</span><span class="o">:</span><span class="n">coins</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">coin</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">amount</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">coin</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="subarray">Subarray</h3>
+<ul>
+  <li>309 Best Time to buy and sell stock with cooldown(DP, multi-states)(<a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">Q</a>:<a href="">A</a>)</li>
+</ul>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//backtracking demo could be transformed into multiple dp arrays</span>
+<span class="kt">void</span> <span class="nf">backtracking</span><span class="p">(){</span>
+	<span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="n">x</span><span class="o">:</span><span class="p">{</span><span class="n">option1</span><span class="p">,</span> <span class="n">option2</span><span class="p">,...}){</span>
+
+	<span class="p">}</span>
+	<span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">solution</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">dp1</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+	<span class="kt">int</span> <span class="n">dp2</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+	<span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>55 Jump Game(<a href="https://leetcode.com/problems/jump-game/">Q</a>:<a href="">A</a>)</p>
+  </li>
+  <li>
+    <p>368 Largest Divisible Subset(<a href="https://leetcode.com/problems/largest-divisible-subset/">Q</a>:<a href="">A</a>)(DP)</p>
+  </li>
+</ul>
+
+<h4 id="2d-array">2D array</h4>
+<ul>
+  <li>
+    <p>221 Maximal Square(<a href="https://leetcode.com/problems/maximal-square/">Q</a>:<a href="">A</a>)(DFS-&gt;DP)</p>
+  </li>
+  <li>
+    <p>256 Paint House(<a href="https://leetcode.com/problems/paint-house/">Q</a>:<a href="">A</a>)(backtracking-&gt;DP)</p>
+  </li>
+</ul>
+
+<!--more-->
+
+<h3 id="math">Math</h3>
+<ul class="warning">
+  <li>279 Perfect Squares(<a href="https://leetcode.com/problems/perfect-squares/">Q</a>:<a href="">A</a>)
+Be carefull the limit for the inner loop to speed up running time.</li>
+</ul>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-10-18/Linux-Command-Line" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-10-15/Hash-Table" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

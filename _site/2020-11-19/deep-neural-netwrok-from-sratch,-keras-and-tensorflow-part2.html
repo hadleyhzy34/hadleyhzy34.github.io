@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Deep Neural Network from scratch, scikit-learn, keras&amp;Tensorflow part2 | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Deep Neural Network from scratch, scikit-learn, keras&amp;Tensorflow part2" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="ANN TLU(threshold logic unit), linear threshold unit(LTU) activation function: 1.sigmoid function(y=1/(1+e^(-x))) 2.relu(y=max(0,x)) 3.step function: 3.1 heaviside(z) = (z&gt;=0)?1:0 Perceptron the decision boundary of each output neuron is linear, perceptrons are incapable of learning complex patterns. Perceptron convergence theorem: if the training instances are linearly separable, this algorithm would converge to a solution" />
+<meta property="og:description" content="ANN TLU(threshold logic unit), linear threshold unit(LTU) activation function: 1.sigmoid function(y=1/(1+e^(-x))) 2.relu(y=max(0,x)) 3.step function: 3.1 heaviside(z) = (z&gt;=0)?1:0 Perceptron the decision boundary of each output neuron is linear, perceptrons are incapable of learning complex patterns. Perceptron convergence theorem: if the training instances are linearly separable, this algorithm would converge to a solution" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-11-19/deep-neural-netwrok-from-sratch,-keras-and-tensorflow-part2" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-11-19/deep-neural-netwrok-from-sratch,-keras-and-tensorflow-part2" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-19T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Deep Neural Network from scratch, scikit-learn, keras&amp;Tensorflow part2" />
+<script type="application/ld+json">
+{"headline":"Deep Neural Network from scratch, scikit-learn, keras&amp;Tensorflow part2","url":"https://hadleyhzy34.github.io/home/2020-11-19/deep-neural-netwrok-from-sratch,-keras-and-tensorflow-part2","datePublished":"2020-11-19T00:00:00+08:00","dateModified":"2020-11-19T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-11-19/deep-neural-netwrok-from-sratch,-keras-and-tensorflow-part2"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"ANN TLU(threshold logic unit), linear threshold unit(LTU) activation function: 1.sigmoid function(y=1/(1+e^(-x))) 2.relu(y=max(0,x)) 3.step function: 3.1 heaviside(z) = (z&gt;=0)?1:0 Perceptron the decision boundary of each output neuron is linear, perceptrons are incapable of learning complex patterns. Perceptron convergence theorem: if the training instances are linearly separable, this algorithm would converge to a solution","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-11-19 00:00:00 +0800">November 19, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Deep Neural Network from scratch, scikit-learn, keras&Tensorflow part2</h1>
+  <div class="post-line"></div>
+
+  <h2 id="ann">ANN</h2>
+<p>TLU(threshold logic unit), linear threshold unit(LTU)
+activation function:
+1.sigmoid function(y=1/(1+e^(-x)))
+2.relu(y=max(0,x))
+3.step function:
+3.1 heaviside(z) = (z&gt;=0)?1:0</p>
+
+<p>Perceptron
+the decision boundary of each output neuron is linear, perceptrons are incapable of learning complex patterns. 
+Perceptron convergence theorem:
+if the training instances are linearly separable, this algorithm would converge to a solution</p>
+
+<!--more-->
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Perceptron</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="p">.</span><span class="n">data</span><span class="p">[:,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">iris</span><span class="p">.</span><span class="n">target</span> <span class="o">==</span> <span class="mi">0</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">int</span><span class="p">)</span> <span class="c1">#if iris setosa, output 1, otherwise 0
+</span>
+<span class="n">per_clf</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">()</span>
+<span class="n">per_clf</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">per_clf</span><span class="p">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[0]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">note</span> <span class="n">that</span> <span class="n">perceptron</span> <span class="n">make</span> <span class="n">predictions</span> <span class="n">based</span> <span class="n">on</span> <span class="n">a</span> <span class="n">hard</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">hwile</span> <span class="n">logistic</span> <span class="n">regression</span> <span class="n">classifier</span> <span class="n">outpu</span> <span class="n">a</span> <span class="k">class</span> <span class="nc">probability</span><span class="p">.</span>
+<span class="n">XOR</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">solved</span> <span class="n">by</span> <span class="n">using</span> <span class="n">perceptrons</span> <span class="ow">or</span> <span class="nb">any</span> <span class="n">other</span> <span class="n">linear</span> <span class="n">classification</span> <span class="n">model</span> <span class="n">including</span> <span class="n">logistic</span> <span class="n">regression</span> <span class="n">model</span><span class="p">.</span> <span class="n">However</span><span class="p">,</span> <span class="n">a</span> <span class="n">simple</span> <span class="n">transformation</span> <span class="n">to</span> <span class="n">the</span> <span class="n">feature</span> <span class="n">space</span><span class="p">,</span> <span class="n">like</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">x2</span> <span class="n">this</span> <span class="n">kind</span> <span class="n">of</span> <span class="n">nonlinear</span> <span class="n">feature</span> <span class="n">allows</span> <span class="n">logistic</span> <span class="n">regression</span> <span class="n">to</span> <span class="n">learn</span> <span class="n">a</span> <span class="n">decision</span><span class="p">.</span>
+
+<span class="n">by</span> <span class="n">stacking</span> <span class="n">multiple</span> <span class="n">perceptrons</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">called</span> <span class="n">MLP</span><span class="p">(</span><span class="n">multiple</span> <span class="n">perceptron</span><span class="p">)</span> <span class="n">could</span> <span class="n">solve</span> <span class="n">this</span> <span class="n">problem</span><span class="p">.</span>
+
+<span class="n">check</span> <span class="n">book</span> <span class="n">page288</span> <span class="n">to</span> <span class="n">see</span> <span class="n">how</span> <span class="n">it</span> <span class="n">could</span> <span class="n">solve</span> <span class="n">XOR</span> <span class="n">problem</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  File "&lt;ipython-input-25-53e01c846747&gt;", line 1
+    note that perceptron make predictions based on a hard threshold, hwile logistic regression classifier outpu a class probability.
+         ^
+SyntaxError: invalid syntax
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MLP</span><span class="p">:</span>
+<span class="nb">input</span> <span class="n">layer</span>
+<span class="n">hidden</span> <span class="n">layer</span>
+<span class="n">output</span> <span class="n">layer</span>
+
+<span class="mf">1.</span> <span class="n">the</span> <span class="n">layers</span> <span class="n">that</span> <span class="n">close</span> <span class="n">to</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">layer</span> <span class="n">are</span> <span class="n">usually</span> <span class="n">called</span> <span class="n">the</span> <span class="n">lower</span> <span class="n">layers</span><span class="p">,</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">ones</span> <span class="n">close</span> <span class="n">to</span> <span class="n">the</span> <span class="n">outputs</span> <span class="n">are</span> <span class="n">usually</span> <span class="n">called</span> <span class="n">the</span> <span class="n">upper</span> <span class="n">layers</span>
+<span class="mf">2.</span> <span class="n">every</span> <span class="n">layers</span> <span class="k">except</span> <span class="n">output</span> <span class="n">layers</span> <span class="n">includes</span> <span class="n">a</span> <span class="n">bias</span> <span class="n">neuron</span> <span class="ow">and</span> <span class="ow">is</span> <span class="n">fully</span> <span class="n">connected</span> <span class="n">to</span> <span class="n">the</span> <span class="nb">next</span> <span class="n">layer</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Batch</span> <span class="n">Gradient</span> <span class="n">descent</span><span class="p">:</span> <span class="n">batch</span> <span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="n">of</span> <span class="n">training</span> <span class="nb">set</span>
+<span class="n">stochastic</span> <span class="n">gradient</span> <span class="n">descent</span><span class="p">.</span> <span class="n">batch</span> <span class="n">size</span> <span class="o">=</span><span class="mi">1</span>
+<span class="n">mini</span><span class="o">-</span><span class="n">batch</span> <span class="n">gradient</span> <span class="n">descent</span><span class="p">.</span> <span class="mi">1</span><span class="o">&lt;</span><span class="n">batch</span> <span class="n">size</span><span class="o">&lt;</span><span class="n">size</span> <span class="n">of</span> <span class="n">training</span> <span class="nb">set</span>
+</code></pre></div></div>
+
+<p>it is important to initialize all the hidden layers’ connectin weights randomly, or else training will fail. For example, if you initialize all weights and biases to zero, then all neurons in a given layer will be perfectly identical, and thus backpropagation will affect them in exactly the same way, so they will remain identical. In other words, despite having hundres of neurons per layer, your model will act as if it had one one neuron per layer: it won’t be smart. If instead you randomly initialize the weights, you break the symmetry and allow backprograpation to train a diverse team of neurons.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">change</span> <span class="n">perceptron</span> <span class="n">step</span> <span class="n">function</span> <span class="n">to</span> <span class="n">MLP</span> <span class="n">sigmoid</span> <span class="n">function</span>
+
+<span class="o">*</span> <span class="n">step</span> <span class="n">function</span>
+<span class="o">*</span> <span class="n">sigmoid</span> <span class="n">function</span>
+<span class="o">*</span> <span class="n">hyperbolic</span> <span class="n">tangent</span> <span class="n">function</span><span class="p">:</span>
+<span class="n">tanh</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">=</span> <span class="n">sinh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="c1">#https://www.mathworks.com/help/matlab/ref/tanh.html
+</span><span class="n">that</span> <span class="nb">range</span> <span class="n">tends</span> <span class="n">to</span> <span class="n">make</span> <span class="n">each</span> <span class="n">layer</span><span class="s">'s output more or less centered around 0 at the beginning of training, which oftern helps speed up convergence
+* ReLU(z) = max(0,z)
+slope changes abruptly and its derivative is 0 for z&lt;0, in pratice it has become the default since it has the advantage of being fast to compute
+
+* softplus activation function softplus(z)=log(1+exp(z)) which is smooth variant of ReLU, it is close to 0 when z is negative, and close to z when z is positive.
+
+## the key idea why we need activation functions:
+if chain several linear transformations, it is still linear transformation. so there'</span><span class="n">s</span> <span class="n">no</span> <span class="n">nonlinearity</span> <span class="n">between</span> <span class="n">layers</span><span class="p">,</span> <span class="n">even</span> <span class="n">deep</span> <span class="n">stack</span> <span class="n">of</span> <span class="n">layers</span> <span class="ow">is</span> <span class="n">still</span> <span class="n">quivalent</span> <span class="n">to</span> <span class="n">a</span> <span class="n">single</span> <span class="n">layer</span><span class="p">.</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">applications</span><span class="p">:</span>
+<span class="mf">1.</span> <span class="n">regression</span> <span class="n">MLPs</span>
+<span class="mf">1.1</span> <span class="n">output</span> <span class="n">neurons</span>
+<span class="n">it</span> <span class="n">depends</span> <span class="n">on</span> <span class="n">number</span> <span class="n">of</span> <span class="n">output</span> <span class="n">values</span> <span class="n">need</span> <span class="n">to</span> <span class="n">be</span> <span class="n">predicted</span>
+<span class="o">*</span> <span class="n">single</span> <span class="n">value</span><span class="o">-&gt;</span><span class="n">single</span> <span class="n">output</span> <span class="n">neurons</span>
+<span class="o">*</span> <span class="n">multiple</span> <span class="n">values</span><span class="o">-&gt;</span><span class="n">one</span> <span class="n">output</span> <span class="n">neuron</span> <span class="n">per</span> <span class="n">output</span> <span class="n">dimension</span>
+<span class="mf">1.2</span> <span class="k">for</span> <span class="n">output</span> <span class="n">neurons</span><span class="p">,</span> <span class="n">normally</span> <span class="n">do</span> <span class="ow">not</span> <span class="n">use</span> <span class="nb">any</span> <span class="n">activation</span> <span class="n">function</span><span class="p">,</span> <span class="n">but</span> <span class="n">alternatively</span> <span class="n">choose</span> <span class="n">different</span> <span class="n">activation</span> <span class="n">functions</span> <span class="n">depending</span> <span class="n">on</span> <span class="n">output</span> <span class="nb">range</span> <span class="n">of</span> <span class="n">values</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">loss</span> <span class="n">function</span><span class="o">/</span><span class="n">evaluation</span> <span class="n">metric</span> <span class="n">to</span> <span class="n">use</span> 
+<span class="mf">1.</span><span class="n">during</span> <span class="n">training</span> <span class="ow">is</span> <span class="n">typically</span> <span class="n">the</span> <span class="n">mean</span> <span class="n">sqaured</span> <span class="n">error</span>
+<span class="mf">2.</span><span class="k">if</span> <span class="n">you</span> <span class="n">have</span> <span class="n">alot</span> <span class="n">of</span> <span class="n">outliers</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">training</span> <span class="nb">set</span><span class="p">,</span> <span class="n">you</span> <span class="n">may</span> <span class="n">prefer</span> <span class="n">to</span> <span class="n">use</span> <span class="n">the</span> <span class="n">mean</span> <span class="n">absolute</span> <span class="n">error</span> <span class="n">instead</span><span class="p">.</span>
+
+<span class="n">the</span> <span class="n">average</span> <span class="n">difference</span> <span class="n">observed</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">predicted</span> <span class="ow">and</span> <span class="n">actual</span> <span class="n">values</span> <span class="n">across</span> <span class="n">the</span> <span class="n">whole</span> <span class="n">test</span> <span class="nb">set</span><span class="p">.</span>
+
+<span class="n">page</span> <span class="mi">293</span> <span class="ow">not</span> <span class="n">correct</span>
+
+<span class="n">Taking</span> <span class="n">the</span> <span class="n">square</span> <span class="n">root</span> <span class="n">of</span> <span class="n">the</span> <span class="n">average</span> <span class="n">squared</span> <span class="n">errors</span> <span class="n">has</span> <span class="n">some</span> <span class="n">interesting</span> <span class="n">implications</span> <span class="k">for</span> <span class="n">RMSE</span><span class="p">.</span> <span class="n">Since</span> <span class="n">the</span> <span class="n">errors</span> <span class="n">are</span> <span class="n">squared</span> <span class="n">before</span> <span class="n">they</span> <span class="n">are</span> <span class="n">averaged</span><span class="p">,</span> <span class="n">the</span> <span class="n">RMSE</span> <span class="n">gives</span> <span class="n">a</span> <span class="n">relatively</span> <span class="n">high</span> <span class="n">weight</span> <span class="n">to</span> <span class="n">large</span> <span class="n">errors</span><span class="p">.</span> <span class="n">This</span> <span class="n">means</span> <span class="n">the</span> <span class="n">RMSE</span> <span class="n">should</span> <span class="n">be</span> <span class="n">more</span> <span class="n">useful</span> <span class="n">when</span> <span class="n">large</span> <span class="n">errors</span> <span class="n">are</span> <span class="n">particularly</span> <span class="n">undesirable</span><span class="p">.</span> <span class="n">The</span> <span class="n">three</span> <span class="n">tables</span> <span class="n">below</span> <span class="n">show</span> <span class="n">examples</span> <span class="n">where</span> <span class="n">MAE</span> <span class="ow">is</span> <span class="n">steady</span> <span class="ow">and</span> <span class="n">RMSE</span> <span class="n">increases</span> <span class="k">as</span> <span class="n">the</span> <span class="n">variance</span> <span class="n">associated</span> <span class="k">with</span> <span class="n">the</span> <span class="n">frequency</span> <span class="n">distribution</span> <span class="n">of</span> <span class="n">error</span> <span class="n">magnitudes</span> <span class="n">also</span> <span class="n">increases</span><span class="p">.</span>
+
+<span class="mf">3.</span><span class="n">RMSE</span>
+
+<span class="mf">4.</span><span class="n">huber</span> <span class="n">loss</span>
+
+<span class="o">*</span> <span class="n">outlier</span>
+
+<span class="n">An</span> <span class="n">outlier</span> <span class="ow">is</span> <span class="n">an</span> <span class="nb">object</span> <span class="n">that</span> <span class="n">deviates</span> <span class="n">significantly</span> <span class="k">from</span> <span class="n">the</span> <span class="n">rest</span> <span class="n">of</span> <span class="n">the</span> <span class="n">objects</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Summary</span><span class="p">:</span>
+<span class="nb">input</span> <span class="n">neurons</span><span class="p">:</span><span class="n">one</span> <span class="n">per</span> <span class="nb">input</span> <span class="n">features</span>
+<span class="n">hidden</span> <span class="n">layers</span><span class="p">:</span><span class="n">depends</span><span class="p">,</span> <span class="n">typically</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">5</span>
+<span class="n">neurons</span> <span class="n">per</span> <span class="n">hidden</span> <span class="n">layer</span><span class="p">:</span><span class="n">depends</span> <span class="n">on</span> <span class="n">the</span> <span class="n">problem</span><span class="p">,</span> <span class="n">typically</span> <span class="mi">10</span> <span class="n">to</span> <span class="mi">100</span>
+<span class="n">output</span> <span class="n">neurons</span><span class="p">:</span><span class="mi">1</span> <span class="n">perdiction</span> <span class="n">dimension</span>
+<span class="n">hidden</span> <span class="n">activation</span><span class="p">:</span><span class="n">Relu</span>
+<span class="n">output</span> <span class="n">activation</span><span class="p">:</span><span class="n">none</span> <span class="ow">or</span> <span class="n">depends</span>
+<span class="n">loss</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span> <span class="n">rmse</span><span class="p">,</span><span class="n">mae</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">classification</span> <span class="n">MLPs</span>
+
+<span class="n">binary</span> <span class="n">classification</span><span class="p">:</span>
+<span class="n">output</span> <span class="n">layer</span> <span class="n">activation</span><span class="p">:</span><span class="n">sigmoid</span>
+<span class="n">loss</span> <span class="n">function</span><span class="p">:</span><span class="n">cross</span> <span class="n">entropy</span><span class="p">(</span><span class="n">log</span> <span class="n">loss</span><span class="p">)</span>
+
+<span class="n">multilabel</span> <span class="n">binary</span> <span class="n">classification</span><span class="p">:</span>
+<span class="n">output</span> <span class="n">neurons</span><span class="p">:</span><span class="mi">1</span> <span class="n">per</span> <span class="n">label</span>
+<span class="n">loss</span> <span class="n">function</span><span class="p">:</span> <span class="n">cross</span> <span class="n">entropy</span>
+
+<span class="n">multilabel</span> <span class="n">binary</span> <span class="n">classification</span> <span class="k">for</span> <span class="n">instance</span><span class="p">:</span>
+<span class="mf">1.</span><span class="n">email</span> <span class="n">classification</span><span class="p">:</span>
+<span class="mf">1.1</span> <span class="n">ham</span> <span class="ow">or</span> <span class="n">spam</span>
+<span class="mf">1.2</span> <span class="n">urgent</span> <span class="ow">or</span> <span class="n">nonurgent</span>
+
+<span class="n">multiclss</span> <span class="n">classification</span><span class="p">:</span>
+<span class="n">output</span> <span class="n">neurons</span><span class="p">:</span> <span class="mi">1</span> <span class="n">per</span> <span class="k">class</span>
+<span class="nc">loss</span> <span class="n">function</span><span class="p">:</span><span class="n">cross</span> <span class="n">entropy</span>
+</code></pre></div></div>
+
+<h3 id="hyperparameters">hyperparameters</h3>
+<p>are the variables which determines the network structure and the variables which determine how the network is trained</p>
+
+<p>tensorflow: static graph
+pytorch: dynamic graph that allows defining/defining the graph</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tf</span><span class="p">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">keras</span><span class="p">.</span><span class="n">__version__</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.3.1
+2.4.0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### load dataset
+</span><span class="n">fashion_mnist</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">datasets</span><span class="p">.</span><span class="n">fashion_mnist</span>
+<span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">),(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span><span class="o">=</span><span class="n">fashion_mnist</span><span class="p">.</span><span class="n">load_data</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">X_train</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">X_train</span><span class="p">.</span><span class="n">dtype</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(60000, 28, 28)
+uint8
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X_valid</span><span class="p">,</span><span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:</span><span class="mi">5000</span><span class="p">]</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">5000</span><span class="p">:]</span> <span class="o">/</span> <span class="mf">255.0</span>
+<span class="n">y_valid</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[:</span><span class="mi">5000</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[</span><span class="mi">5000</span><span class="p">:]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span> <span class="o">/</span> <span class="mf">255.0</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">label_name</span> <span class="o">=</span> <span class="p">[</span><span class="s">"T-shirt/top"</span><span class="p">,</span> <span class="s">"Trouser"</span><span class="p">,</span> <span class="s">"Pullover"</span><span class="p">,</span> <span class="s">"Dress"</span><span class="p">,</span> <span class="s">"Coat"</span><span class="p">,</span> <span class="s">"Sandal"</span><span class="p">,</span> <span class="s">"Shirt"</span><span class="p">,</span> <span class="s">"Sneaker"</span><span class="p">,</span> <span class="s">"bag"</span><span class="p">,</span> <span class="s">"ankle boot"</span><span class="p">]</span>
+<span class="n">label_name</span><span class="p">[</span><span class="n">y_train</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y_train</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[4 0 7 9 9]
+</code></pre></div></div>
+
+<h3 id="creating-the-model-using-the-sequential-api">Creating the model using the Sequential API</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">Sequential</span><span class="p">()</span>      <span class="c1">##sequential API
+</span><span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">[</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">]))</span>   <span class="c1">##flatten 1D layer
+</span><span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">))</span>  <span class="c1">##dense hidden layer
+</span><span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">))</span>  
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">"softmax"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flatten_6
+dense_15
+dense_16
+dense_17
+
+
+
+---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-34-441d3c181c0e&gt; in &lt;module&gt;
+     12 print(hidden2.name)
+     13 print(hidden3.name)
+---&gt; 14 model.get_layer('dense') is hidden1
+
+
+~/Development/venv/my-venv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py in get_layer(self, name, index)
+   2396         if layer.name == name:
+   2397           return layer
+-&gt; 2398       raise ValueError('No such layer: ' + name + '.')
+   2399     raise ValueError('Provide either a layer name or layer index.')
+   2400 
+
+
+ValueError: No such layer: dense.
+</code></pre></div></div>
+
+<h3 id="pass-a-list-of-layers-when-creating-the-sequential-model">pass a list of layers when creating the sequential model:</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">[</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">]),</span>
+    <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">),</span>
+    <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">),</span>
+    <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">"softmax"</span><span class="p">)</span>
+<span class="p">])</span>  <span class="c1">##sequential API
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Model: "sequential_5"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+flatten_5 (Flatten)          (None, 784)               0         
+_________________________________________________________________
+dense_12 (Dense)             (None, 300)               235500    
+_________________________________________________________________
+dense_13 (Dense)             (None, 100)               30100     
+_________________________________________________________________
+dense_14 (Dense)             (None, 10)                1010      
+=================================================================
+Total params: 266,610
+Trainable params: 266,610
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="n">layers</span>
+<span class="n">hidden0</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">hidden1</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">hidden2</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">hidden3</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hidden0</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hidden1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hidden2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hidden3</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">model</span><span class="p">.</span><span class="n">get_layer</span><span class="p">(</span><span class="s">'dense_15'</span><span class="p">)</span> <span class="ow">is</span> <span class="n">hidden1</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flatten_6
+dense_15
+dense_16
+dense_17
+
+
+
+
+
+True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">weights</span><span class="p">,</span> <span class="n">biases</span> <span class="o">=</span> <span class="n">hidden1</span><span class="p">.</span><span class="n">get_weights</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">weights</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">biases</span><span class="p">)</span>
+<span class="n">biases</span><span class="p">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[ 4.7349229e-02 -9.7253174e-04 -1.1341944e-03 ...  2.5101207e-02
+   6.8740964e-02 -5.6659300e-02]
+ [ 4.9689531e-02 -1.6197551e-02 -2.3989312e-02 ...  5.8839262e-02
+   3.3672228e-02  5.0742328e-02]
+ [-4.2911947e-02 -5.1682625e-02 -3.1449642e-02 ...  9.9925473e-03
+  -6.3275285e-02  2.2455417e-02]
+ ...
+ [ 3.5043560e-02 -6.6033557e-02 -5.3551573e-02 ... -7.4006386e-02
+   1.8318184e-02 -3.4555219e-02]
+ [-8.0467388e-03  6.4311802e-02  3.9261460e-02 ...  2.6988834e-03
+  -2.5993869e-02  9.4175339e-06]
+ [ 3.8276210e-02  2.2218361e-02  7.2731733e-02 ...  3.2831334e-02
+   6.6786796e-02 -4.8152048e-02]]
+(784, 300)
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+
+
+
+
+
+(300,)
+</code></pre></div></div>
+
+<h2 id="compiling-model">compiling model</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">"sparse_categorical_crossentropy"</span><span class="p">,</span>
+                <span class="n">optimizer</span><span class="o">=</span><span class="s">"sgd"</span><span class="p">,</span>
+                <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s">"accuracy"</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mf">1.</span> <span class="n">sparse_categorical_cross</span> <span class="n">entropy</span><span class="p">:</span>
+<span class="n">sparse</span> <span class="n">labels</span> <span class="ow">and</span> <span class="n">classes</span> <span class="n">are</span> <span class="n">exclusive</span><span class="p">,</span> <span class="n">output</span> <span class="k">for</span> <span class="n">each</span> <span class="n">instance</span> <span class="n">only</span> <span class="n">cetain</span> <span class="k">class</span> <span class="nc">index</span> <span class="k">for</span> <span class="n">above</span> <span class="n">example</span>
+<span class="mf">2.</span> <span class="n">categorical_crossentropy</span> <span class="n">such</span> <span class="k">as</span> <span class="n">target</span> <span class="n">probability</span> <span class="n">per</span> <span class="k">class</span> <span class="nc">for</span> <span class="n">each</span> <span class="n">instance</span>
+<span class="mf">3.</span> <span class="n">binary_crossentropy</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">convert</span> <span class="n">labels</span><span class="p">:</span><span class="n">p303</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_valid</span><span class="p">,</span><span class="n">y_valid</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Epoch 1/30
+1719/1719 [==============================] - 8s 5ms/step - loss: 0.7304 - accuracy: 0.7618 - val_loss: 0.5188 - val_accuracy: 0.8288
+Epoch 2/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.4915 - accuracy: 0.8268 - val_loss: 0.4556 - val_accuracy: 0.8474
+Epoch 3/30
+1719/1719 [==============================] - 8s 5ms/step - loss: 0.4458 - accuracy: 0.8432 - val_loss: 0.4399 - val_accuracy: 0.8440
+Epoch 4/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.4179 - accuracy: 0.8527 - val_loss: 0.3924 - val_accuracy: 0.8672
+Epoch 5/30
+1719/1719 [==============================] - 8s 5ms/step - loss: 0.3963 - accuracy: 0.8612 - val_loss: 0.3854 - val_accuracy: 0.8718
+Epoch 6/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.3804 - accuracy: 0.8655 - val_loss: 0.3750 - val_accuracy: 0.8710
+Epoch 7/30
+1719/1719 [==============================] - 8s 5ms/step - loss: 0.3674 - accuracy: 0.8709 - val_loss: 0.3663 - val_accuracy: 0.8756
+Epoch 8/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.3555 - accuracy: 0.8732 - val_loss: 0.3635 - val_accuracy: 0.8760
+Epoch 9/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.3451 - accuracy: 0.8773 - val_loss: 0.3727 - val_accuracy: 0.8690
+Epoch 10/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.3354 - accuracy: 0.8811 - val_loss: 0.3447 - val_accuracy: 0.8802
+Epoch 11/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.3270 - accuracy: 0.8838 - val_loss: 0.3585 - val_accuracy: 0.8752
+Epoch 12/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.3200 - accuracy: 0.8860 - val_loss: 0.3314 - val_accuracy: 0.8840
+Epoch 13/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.3120 - accuracy: 0.8869 - val_loss: 0.3273 - val_accuracy: 0.8816
+Epoch 14/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.3054 - accuracy: 0.8901 - val_loss: 0.3370 - val_accuracy: 0.8806
+Epoch 15/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2973 - accuracy: 0.8937 - val_loss: 0.3225 - val_accuracy: 0.8860
+Epoch 16/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2921 - accuracy: 0.8951 - val_loss: 0.3430 - val_accuracy: 0.8786
+Epoch 17/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2864 - accuracy: 0.8968 - val_loss: 0.3203 - val_accuracy: 0.8842
+Epoch 18/30
+1719/1719 [==============================] - 6s 4ms/step - loss: 0.2808 - accuracy: 0.8998 - val_loss: 0.3209 - val_accuracy: 0.8866
+Epoch 19/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2757 - accuracy: 0.9012 - val_loss: 0.3271 - val_accuracy: 0.8836
+Epoch 20/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2704 - accuracy: 0.9027 - val_loss: 0.3176 - val_accuracy: 0.8890
+Epoch 21/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2653 - accuracy: 0.9044 - val_loss: 0.3163 - val_accuracy: 0.8894
+Epoch 22/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2615 - accuracy: 0.9051 - val_loss: 0.3046 - val_accuracy: 0.8928
+Epoch 23/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2566 - accuracy: 0.9077 - val_loss: 0.3172 - val_accuracy: 0.8860
+Epoch 24/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2513 - accuracy: 0.9099 - val_loss: 0.2993 - val_accuracy: 0.8938
+Epoch 25/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2475 - accuracy: 0.9114 - val_loss: 0.3074 - val_accuracy: 0.8902
+Epoch 26/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2431 - accuracy: 0.9124 - val_loss: 0.3210 - val_accuracy: 0.8872
+Epoch 27/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2397 - accuracy: 0.9137 - val_loss: 0.3079 - val_accuracy: 0.8870
+Epoch 28/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2363 - accuracy: 0.9145 - val_loss: 0.3007 - val_accuracy: 0.8942
+Epoch 29/30
+1719/1719 [==============================] - 8s 5ms/step - loss: 0.2320 - accuracy: 0.9163 - val_loss: 0.2948 - val_accuracy: 0.8952
+Epoch 30/30
+1719/1719 [==============================] - 7s 4ms/step - loss: 0.2288 - accuracy: 0.9180 - val_loss: 0.3020 - val_accuracy: 0.8924
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">history</span><span class="p">.</span><span class="n">history</span><span class="p">).</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">gca</span><span class="p">().</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>  <span class="c1">##set vertical range to [0~1]
+</span><span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="https://raw.githubusercontent.com/hadleyhzy34/deep-learning/main/deep_neural_network/dnn_keras_sklearn_files/dnn_keras_sklearn_28_0.svg" alt="svg" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>313/313 [==============================] - 1s 3ms/step - loss: 0.3293 - accuracy: 0.8859
+
+
+
+
+
+[0.3292936682701111, 0.8859000205993652]
+</code></pre></div></div>
+
+<p>Note that it is common to get slightly lower performance on the test set than on the validation set because the hyperparameters are tuned on the validation set, not the test set</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X_new</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">y_proba</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+<span class="n">y_proba</span><span class="p">.</span><span class="nb">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.01, 0.  , 0.99],
+       [0.  , 0.  , 0.98, 0.  , 0.02, 0.  , 0.  , 0.  , 0.  , 0.  ],
+       [0.  , 1.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  ]],
+      dtype=float32)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+<span class="n">y_pred</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WARNING:tensorflow:From &lt;ipython-input-46-81ace37e545f&gt;:1: Sequential.predict_classes (from tensorflow.python.keras.engine.sequential) is deprecated and will be removed after 2021-01-01.
+Instructions for updating:
+Please use instead:* `np.argmax(model.predict(x), axis=-1)`,   if your model does multi-class classification   (e.g. if it uses a `softmax` last-layer activation).* `(model.predict(x) &gt; 0.5).astype("int32")`,   if your model does binary classification   (e.g. if it uses a `sigmoid` last-layer activation).
+
+
+
+
+
+array([9, 2, 1])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">),</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([9, 2, 1])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y_test</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([9, 2, 1], dtype=uint8)
+</code></pre></div></div>
+
+<h2 id="regression-mlp-using-the-sequential-api">Regression MLP using the sequential API</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_california_housing</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">housing</span> <span class="o">=</span> <span class="n">fetch_california_housing</span><span class="p">()</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">housing</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">housing</span><span class="p">.</span><span class="n">target</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_valid</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_valid</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">,</span><span class="n">input_shape</span><span class="o">=</span><span class="n">X_train</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span>
+    <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">])</span>
+<span class="n">model</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">"mean_squared_error"</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s">"sgd"</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">))</span>
+<span class="n">mse_test</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">X_new</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Epoch 1/20
+363/363 [==============================] - 1s 4ms/step - loss: 0.8456 - val_loss: 2.6605
+Epoch 2/20
+363/363 [==============================] - 1s 3ms/step - loss: 0.5434 - val_loss: 0.7184
+Epoch 3/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.4632 - val_loss: 0.5022
+Epoch 4/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.4310 - val_loss: 0.4699
+Epoch 5/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.4211 - val_loss: 0.4140
+Epoch 6/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.4010 - val_loss: 0.4003
+Epoch 7/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3931 - val_loss: 0.4174
+Epoch 8/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.4904 - val_loss: 0.4105
+Epoch 9/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.4206 - val_loss: 0.4082
+Epoch 10/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3931 - val_loss: 0.3944
+Epoch 11/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3807 - val_loss: 0.3821
+Epoch 12/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3758 - val_loss: 0.3792
+Epoch 13/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3714 - val_loss: 0.3750
+Epoch 14/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3683 - val_loss: 0.3732
+Epoch 15/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3664 - val_loss: 0.3744
+Epoch 16/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3631 - val_loss: 0.3683
+Epoch 17/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3601 - val_loss: 0.3659
+Epoch 18/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3591 - val_loss: 0.3669
+Epoch 19/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3570 - val_loss: 0.3623
+Epoch 20/20
+363/363 [==============================] - 1s 2ms/step - loss: 0.3535 - val_loss: 0.3764
+162/162 [==============================] - 0s 1ms/step - loss: 0.3955
+</code></pre></div></div>
+
+<h2 id="functional-api-example-widedeep-neural-network">Functional API: Example: wide&amp;deep neural network</h2>
+
+<p>it connects all or part of the inputs directly to the output layer, this makes possible for the neural network to leanr both deep patterns and simple rules.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">input_</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">X_train</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="n">hidden1</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">)(</span><span class="n">input_</span><span class="p">)</span>
+<span class="n">hidden2</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">)(</span><span class="n">hidden1</span><span class="p">)</span>
+<span class="n">concat</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Concatenate</span><span class="p">()([</span><span class="n">input_</span><span class="p">,</span><span class="n">hidden2</span><span class="p">])</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="n">concat</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">input_</span><span class="p">],</span><span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">output</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Modification: send a subset of the features through the wide path and a different subset through deep path</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">input_A</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s">"wide_input"</span><span class="p">)</span>
+<span class="n">input_B</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s">"deep_input"</span><span class="p">)</span>
+<span class="n">hidden1</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">)(</span><span class="n">input_B</span><span class="p">)</span>
+<span class="n">hidden2</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">)(</span><span class="n">hidden1</span><span class="p">)</span>
+<span class="n">concat</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Concatenate</span><span class="p">()([</span><span class="n">input_A</span><span class="p">,</span><span class="n">hidden2</span><span class="p">])</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="n">concat</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">input_A</span><span class="p">,</span> <span class="n">input_B</span><span class="p">],</span><span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">output</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">WideAndDeepModel</span><span class="p">(</span><span class="n">keras</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s">"relu"</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="c1">#handles standard args
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">hidden1</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">activation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">hidden2</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">activation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">main_output</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">aux_output</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+        <span class="n">input_A</span><span class="p">,</span> <span class="n">inut_B</span> <span class="o">=</span> <span class="n">inputs</span>
+        <span class="n">hidden1</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">hidden1</span><span class="p">(</span><span class="n">input_B</span><span class="p">)</span>
+        <span class="n">hidden2</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">hidden2</span><span class="p">(</span><span class="n">hidden1</span><span class="p">)</span>
+        <span class="n">concat</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">input_A</span><span class="p">,</span> <span class="n">hidden2</span><span class="p">])</span>
+        <span class="n">main_output</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">main_output</span><span class="p">(</span><span class="n">concat</span><span class="p">)</span>
+        <span class="n">aux_output</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">aux_output</span><span class="p">(</span><span class="n">hidden2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">main_output</span><span class="p">,</span> <span class="n">aux_output</span>
+    
+<span class="n">model</span> <span class="o">=</span> <span class="n">WideAndDeepModel</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>cons: when you call the summar() method, you only get list of layers, without any information on how they are connected to each other</p>
+
+<h3 id="save-and-load">save and load</h3>
+<p>model.save(“my_keras_model.h5”)
+model = keras.mdoels.load_model(“my_keras_model.h5”)</p>
+
+<h4 id="using-callbacks">using callbacks</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">the</span> <span class="n">fit</span> <span class="n">method</span> <span class="n">accepts</span> <span class="n">a</span> <span class="n">callbacks</span> <span class="n">argument</span> <span class="n">that</span> <span class="n">lets</span> <span class="n">you</span> <span class="n">specify</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">objects</span> <span class="n">that</span> <span class="n">Keras</span> <span class="n">will</span> <span class="n">call</span> <span class="n">at</span> <span class="n">the</span> <span class="n">start</span> <span class="ow">and</span> <span class="n">end</span> <span class="n">of</span> <span class="n">training</span><span class="p">,</span> <span class="n">at</span> <span class="n">the</span> <span class="n">start</span> <span class="ow">and</span> <span class="n">end</span> <span class="n">of</span> <span class="n">each</span> <span class="n">epoch</span><span class="p">,</span> <span class="ow">and</span> <span class="n">even</span> <span class="n">before</span> <span class="ow">and</span> <span class="n">after</span> <span class="n">processing</span> <span class="n">each</span> <span class="n">batch</span><span class="p">.</span> 
+</code></pre></div></div>
+
+<h3 id="checkpoint-and-early-stopping">checkpoint and early stopping</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">checkpoint_cb</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">callbacks</span><span class="p">.</span><span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s">"my_keras_model.h5"</span><span class="p">,</span><span class="n">save_best_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">early_stopping_cb</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">callbacks</span><span class="p">.</span><span class="n">EarlyStopping</span><span class="p">(</span><span class="n">patience</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">restore_best_weights</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_valid</span><span class="p">,</span><span class="n">y_valid</span><span class="p">),</span>
+                <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_cb</span><span class="p">,</span><span class="n">early_stopping_cb</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------------------------------------------------------------
+
+RuntimeError                              Traceback (most recent call last)
+
+&lt;ipython-input-57-eb74217ce75e&gt; in &lt;module&gt;
+      1 checkpoint_cb = keras.callbacks.ModelCheckpoint("my_keras_model.h5",save_best_only=True)
+      2 early_stopping_cb = keras.callbacks.EarlyStopping(patience=10,restore_best_weights=True)
+----&gt; 3 history = model.fit(X_train, y_train, epochs=100,validation_data=(X_valid,y_valid),callbacks=[checkpoint_cb,early_stopping_cb])
+
+
+~/Development/venv/my-venv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py in _method_wrapper(self, *args, **kwargs)
+    106   def _method_wrapper(self, *args, **kwargs):
+    107     if not self._in_multi_worker_mode():  # pylint: disable=protected-access
+--&gt; 108       return method(self, *args, **kwargs)
+    109 
+    110     # Running inside `run_distribute_coordinator` already.
+
+
+~/Development/venv/my-venv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py in fit(self, x, y, batch_size, epochs, verbose, callbacks, validation_split, validation_data, shuffle, class_weight, sample_weight, initial_epoch, steps_per_epoch, validation_steps, validation_batch_size, validation_freq, max_queue_size, workers, use_multiprocessing)
+   1029     # Legacy graph support is contained in `training_v1.Model`.
+   1030     version_utils.disallow_legacy_graph('Model', 'fit')
+-&gt; 1031     self._assert_compile_was_called()
+   1032     self._check_call_args('fit')
+   1033     _disallow_inside_tf_function('fit')
+
+
+~/Development/venv/my-venv/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py in _assert_compile_was_called(self)
+   2567     # (i.e. whether the model is built and its inputs/outputs are set).
+   2568     if not self._is_compiled:
+-&gt; 2569       raise RuntimeError('You must compile your model before '
+   2570                          'training/testing. '
+   2571                          'Use `model.compile(optimizer, loss)`.')
+
+
+RuntimeError: You must compile your model before training/testing. Use `model.compile(optimizer, loss)`.
+</code></pre></div></div>
+
+<h2 id="fine-tuning-neural-network-hyperparameters">Fine-Tuning Neural Network Hyperparameters</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Option</span><span class="p">:</span>
+<span class="k">try</span> <span class="n">many</span> <span class="n">combinations</span> <span class="n">of</span> <span class="n">hyperparameter</span> <span class="ow">and</span> <span class="n">see</span> <span class="n">which</span> <span class="n">one</span> <span class="n">works</span> <span class="n">best</span> <span class="n">on</span> <span class="n">the</span> <span class="n">validation</span> <span class="nb">set</span><span class="p">.</span><span class="n">add</span>
+<span class="mf">1.</span><span class="n">Use</span> <span class="n">GridSearchCV</span> <span class="ow">or</span> <span class="n">RandomizedSearchCV</span> <span class="n">to</span> <span class="n">explore</span> <span class="n">the</span> <span class="n">hyperparameter</span> <span class="n">space</span>
+<span class="mf">2.</span><span class="n">use</span> <span class="n">randomized</span> <span class="n">search</span> <span class="n">rather</span> <span class="n">than</span> <span class="n">grid</span> <span class="n">search</span>
+<span class="mf">3.</span>
+
+<span class="n">hyperparameter</span> <span class="n">python</span> <span class="n">libraries</span><span class="p">:</span>
+<span class="mf">1.</span><span class="n">hyperopt</span>
+<span class="mf">2.</span><span class="n">hyperas</span>
+<span class="mf">3.</span><span class="n">keras</span> <span class="n">tuner</span>
+<span class="mf">4.</span><span class="n">scikit</span><span class="o">-</span><span class="n">optimize</span>
+<span class="mf">5.</span><span class="n">spearmint</span>
+<span class="mf">6.</span><span class="n">hyperband</span>
+<span class="mf">7.</span><span class="n">sklearn</span><span class="o">-</span><span class="n">deap</span>
+
+<span class="n">hyperparameter</span> <span class="n">optimization</span> <span class="n">services</span><span class="p">:</span>
+<span class="mf">1.</span><span class="n">google</span> <span class="n">cloud</span> <span class="n">ai</span> <span class="n">platforms</span>
+<span class="mf">2.</span><span class="n">arimo</span>
+<span class="mf">3.</span><span class="n">sigOpt</span>
+<span class="mf">4.</span><span class="n">CallDesks</span><span class="s">' Oscar
+</span></code></pre></div></div>
+
+<p>Overfitting:
+Overfitting refers to a model that models the training data too well. Overfitting happens when a model learns the detail and noise in the training data to the extent that it negatively impacts the performance of the model on new data.</p>
+
+<h4 id="k-fold-cross-validation">K fold cross validation</h4>
+<p>In K Fold cross validation, the data is divided into k subsets. Now the holdout method is repeated k times, such that each time, one of the k subsets is used as the test set/ validation set and the other k-1 subsets are put together to form a training set.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Transfer</span> <span class="n">learning</span><span class="p">:</span>
+<span class="n">to</span> <span class="n">generalize</span> <span class="n">new</span> <span class="n">datasets</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">you</span> <span class="n">have</span> <span class="n">already</span> <span class="n">trained</span> <span class="n">a</span> <span class="n">model</span> <span class="n">to</span> <span class="n">recognize</span> <span class="n">faces</span> <span class="ow">in</span> <span class="n">puctures</span> <span class="ow">and</span> <span class="n">you</span> <span class="n">now</span> <span class="n">want</span> <span class="n">to</span> <span class="n">train</span> <span class="n">a</span> <span class="n">new</span> <span class="n">neural</span> <span class="n">network</span> <span class="n">to</span> <span class="n">recognize</span> <span class="n">hairstyles</span><span class="p">,</span> <span class="n">you</span> <span class="n">can</span> <span class="n">kickstart</span> <span class="n">the</span> <span class="n">training</span> <span class="n">by</span> <span class="n">reusing</span> <span class="n">the</span> <span class="n">lower</span> <span class="n">layers</span> <span class="n">of</span> <span class="n">the</span> <span class="n">first</span> <span class="n">network</span><span class="p">.</span> <span class="n">Instead</span> <span class="n">of</span> <span class="n">randomly</span> <span class="n">initializing</span> <span class="n">the</span> <span class="n">weights</span> <span class="ow">and</span> <span class="n">biases</span> <span class="n">of</span> <span class="n">the</span> <span class="n">first</span> <span class="n">few</span> <span class="n">layers</span> <span class="n">of</span> <span class="n">the</span> <span class="n">new</span> <span class="n">neural</span> <span class="n">network</span><span class="p">,</span> <span class="n">you</span> <span class="n">can</span> <span class="n">initialize</span> <span class="n">them</span> <span class="n">to</span> <span class="n">the</span> <span class="n">values</span> <span class="n">of</span> <span class="n">the</span> <span class="n">weights</span> <span class="ow">and</span> <span class="n">biases</span> <span class="n">of</span> <span class="n">the</span> <span class="n">lower</span> <span class="n">layers</span> <span class="n">of</span> <span class="n">the</span> <span class="n">first</span> <span class="n">entwork</span><span class="p">.</span> <span class="n">This</span> <span class="n">way</span> <span class="n">network</span> <span class="n">will</span> <span class="ow">not</span> <span class="n">have</span> <span class="n">to</span> <span class="n">learn</span> <span class="n">the</span> <span class="n">low</span> <span class="n">level</span> <span class="n">structures</span><span class="p">,</span> <span class="n">it</span> <span class="n">will</span> <span class="n">only</span> <span class="n">have</span> <span class="n">to</span> <span class="n">leran</span> <span class="n">the</span> <span class="n">higher</span><span class="o">-</span><span class="n">level</span> <span class="n">strcutures</span><span class="p">.</span>
+
+<span class="n">Number</span> <span class="n">of</span> <span class="n">hidden</span> <span class="n">layers</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">most</span> <span class="n">of</span> <span class="n">problems</span><span class="p">,</span> <span class="n">start</span> <span class="k">with</span> <span class="n">just</span> <span class="n">one</span> <span class="ow">or</span> <span class="n">two</span> <span class="n">hidden</span> <span class="n">layers</span><span class="p">.</span> <span class="k">for</span> <span class="n">more</span> <span class="nb">complex</span> <span class="n">problems</span><span class="p">,</span> <span class="n">ramp</span> <span class="n">up</span> <span class="n">number</span> <span class="n">of</span> <span class="n">hidden</span> <span class="n">layers</span> <span class="n">until</span> <span class="n">overfitting</span> <span class="n">the</span> <span class="n">training</span> <span class="nb">set</span><span class="p">.</span>
+
+<span class="n">Number</span> <span class="n">of</span> <span class="n">Neurons</span> <span class="n">per</span> <span class="n">hidden</span> <span class="n">layers</span>
+<span class="n">size</span> <span class="n">them</span> <span class="n">to</span> <span class="n">form</span> <span class="n">a</span> <span class="n">pyramid</span><span class="p">,</span> <span class="k">with</span> <span class="n">fewer</span> <span class="ow">and</span> <span class="n">fewer</span> <span class="n">neurons</span> <span class="n">at</span> <span class="n">each</span> <span class="n">layer</span><span class="p">,</span> <span class="n">but</span> <span class="n">this</span> <span class="n">practice</span> <span class="n">it</span> <span class="ow">not</span> <span class="n">always</span> <span class="n">to</span> <span class="n">be</span> <span class="n">efficent</span><span class="p">.</span>
+
+<span class="mf">1.</span><span class="k">try</span> <span class="n">to</span> <span class="n">increasing</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">neurons</span> <span class="n">graudally</span> <span class="n">until</span> <span class="n">the</span> <span class="n">ntwork</span> <span class="n">starts</span> <span class="n">overfitting</span>
+<span class="mf">2.</span><span class="n">pick</span> <span class="n">more</span> <span class="n">layers</span> <span class="ow">and</span> <span class="n">neurons</span> <span class="n">than</span> <span class="n">you</span> <span class="n">actually</span> <span class="n">need</span><span class="p">,</span> <span class="n">then</span> <span class="n">use</span> <span class="n">early</span> <span class="n">stopping</span> <span class="n">to</span> <span class="n">prevent</span> <span class="n">it</span> <span class="k">from</span> <span class="n">overfitting</span><span class="p">.</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">learning</span> <span class="n">rate</span><span class="p">:</span>
+<span class="n">optimizer</span>
+<span class="n">batch</span> <span class="n">size</span>
+<span class="n">activation</span> <span class="n">function</span>
+<span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span>
+
+<span class="n">note</span> <span class="n">that</span> <span class="n">optimal</span> <span class="n">learning</span> <span class="n">rate</span> <span class="n">depends</span> <span class="n">on</span> <span class="n">the</span> <span class="n">other</span> <span class="n">hyperparameters</span> <span class="n">especially</span> <span class="n">the</span> <span class="n">batch</span> <span class="n">size</span><span class="o">-</span><span class="n">so</span> <span class="k">if</span> <span class="n">you</span> <span class="n">modify</span> <span class="nb">any</span> <span class="n">hyperparameter</span><span class="p">,</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">to</span> <span class="n">update</span> <span class="n">the</span> <span class="n">learning</span> <span class="n">rate</span> <span class="k">as</span> <span class="n">well</span>
+</code></pre></div></div>
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-11-23/Principal-Component-Analysis" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-11-18/softmax_function" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

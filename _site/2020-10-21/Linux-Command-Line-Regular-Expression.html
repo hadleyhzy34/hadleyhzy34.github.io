@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Linux Command Line - Regular Expressions | Ziyue(Hadley) Hou</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Linux Command Line - Regular Expressions" />
+<meta name="author" content="Ziyue Hou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Egrep egrep is a program which will search a given set of data and print every line which contains a given pattern. It is an extension of a program called grep. It’s name is odd but based upon a command which did a similar function, in a text editor called ed. It has many command line options which modify it’s behaviour so it’s worth checking out it’s man page. ie the -v option tells grep to instead print every line which does not match the pattern. hadley@hadley-MacBookPro:~/Developments/parentDirectory$ egrep &#39;mellon&#39; data.txt Mark watermellons 12 Oliver rockmellons 2 -v to tells egrep to instread print every line which does not match the pattern" />
+<meta property="og:description" content="Egrep egrep is a program which will search a given set of data and print every line which contains a given pattern. It is an extension of a program called grep. It’s name is odd but based upon a command which did a similar function, in a text editor called ed. It has many command line options which modify it’s behaviour so it’s worth checking out it’s man page. ie the -v option tells grep to instead print every line which does not match the pattern. hadley@hadley-MacBookPro:~/Developments/parentDirectory$ egrep &#39;mellon&#39; data.txt Mark watermellons 12 Oliver rockmellons 2 -v to tells egrep to instread print every line which does not match the pattern" />
+<link rel="canonical" href="https://hadleyhzy34.github.io/home/2020-10-21/Linux-Command-Line-Regular-Expression" />
+<meta property="og:url" content="https://hadleyhzy34.github.io/home/2020-10-21/Linux-Command-Line-Regular-Expression" />
+<meta property="og:site_name" content="Ziyue(Hadley) Hou" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-21T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Linux Command Line - Regular Expressions" />
+<script type="application/ld+json">
+{"headline":"Linux Command Line - Regular Expressions","url":"https://hadleyhzy34.github.io/home/2020-10-21/Linux-Command-Line-Regular-Expression","datePublished":"2020-10-21T00:00:00+08:00","dateModified":"2020-10-21T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://hadleyhzy34.github.io/home/2020-10-21/Linux-Command-Line-Regular-Expression"},"author":{"@type":"Person","name":"Ziyue Hou"},"description":"Egrep egrep is a program which will search a given set of data and print every line which contains a given pattern. It is an extension of a program called grep. It’s name is odd but based upon a command which did a similar function, in a text editor called ed. It has many command line options which modify it’s behaviour so it’s worth checking out it’s man page. ie the -v option tells grep to instead print every line which does not match the pattern. hadley@hadley-MacBookPro:~/Developments/parentDirectory$ egrep &#39;mellon&#39; data.txt Mark watermellons 12 Oliver rockmellons 2 -v to tells egrep to instread print every line which does not match the pattern","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/home/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="150x150" href="/home/assets/icon-150x150.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="/home/assets/icon-128x128.png"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="/home/assets/icon-70x70.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/home/assets/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/home/assets/icon-16x16.png"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/home/assets/icon-180x180.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://hadleyhzy34.github.io/home/feed.xml" title="Ziyue(Hadley) Hou" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/home/">
+      <img class="site-logo" src="/home/assets/icon.png">
+      <h2 class="nav-title" >Ziyue(Hadley) Hou</h2>
+    </a>
+    <ul>
+      <li><a href="/home/">Posts</a></li>
+      <li><a href="/home/category">Category</a></li>
+      <li><a href="/home/archive">Archive</a></li>
+      <li><a href="/home/tags">Tags</a></li>
+      <li><a href="/home/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Ziyue Hou
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-10-21 00:00:00 +0800">October 21, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">Linux Command Line - Regular Expressions</h1>
+  <div class="post-line"></div>
+
+  <h2 id="egrep">Egrep</h2>
+<p>egrep is a program which will search a given set of data and print every line which contains a given pattern. It is an extension of a program called grep. It’s name is odd but based upon a command which did a similar function, in a text editor called ed. It has many command line options which modify it’s behaviour so it’s worth checking out it’s man page. ie the -v option tells grep to instead print every line which does not match the pattern.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>egrep <span class="s1">'mellon'</span> data.txt 
+Mark watermellons 12
+Oliver rockmellons 2
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">-v</code> to tells egrep to instread print every line which does not match the pattern</p>
+
+<!--more-->
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>egrep <span class="nt">-v</span> <span class="s1">'mellon'</span> data.txt 
+Fred apples 20
+Susy oranges 5
+Robert pears 4
+Terry oranges 9
+Lisa peaches 7
+Susy oranges 12
+Mark grapes 39
+Anne mangoes 7
+Greg pineapples 3
+Betty limes 14
+</code></pre></div></div>
+<p>check their line number as well</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>egrep <span class="nt">-n</span> <span class="s1">'mellon'</span> data.txt 
+3:Mark watermellons 12
+11:Oliver rockmellons 2
+</code></pre></div></div>
+
+<p>check how many lines did match</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>egrep <span class="nt">-c</span> <span class="s1">'mellon'</span> data.txt 
+2
+</code></pre></div></div>
+
+<p>Regular expression overview</p>
+
+<p>identify any line with two or more vowels in a row</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>egrep <span class="s1">'[aeiou]{1,}'</span> data.txt 
+Fred apples 20
+Susy oranges 5
+Mark watermellons 12
+Robert pears 4
+Terry oranges 9
+Lisa peaches 7
+Susy oranges 12
+Mark grapes 39
+Anne mangoes 7
+Greg pineapples 3
+Oliver rockmellons 2
+Betty limes 14
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>egrep <span class="s1">'[aeiou]{2,}'</span> data.txt 
+Robert pears 4
+Lisa peaches 7
+Anne mangoes 7
+Greg pineapples 3
+</code></pre></div></div>
+
+<p>any line with a 2 on it which is not the end of the line</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>egrep <span class="s1">'1.+'</span> data.txt 
+Mark watermellons 12
+Susy oranges 12
+Betty limes 14
+</code></pre></div></div>
+
+<ul>
+  <li>$ - matches the end of the line.</li>
+  <li>^ - matches the beginning of the line.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>egrep <span class="s1">'2$'</span> data.txt 
+Mark watermellons 12
+Susy oranges 12
+Oliver rockmellons 2
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>egrep <span class="s1">'^F'</span> data.txt 
+Fred apples 20
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>egrep <span class="s1">'^[A-D]'</span> data.txt 
+Anne mangoes 7
+Betty limes 14
+</code></pre></div></div>
+
+<p>each line which contains either ‘Fred’ or ‘Robert’ or ‘Susy’</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>egrep <span class="s1">'Fred|Robert|Susy'</span> data.txt 
+Fred apples 20
+Susy oranges 5
+Robert pears 4
+Susy oranges 12
+</code></pre></div></div>
+
+<h2 id="grep">grep</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="o">[</span>options] pattern <span class="o">[</span>files]
+</code></pre></div></div>
+<p>Note that if pattern does not include spaces or any other special characters then you don’t need to use quotes
+{“.info}</p>
+
+<ul>
+  <li>-i: Ignored, case for matching</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-i</span> <span class="s2">"fred"</span> data.txt 
+Fred apples 20
+</code></pre></div></div>
+
+<ul>
+  <li>-c : this prints only a count of the lines that match a pattern</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-c</span> <span class="s2">"oranges"</span> data.txt 
+3
+</code></pre></div></div>
+
+<ul>
+  <li>-l : display list of a filenames only, we can just display the files that contains the given string/pattern
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-l</span> <span class="s2">"apple"</span> data.txt 
+data.txt
+</code></pre></div>    </div>
+    <p>search all files in current directory:</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-l</span> <span class="s2">"Fred"</span> <span class="k">*</span>
+data.txt
+<span class="nb">grep</span>: test1: Is a directory
+</code></pre></div>    </div>
+  </li>
+  <li>-w : display only the matched pattern, by default, grep displays the entire line which has the matched string.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-l</span> <span class="s2">"apple"</span> data.txt 
+data.txt
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-w</span> <span class="s2">"apple"</span> data.txt 
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-w</span> <span class="s2">"apples"</span> data.txt 
+Fred apples 20
+</code></pre></div></div>
+<ul>
+  <li>-o : displays only the matched string by using the -o option
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-o</span> <span class="s2">"Fred"</span> 
+data.txt:Fred
+</code></pre></div>    </div>
+  </li>
+  <li>-n : show line number while displaying the output</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-n</span> <span class="s2">"oranges"</span> data.txt 
+2:Susy oranges 5
+5:Terry oranges 9
+7:Susy oranges 12
+</code></pre></div></div>
+
+<ul>
+  <li>-v : displays lines that are not matched with the specified search string pattern</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-v</span> <span class="s2">"^[A-K]"</span> data.txt 
+Susy oranges 5
+Mark watermellons 12
+Robert pears 4
+Terry oranges 9
+Lisa peaches 7
+Susy oranges 12
+Mark grapes 39
+Oliver rockmellons 2
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"^[M-Z]"</span> data.txt 
+Susy oranges 5
+Mark watermellons 12
+Robert pears 4
+Terry oranges 9
+Susy oranges 12
+Mark grapes 39
+Oliver rockmellons 2
+</code></pre></div></div>
+
+<p>showing lines that end with a string</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"2$"</span> data.txt 
+Mark watermellons 12
+Susy oranges 12
+Oliver rockmellons 2
+</code></pre></div></div>
+
+<ul>
+  <li>-e : specifies expression with -e option, can use multiple times:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-e</span> <span class="s2">"Fred"</span> <span class="nt">-e</span> <span class="s2">"Mark"</span> data.txt 
+Fred apples 20
+Mark watermellons 12
+Mark grapes 39
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>Display directories:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> | <span class="nb">grep</span> <span class="s2">"^d"</span>
+drwxrwxr-x 2 hadley hadley 4096 Okt 20 21:33 test1
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> | <span class="nb">grep</span> <span class="s2">"^-"</span>
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley  197 Okt 21 19:51 data.txt
+<span class="nt">-rwxrwxrwx</span> 1 hadley hadley   92 Okt 20 21:28 file.txt
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:42 test.cpp
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:01 ttt
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:42 x
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:43 x1
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley    0 Okt 20 21:42 y
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">^</code> : use <code class="language-plaintext highlighter-rouge">^</code> with <code class="language-plaintext highlighter-rouge">[]</code>, the pattern must not contain any character in the set specified</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"^[^A-K]"</span> data.txt 
+Susy oranges 5
+Mark watermellons 12
+Robert pears 4
+Terry oranges 9
+Lisa peaches 7
+Susy oranges 12
+Mark grapes 39
+Oliver rockmellons 2
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">.</code> to match any one character</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"pears.4"</span> data.txt 
+Robert pears 4
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">\</code> to ignore the special meaning of the character following it</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="s1">'test\.\\test\[ss\]'</span> data.txt 
+test.<span class="se">\t</span>est[ss]
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-F</span> <span class="s2">"test.</span><span class="se">\t</span><span class="s2">est[ss]"</span> data.txt 
+test.<span class="se">\t</span>est[ss]
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">*</code> : zero or more occurrences of the previous character</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"a*b*c*d*e"</span> data.txt 
+Fred apples 20
+Susy oranges 5
+Mark watermellons 12
+Robert pears 4
+Terry oranges 9
+Lisa peaches 7
+Susy oranges 12
+Mark grapes 39
+Anne mangoes 7
+Greg pineapples 3
+Oliver rockmellons 2
+Betty limes 14
+test.<span class="se">\t</span>est[ss]
+aaabbbbccdddddeee
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"aaab*c*d*e"</span> data.txt 
+aaabbbbccdddddeee
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep </span>Betty <span class="k">*</span>.txt
+data.txt:Betty limes 14
+</code></pre></div></div>
+
+<p class="warning">Note the difference between <code class="language-plaintext highlighter-rouge">*</code> in pattern and <code class="language-plaintext highlighter-rouge">*</code> in files.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"*tt"</span> data.txt 
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"tt"</span> data.txt 
+Betty limes 14
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"B*tt"</span> data.txt 
+Betty limes 14
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep </span>tt <span class="k">*</span>.txt
+data.txt:Betty limes 14
+</code></pre></div></div>
+
+<p>check how many processed are running on your system as youtube-music</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>ps <span class="nt">-ef</span> | <span class="nb">grep</span> <span class="nt">-c</span> youtube-music
+11
+</code></pre></div></div>
+
+<ul>
+  <li>Recursive Search</li>
+</ul>
+
+<p>search all files inside current directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-r</span> Betty <span class="k">*</span>
+data.txt:Betty limes 14
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> test1/
+total 4
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley 230 Okt 21 21:09 data.txt
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley   0 Okt 20 19:59 test1.txt
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley   0 Okt 20 20:03 test2.txt
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley   0 Okt 20 21:32 test3.cpp
+<span class="nt">-rw-rw-r--</span> 1 hadley hadley   0 Okt 20 21:33 test4.py
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-r</span> Betty <span class="k">*</span>
+data.txt:Betty limes 14
+test1/data.txt:Betty limes 14
+</code></pre></div></div>
+
+<p>search files with certain extension:
+<code class="language-plaintext highlighter-rouge">grep -inr --include=\*.extension 'searchterm' ./</code></p>
+
+<ul>
+  <li>
+    <p>-r: recursively</p>
+  </li>
+  <li>
+    <p>-i: ignore-case</p>
+  </li>
+  <li>
+    <p>-n: each output line is preceded by its relative line number in the file</p>
+  </li>
+  <li>
+    <p>–include: all <code class="language-plaintext highlighter-rouge">*.txt</code>: text files</p>
+  </li>
+  <li>
+    <p>./: Start at current directory.</p>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-inr</span> <span class="nt">--include</span><span class="o">=</span><span class="k">*</span>.txt <span class="s1">'Betty'</span> ./
+./test1/data.txt:12:Betty limes 14
+./data.txt:12:Betty limes 14
+</code></pre></div></div>
+
+<p class="warning">Note difference below:</p>
+
+<p>Note the difference between <code class="language-plaintext highlighter-rouge">-r</code> and <code class="language-plaintext highlighter-rouge">-R</code> and difinition of symbolic links:</p>
+
+<p>https://linuxize.com/post/how-to-use-grep-command-to-search-files-in-linux/</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-r</span> Betty <span class="k">*</span>
+data.txt:Betty limes 14
+test1/data.txt:Betty limes 14
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-r</span> Betty <span class="k">*</span>.txt
+data.txt:Betty limes 14
+hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-r</span> Betty <span class="nb">.</span>
+./test1/data.txt:Betty limes 14
+./data.txt:Betty limes 14
+</code></pre></div></div>
+<p>search file name with certain extension recursively:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hadley@hadley-MacBookPro:~/Developments/parentDirectory<span class="nv">$ </span>find <span class="nb">.</span> <span class="nt">-iname</span> <span class="s1">'*.txt'</span>
+./file.txt
+./test1/test2.txt
+./test1/test1.txt
+./test1/data.txt
+./data.txt
+</code></pre></div></div>
+
+<p>Note that iname does a case insensitive search.</p>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/home/2020-10-21/Linux-Process-Management" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/home/2020-10-20/Linux-Piping-and-Redirection" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer class= "blog-footer">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <p>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-github"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-wechat"></a>
+            <a href="#" class="fa fa-weibo"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-skype"></a>
+          </p>
+        
+<!--     <p>Hadley_hzy@hotmail.com</p> -->
+
+    <p>© Ziyue(Hadley) Hou 2021<!--  --></p>
+
+  </footer>
+
+  </body>
+</html>

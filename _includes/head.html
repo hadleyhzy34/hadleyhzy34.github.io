@@ -1,0 +1,29 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% seo %}
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="180x180" href="{{ "/assets/icon-180x180.png" | relative_url }}">
+<!--   <link rel="icon" type="image/png" sizes="180x180" href="{{ "/assets/icon-180x180.png" | relative_url }}">
+  <link rel="icon" type="image/png" sizes="150x150" href="{{ "/assets/icon-150x150.png" | relative_url }}">
+  <link rel="icon" type="image/png" sizes="128x128" href="{{ "/assets/icon-128x128.png" | relative_url }}"> -->
+<!--   <link rel="icon" type="image/png" sizes="70x70" href="{{ "/assets/icon-70x70.png" | relative_url }}">
+  <link rel="icon" type="image/png" sizes="48x48" href="{{ "/assets/icon-48x48.png" | relative_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ "/assets/icon-16x16.png" | relative_url }}"> -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="{{ "/assets/icon-180x180.png" | relative_url }}">
+
+  <!-- RSS -->
+  {% feed_meta %}
+
+  <!-- Google Analytics-->
+  {% if site.google_analytics and jekyll.environment == 'production' %}
+  {% include analytics.html %}
+  {% endif %}
+</head>
