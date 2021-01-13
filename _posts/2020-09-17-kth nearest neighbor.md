@@ -27,10 +27,6 @@ from collections import Counter
 <!--more-->
 ### prepare data
 
-$$ f(x) = k2 * \sigma(k_1 * x + b_1) + b2 $$
-
-$$ \sigma(x) = \frac{1}{1 + e^(-x)} $$ 
-
 ```python
 iris = datasets.load_iris()
 iris_data = iris.data
