@@ -28,6 +28,11 @@ g++ -g main.cpp -o main
 
 ```
 
+### gdb installations
+
+```terminal
+apt-get install gdb
+```
 
 
 * loading a program to debug
@@ -93,12 +98,17 @@ Then:
 {:.info}
 
 
-Conditional Breakpoints:
+### commands 
+
+
+* Conditional Breakpoints:
 
 ```terminal
 (gdb) break fun2
 Breakpoint 1 at 0x100000cdf: file main.cpp, line 10.
 ```
+
+
 
 
 
