@@ -76,7 +76,7 @@ run
 ```
 
 Q:A
-{:warning}
+{:.warning}
 
 ```terminal
 (gdb) run
