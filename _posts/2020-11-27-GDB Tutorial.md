@@ -30,12 +30,19 @@ g++ -g main.cpp -o main
 
 ### gdb installations
 
+* Linux
+
 ```terminal
 apt-get install gdb
 ```
 
+* Mac OS
 
-* loading a program to debug
+``` terminal
+brew install gdb
+```
+
+### loading a program to debug
 
 ```terminal
 gdb <executable_file_name>
@@ -67,6 +74,9 @@ Reading symbols from /Users/hadley/Development/gdb/main.dSYM/Contents/Resources/
 ```terminal
 run
 ```
+
+Q:A
+{:warning}
 
 ```terminal
 (gdb) run
