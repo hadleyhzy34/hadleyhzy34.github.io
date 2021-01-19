@@ -78,6 +78,8 @@ run
 Q:A
 {:.warning}
 
+#### Problem
+
 ```terminal
 (gdb) run
 Starting program: /Users/hadley/Development/gdb/main 
@@ -86,7 +88,7 @@ Unable to find Mach task port for process-id 774: (os/kern) failure (0x5).
 ```
 {:.warning}
 
-Solution:
+#### Solution
 
 Codesigning requires a certificate. The following procedure explains how to create one and apply it to gdb:
 
@@ -109,6 +111,38 @@ Then:
 
 
 ### commands 
+
+#### start debugging
+
+```terminal
+(gdb) start
+Temporary breakpoint 1 at 0x5555555551e5: file main.cpp, line 9.
+Starting program: /home/hadley/Developments/gdb/main 
+
+Temporary breakpoint 1, main () at main.cpp:9
+9	int main(){
+```
+
+#### step  
+
+``` terminal
+(gdb) n
+10	    func1();
+(gdb) n
+10
+11	    int variable_main = 20;
+```
+
+#### breakpoint debugging  
+
+* breakpoint + lineNumber
+
+``` terminal
+
+```
+
+``` terminal
+
 
 
 * Conditional Breakpoints:
