@@ -123,7 +123,9 @@ Temporary breakpoint 1, main () at main.cpp:9
 9	int main(){
 ```
 
-#### step  
+#### step `n` and `step + number_of_steps`  
+
+`next` won't jump into functions, but if function name is set to be break point, then `next` will still jump into functions:
 
 ``` terminal
 (gdb) n
@@ -133,13 +135,153 @@ Temporary breakpoint 1, main () at main.cpp:9
 11	    int variable_main = 20;
 ```
 
-#### breakpoint debugging  
-
-* breakpoint + lineNumber
+`step` jump into functions:
 
 ``` terminal
-
+(gdb) step 
+12		cout<<"the current variable i is: "<<i<<endl;
+(gdb) step
+the current variable i is: 6
+11	    for(int i=0;i<20;i++){
+(gdb) step 2
+the current variable i is: 7
+11	    for(int i=0;i<20;i++){
+(gdb) step 2
+the current variable i is: 8
+11	    for(int i=0;i<20;i++){
 ```
+
+
+#### breakpoint debugging  
+
+* breakpoint + lineNumber/func_name
+
+``` terminal
+(gdb) b 4
+Breakpoint 5 at 0x5555555551a9: file main.cpp, line 4.
+(gdb) b func1
+Breakpoint 2 at 0x5555555551c9: file main.cpp, line 4.
+```
+
+* hit breakpoint
+
+1. start the program
+
+``` terminal
+(gdb) start
+Temporary breakpoint 7 at 0x5555555551e5: file main.cpp, line 9.
+Starting program: /home/hadley/Developments/gdb/main 
+
+Temporary breakpoint 7, main () at main.cpp:9
+9	int main(){
+1: b = {i = {0, 1068498944}, d = 0.0625}
+```
+
+2. continue the program  
+
+`continue` or `c` will make the program run automatically until it reaches breakpoints or end of the program, in the case below, it first reaches the only breakpoint, then it reaches the end of the program.  
+
+``` terminal
+(gdb) c
+Continuing.
+
+Breakpoint 5, func1 () at main.cpp:4
+4	void func1(){
+1: b = {i = {0, 1068498944}, d = 0.0625}
+```
+
+it reaches the end of the program: 
+
+``` terminal
+(gdb) c
+Continuing.
+10
+20
+[Inferior 1 (process 62339) exited normally]
+```
+
+* check breakpoints
+
+``` terminal
+(gdb) i b
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep y   0x00005555555551a9 in func1() at main.cpp:4
+	breakpoint already hit 1 time
+```
+
+* disable or delete breakpoint
+
+``` terminal
+(gdb) disable 2
+(gdb) i b
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep n   0x00005555555551a9 in func1() at main.cpp:4
+	breakpoint already hit 1 time
+```
+
+delete breakpoint using `clear + linenumber/func_name` or `delete + number_breakpoints`   
+
+``` terminal
+(gdb) i b
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep y   0x00005555555551a9 in func1() at main.cpp:4
+	breakpoint already hit 1 time
+6       breakpoint     keep y   0x00005555555551fd in main() at main.cpp:12
+(gdb) delete 2
+(gdb) i b
+Num     Type           Disp Enb Address            What
+6       breakpoint     keep y   0x00005555555551fd in main() at main.cpp:12
+(gdb) clear 12
+
+(gdb) i b
+Deleted breakpoint 6 No breakpoints or watchpoints.
+```
+
+delete all breakpoints:
+
+``` terminal
+(gdb) delete
+Delete all breakpoints? (y or n) y
+```
+
+#### print variables
+
+`print+variable_name`  
+
+
+``` terminal
+(gdb) run
+Starting program: /home/hadley/Developments/gdb/main 
+
+Breakpoint 10, func1 () at main.cpp:5
+5	    int variable1 = 10;
+(gdb) print variable1
+$2 = 21845
+(gdb) n
+6	    cout<<variable1<<endl;
+(gdb) print variable1
+$3 = 10
+```
+
+#### check stack info
+
+when program calls a function, function address/function variable will be pushed into stack, use `bt` to check stack info.
+
+``` terminal
+(gdb) run
+Starting program: /home/hadley/Developments/gdb/main 
+
+Breakpoint 1, func1 () at main.cpp:4
+4	void func1(){
+(gdb) bt
+#0  func1 () at main.cpp:4
+#1  0x0000555555555252 in main () at main.cpp:15
+```
+
+
+
+
+
 
 ``` terminal
 
@@ -153,6 +295,13 @@ Breakpoint 1 at 0x100000cdf: file main.cpp, line 10.
 ```
 
 
+#### Reference
+
+1. https://www.cnblogs.com/kingos/p/4514756.html
+2. http://witmax.cn/gdb-usage.html
+3. https://www.cnblogs.com/chenmingjun/p/8280889.html
+4. https://blog.csdn.net/horotororensu/article/details/82256832
+5. https://blog.csdn.net/awm_kar98/article/details/82840811
 
 
 
