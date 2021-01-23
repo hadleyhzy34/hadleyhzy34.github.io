@@ -110,6 +110,48 @@ Then:
 {:.info}
 
 
+### source code
+
+``` c++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void func1(){
+    int variable1 = 10;
+    cout<<variable1<<endl;
+}
+
+void func2(){
+    int variable2 = 20;
+    cout<<variable2<<endl;
+}
+
+int main(){
+    vector<int> array(5);
+    //cout<<"test"<<array[10]<<endl;
+    cout<<array.max_size()<<endl;
+    cout<<"the current array size is: "<<array.size()<<endl;
+    cout<<"test for index out of range "<<array[-1]<<" "<<&array[-1]<<endl;
+    for(int i=0;i<20;i++){
+  cout<<i<<"test "<<array[i]<<&array[i]<<endl;
+    }
+    for(int i=0;i<6;i++){
+  array[i]=i;
+  cout<<i<<" "<<array[i]<<endl;
+    }
+    func1();
+    func2();
+    for(int i=0;i<20;i++){
+  cout<<"the current variable i is: "<<i<<endl;
+    }
+    int variable_main = 20;
+    cout<<variable_main<<endl;
+}
+```
+
+
+
 ### commands 
 
 #### start debugging
@@ -162,6 +204,27 @@ Breakpoint 5 at 0x5555555551a9: file main.cpp, line 4.
 (gdb) b func1
 Breakpoint 2 at 0x5555555551c9: file main.cpp, line 4.
 ```
+
+* conditional breakpoint
+
+`break + lineNumber/func_name if + expression`
+
+``` terminal
+(gdb) break 28 if array[1]==1
+Breakpoint 1 at 0x1592: file main.cpp, line 28.
+```
+
+It means if vector array element at index 1 is 1, then program stops right before line 28.
+{:.info}
+
+``` terminal
+(gdb) i b
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000555555555592 in main() at main.cpp:28
+  stop only if array[1]==1
+  breakpoint already hit 1 time
+```
+
 
 * hit breakpoint
 
@@ -244,7 +307,9 @@ delete all breakpoints:
 Delete all breakpoints? (y or n) y
 ```
 
-#### print variables
+#### variables read/write
+
+* print variable
 
 `print+variable_name`  
 
@@ -261,6 +326,16 @@ $2 = 21845
 6	    cout<<variable1<<endl;
 (gdb) print variable1
 $3 = 10
+```
+
+* set variable value
+
+``` terminal
+(gdb) set array[1]=11
+(gdb) print array[1]
+$13 = 11
+(gdb) print array
+$14 = std::vector of length 5, capacity 5 = {0, 11, 2, 3, 4}
 ```
 
 #### check stack info
