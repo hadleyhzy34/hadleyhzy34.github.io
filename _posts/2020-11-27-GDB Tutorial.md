@@ -19,13 +19,13 @@ tags:
 1. C++
 
 ``` terminal
-g++ -g main.cpp -o main
+g++ -g -o main main.cpp
 ```
 
 2. C
 
 ``` terminal
-
+g++ -g -o main main.c
 ```
 
 ### gdb installations
@@ -328,6 +328,35 @@ $2 = 21845
 $3 = 10
 ```
 
+* watch variable
+
+`display+variable`
+
+```terminal
+(gdb) display array[4]
+2: array[4] = 0
+(gdb) n
+24      vector<int> array(5);
+1: array[0] = 0
+2: array[4] = 0
+```
+
+show display variable list and undisplay variable by variable index number:
+
+```terminal
+(gdb) i display
+Auto-display expressions now in effect:
+Num Enb Expression
+1:   y  array[0]
+2:   y  array[4]
+(gdb) undisplay 2
+(gdb) n
+0test 00x55555556beb0
+29      for(int i=0;i<20;i++){
+1: array[0] = 0
+```
+
+
 * set variable value
 
 ``` terminal
@@ -353,21 +382,178 @@ Breakpoint 1, func1 () at main.cpp:4
 #1  0x0000555555555252 in main () at main.cpp:15
 ```
 
-
-
-
-
+* finish the current program
 
 ``` terminal
+(gdb) finish
+Run till exit from #0  func3 (n=20) at main.cpp:17
+0x0000555555555650 in main () at main.cpp:43
+43      cout<<func3(variable_main);
+Value returned is $1 = 210
+```
+
+#### I/O
+
+* output
+
+``` terminal
+(gdb) r >output.txt | less -N output.txt 
+Starting program: /home/hadley/Developments/gdb-tutorial/main >output.txt | less -N output.txt
+During startup program exited normally.
+```
 
 
+#### watchpoint debugging
 
-* Conditional Breakpoints:
+the difference between watchpoint and breakpoint:
+1. breakpoint: program stopped when it reached breakpoint
+2. watchpoint: program stopped when watched variable visited by program
+
+* add watchpoint:  
+
+`watch+variable`  
+
+* show watchpoint:  
+
+`info+watch`  or `i b`  
+
+* delete watchpoint:
+
+`delete+watchpoint number`  
+
+#### assembly language
+
+* check register address and reserved value
+
+``` terminal
+info registers
+```
+
+* check assembly language
+
+``` terminal
+disassemble
+```
+
+* show registers
+
+``` terminal
+p+$register_name
+```
+
+* example to show how to modify value reserved in register during debugging
+
+https://blog.csdn.net/kabar_strider/article/details/5951837?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control
+
+
+#### program counter
+
+pc can also be written as $pc or $eip, it shows content of program counter, which points to current address that program is running. 
+
+`x` can show content of memory, format should be like `x/i $ps`, it shows assemby language.
+
+For example, `x/10i $pc` this command, it shows 10 assembly code lines from current address which pc points to.
 
 ```terminal
-(gdb) break fun2
-Breakpoint 1 at 0x100000cdf: file main.cpp, line 10.
+(gdb) print $pc
+$10 = (void (*)(void)) 0x555555555535 <main()+450>
+(gdb) x/10i $pc
+=> 0x555555555535 <main()+450>: addl   $0x1,-0x40(%rbp)
+   0x555555555539 <main()+454>: jmpq   0x5555555554af <main()+316>
+   0x55555555553e <main()+459>: movl   $0x0,-0x3c(%rbp)
+   0x555555555545 <main()+466>: cmpl   $0x5,-0x3c(%rbp)
+   0x555555555549 <main()+470>: jg     0x5555555555c4 <main()+593>
+   0x55555555554b <main()+472>: mov    -0x3c(%rbp),%eax
+   0x55555555554e <main()+475>: movslq %eax,%rdx
+   0x555555555551 <main()+478>: lea    -0x30(%rbp),%rax
+   0x555555555555 <main()+482>: mov    %rdx,%rsi
+   0x555555555558 <main()+485>: mov    %rax,%rdi
 ```
+
+#### process management
+
+* search current running process
+
+```terminal
+hadley@hadley-MacBookPro:~/Downloads$ ps -eaf | grep hello
+hadley    211637   63199  0 14:40 pts/2    00:00:00 ./hello
+hadley    211649   18443  0 14:40 pts/0    00:00:00 grep --color=auto hello
+```
+
+* check process info given PID
+
+``` terminal
+hadley@hadley-MacBookPro:~/Developments/gdb-tutorial$ gdb
+GNU gdb (Ubuntu 9.2-0ubuntu1~20.04) 9.2
+Copyright (C) 2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+(gdb) info proc 63199
+process 63199
+cmdline = 'bash'
+cwd = '/home/hadley/Developments/gdb-tutorial'
+exe = '/usr/bin/bash'
+```
+
+* debugging process that is already running
+
+```terminal
+(gdb) attach 63199
+Attaching to process 63199
+Reading symbols from /usr/bin/bash...
+(No debugging symbols found in /usr/bin/bash)
+Reading symbols from /lib/x86_64-linux-gnu/libtinfo.so.6...
+(No debugging symbols found in /lib/x86_64-linux-gnu/libtinfo.so.6)
+Reading symbols from /lib/x86_64-linux-gnu/libdl.so.2...
+Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/libdl-2.31.so...
+Reading symbols from /lib/x86_64-linux-gnu/libc.so.6...
+Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/libc-2.31.so...
+Reading symbols from /lib64/ld-linux-x86-64.so.2...
+(No debugging symbols found in /lib64/ld-linux-x86-64.so.2)
+Reading symbols from /lib/x86_64-linux-gnu/libnss_files.so.2...
+Reading symbols from /usr/lib/debug//lib/x86_64-linux-gnu/libnss_files-2.31.so...
+0x00007f46a7762dba in __GI___wait4 (pid=-1, stat_loc=0x7ffef1b3aa70, options=10, 
+    usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:27
+27  ../sysdeps/unix/sysv/linux/wait4.c: No such file or directory.
+```
+
+remember to add sudo when typing `gdb` otherwise operation not permitted.
+{:.warning}
+
+#### thread debugging
+
+source:
+https://blog.csdn.net/zhangye3017/article/details/80382496
+
+more source and practice needs to be done
+
+#### command history
+
+* save history command into file, the default file is ./.gdb_history
+
+```terminal
+set history expansion
+show history expansion
+```
+
+* set/show saving history record on
+
+```terminal
+set history save
+show history save
+```
+
 
 
 #### Reference
