@@ -1,11 +1,15 @@
 ---
 layout: post
-title: Principal Component Analysis
+title: PCA, filtering, downsampling and application to point cloud
 key: 20201123
 tags:
-  - Python
+  - python
   - machine learning
   - PCA
+  - vortex filtering
+  - downsampling
+  - point cloud
+  - surface normal
 ---
 
 ## Principal Component Analysis
